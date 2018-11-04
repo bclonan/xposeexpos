@@ -1,0 +1,26 @@
+<template>
+<div class="cart-quickview">
+    <div class="inner">
+        <!-- Header -->
+        <div class="quickview-header">
+            <h2>Quick Cart</h2>
+            <span id="close-cart-sidebar"><i data-feather="x"></i></span>
+        </div>
+        <!-- Cart quickview body -->
+        <div class="cart-body">
+            <div class="empty-cart has-text-centered">
+                <h3>Your cart is empty</h3>
+                <img src="assets/images/icons/new-cart.svg" alt="">
+                <a href="shop.html" class="button big-button rounded">Start Shopping</a>
+                <small>You can create your account later</small>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+    export default {
+      name: "QuickviewEmpty"
+    };
+</script>

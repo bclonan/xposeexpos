@@ -1,0 +1,143 @@
+<template>
+    <!-- Create Project Modal -->
+    <div class="modal create-project-modal modal-hero" v-if="activeModalOverlayToggled === 'createProjectModal'" :class="[ activeModalOverlayToggled === 'createProjectModal' ? 'is-active' : '']">
+        <div class="modal-background scaleInCircle"></div>
+        <div class="modal-content scaleIn">
+            <div class="flex-card simple-shadow">
+                <h2 class="has-text-centered dark-text">New Project</h2>
+                <div class="navigation-tabs layout-tabs animated-tabs">
+                    <div class="tabs is-toggle is-fullwidth no-margin-bottom">
+                        <ul>
+                            <li class="tab-link" data-tab="project-details" @click="setTheActiveTab('projectDetails')" :class="[ isTabActiveNow === 'projectDetails' ? 'is-active' : '']">
+                                <a>Details</a>
+                            </li>
+                            <li class="tab-link" data-tab="project-members" @click="setTheActiveTab('projectMembers')" :class="[ isTabActiveNow === 'projectMembers' ? 'is-active' : '']">
+                                <a>Members</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="navtab-content" :class="[ isTabActiveNow === 'projectDetails' ? 'is-active' : '']">
+                        <div class="card-body">
+                            <div class="content">
+                                <!-- New Project form -->
+                                <form>
+
+                                    <div class="field mb-10">
+                                        <label class="label dark-text">Project Dates</label>
+                                        <div class="columns is-vcentered is-fieldset">
+                                            <div class="column is-3">
+                                                <div class="field-label">Start date*</div>
+                                            </div>
+                                            <div class="column is-9">
+                                                <div class="control has-icons-right">
+                                                    <input data-toggle="datepicker" type="text" class="input is-medium" placeholder="Start Date">
+                                                    <span class="icon is-right is-medium">
+                                                        <i class="im im-icon-Calendar-4"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="columns is-fieldset">
+                                            <div class="column is-3">
+                                                <div class="field-label">End Date*</div>
+                                            </div>
+                                            <div class="column is-9">
+                                                <div class="control has-icons-right">
+                                                    <input data-toggle="datepicker" type="text" class="input is-medium" placeholder="End Date">
+                                                    <span class="icon is-right is-medium">
+                                                        <i class="im im-icon-Calendar-4"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field mb-10">
+                                        <label class="label dark-text">Project Meta</label>
+                                        <div class="columns is-vcentered is-fieldset">
+                                            <div class="column is-3">
+                                                <div class="field-label">Project Name*</div>
+                                            </div>
+                                            <div class="column is-9">
+                                                <input type="text" class="input is-medium">
+                                            </div>
+                                        </div>
+                                        <div class="columns is-fieldset">
+                                            <div class="column is-3">
+                                                <div class="field-label">Description*</div>
+                                            </div>
+                                            <div class="column is-9">
+                                                <textarea class="textarea" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-footer">
+                                        <button type="submit" class="button is-modal">Create Project</button>
+                                    </div>
+
+                                </form>
+                                <!-- /New Project form -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="navtab-content" :class="[ isTabActiveNow === 'projectMembers' ? 'is-active' : '']">
+
+                        <div class="project-members">
+                            <div class="face">
+                                <img src="https://via.placeholder.com/250x250">
+                            </div>
+                        </div>
+
+                        <div class="modal-filter">
+                            <div class="control">
+                                <input class="input is-medium is-rounded" type="text" placeholder="Filter Members">
+                                <span class="material-icons">filter_list</span>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="members-select">
+                                <div class="member-row">
+                                    <img src="https://via.placeholder.com/250x250">
+                                    <span>Eric Daniels</span>
+                                    <div class="b-checkbox is-secondary">
+                                        <input class="styled" type="checkbox" checked>
+                                        <label for="user1"></label>
+                                    </div>
+                                </div>
+                                <div class="member-row">
+                                    <img src="https://via.placeholder.com/250x250">
+                                    <span>Anthony Briggs</span>
+                                    <div class="b-checkbox is-secondary">
+                                        <input class="styled" type="checkbox" checked>
+                                        <label for="user2"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <button @click="resetActiveModalOverlay" :class="[ activeModalOverlayToggled === 'createProjectModal' ? 'is-large' : 'is-hidden']" aria-label="close"></button>
+    </div>
+    <!-- Reminder Modal -->
+</template>
+
+<script>
+    import { activeModalToggle } from "@/components/Main/Mixins/activeModalToggle.js";
+    import { activeTabMixin } from "@/components/Main/Mixins/activeTabMixin.js";
+    export default {
+      name: "CreateProjectModal",
+      mixins: [activeModalToggle, activeTabMixin],
+      data() {
+        return {
+          activeTabChosen: "projectDetails"
+        };
+      }
+    };
+</script>
