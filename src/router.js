@@ -117,14 +117,6 @@ const router = new Router({
           }
         },
         {
-          path: '/exibitorpage',
-          name: 'exibitorpage',
-          component: exibitorpage,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
           path: '/messages',
           name: 'messages',
           component: DashMessages,

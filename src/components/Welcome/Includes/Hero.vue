@@ -3,7 +3,7 @@
     <div class="hero is-fullheight is-theme-accent">
 
         <!-- Navbar partial -->
-        <The-Navbar />
+        <NavBar />
 
         <!-- Hero content -->
         <div class="hero-body ">
@@ -32,14 +32,14 @@
 </template>
 
 <script>
-    import TheNavbar from './TheNavbar.vue';
+    import NavBar from '@/components/Welcome/Includes/navbar/navbar.vue';
     export default {
       name: 'Hero',
       data() {
         return {};
       },
       components: {
-        TheNavbar
+        NavBar
       }
     };
 </script>

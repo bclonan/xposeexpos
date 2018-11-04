@@ -109,3 +109,10 @@
       components: {}
     };
 </script>
+
+<style scoped>
+    footer.footer {
+      /* border-top: 1px solid #e5e5e5; */
+      margin-left: 0px;
+    }
+</style>
