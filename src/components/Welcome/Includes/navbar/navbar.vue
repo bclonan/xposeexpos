@@ -29,14 +29,11 @@
         <!-- Navbar Start -->
         <div class="navbar-start">
           <!-- Dropdown -->
-          <router-link to="Howitworks" class="navbar-item is-slide is-centered-tablet">
-            How it Works?
-          </router-link>
-          <!-- Navbar item -->
-          <router-link to="features" class="navbar-item is-slide is-centered-tablet is-hidden-desktop is-hidden-tablet">
-            Features
-          </router-link>
 
+          <!-- Navbar item -->
+          <router-link to="Browse" class="navbar-item is-slide is-centered-tablet" :style="textcolor">
+            Browse
+          </router-link>
         </div>
 
         <!-- Navbar end -->
@@ -44,10 +41,11 @@
           <!-- Navbar item -->
 
           <!-- Navbar item -->
-          <router-link to="Browse" class="navbar-item is-slide is-centered-tablet">
-            Browse
+
+          <router-link to="Howitworks" class="navbar-item is-slide is-centered-tablet" :style="textcolor">
+            How it Works?
           </router-link>
-          <router-link to="Contact" class="navbar-item is-slide is-centered-tablet" href="#">
+          <router-link to="Contact" class="navbar-item is-slide is-centered-tablet" href="#" :style="textcolor">
             Contact
           </router-link>
           <!-- Signup button -->
@@ -66,6 +64,7 @@
 <script>
   export default {
     name: 'TheNavbar',
+    props: ['textcolor'],
     data() {
       return {};
     },

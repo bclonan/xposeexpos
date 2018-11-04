@@ -17,7 +17,7 @@
               </h2>
               <p class="">
 
-                <input class="input rounded is-medium" type="text" placeholder="Find your Expo....">
+                <input class="input rounded is-medium" type="text" placeholder="Find your Expo...." v-model="search">
 
               </p>
             </div>
@@ -100,17 +100,24 @@
   import NavBar from '@/components/Welcome/Includes/navbar/navbar.vue';
 
   import Footer from '@/components/Welcome/Includes/Footer.vue';
+
+  import { getAllExpos } from '@/components/Welcome/mixins/getAllExpos.js';
   export default {
     name: 'searchpage',
+    mixins: [getAllExpos],
     data() {
       return {
-        textcolor: 'white'
+        textcolor: 'color:white;',
+        search: '',
+
+        exposResults: []
       };
     },
     components: {
       NavBar,
       Footer
-    }
+    },
+    computed: {}
   };
 </script>
 
