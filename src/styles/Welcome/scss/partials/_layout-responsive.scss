@@ -189,37 +189,6 @@ TABLE OF CONTENTS
 }
 
 /* ==========================================================================
-1. Between 768px and 1024px landscape orientation
-========================================================================== */
-
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) { 
-    //tablet portrait orientation adjustments
-    .navbar-brand {
-        height: 4.6rem;
-        .custom-burger {
-            display: flex;
-        }
-    }
-    .navbar-item.is-footer {
-        display: none;
-    }
-    .menu-image {
-        display: none !important;
-    }
-    //Helpers
-    .navbar-menu.is-active {
-        .is-centered-tablet {
-            text-align: center !important;
-        }
-    }
-    .is-mega {
-        > .navbar-link {
-            display: none;
-        }
-    }
-}
-
-/* ==========================================================================
 2. max-width 1007px
 ========================================================================== */
 @media (max-width: 1007px) {
@@ -246,34 +215,65 @@ TABLE OF CONTENTS
     }
 }
 
-/* Portrait HD */
-@media only screen 
-    and (min-device-width: 1024px) 
-    and (max-device-width: 1366px) 
-    and (orientation: portrait) 
-    and (-webkit-min-device-pixel-ratio: 1.5) {
 
-        .navbar-brand {
-            height: 4.6rem;
-            .custom-burger {
-                display: flex;
+/* ==========================================================================
+4. Tablet Landscape
+========================================================================== */
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    
+    .navbar-brand {
+        min-height: 4.6rem;
+        height: 4.6rem;
+        .custom-burger {
+            display: flex;
+        }
+    }
+    //Darken transparent navbar when responsive menu is open on mobile (only if it is a light navbar)
+    .navbar-wrapper.navbar-fade.navbar-light.mobile-menu-dark {
+        background-color: $sidebar !important;
+        .nav-menu.is-active {
+            background-color: $sidebar !important;
+            .nav-inner.is-menu-mobile {
+                color: $white !important;
+                &.is-active {
+                    color: $primary !important;
+                }
             }
         }
-        .navbar-item.is-footer {
-            display: none;
-        }
-        .menu-image {
-            display: none !important;
-        }
-        //Helpers
-        .navbar-menu.is-active {
-            .is-centered-tablet {
-                text-align: center !important;
+    }
+    .navbar-wrapper.navbar-fade.mobile-menu-dark {
+        background-color: $white !important;
+    }
+    .navbar {
+        &.navbar-light {
+            &.is-dark-mobile {
+                background: $sidebar;
+                .navbar-menu {
+                    background: $sidebar;
+                    a {
+                        color: $white;
+                    }
+                }
             }
         }
-        .is-mega {
-            > .navbar-link {
-                display: none;
+        .navbar-menu {
+            .navbar-link, .navbar-item, .navbar-dropdown {
+                width: 100%;
+                text-align: center;
+            }
+            .navbar-link {
+                &:after {
+                    display: block !important;
+                    right: 43%;
+                }
+            }
+            .button {
+                width: 100%;
+            }
+            #signup-btn, #signup-btn-alt  {
+                width: 30% !important;
             }
         }
+    }
 }

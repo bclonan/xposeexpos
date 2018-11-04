@@ -68,7 +68,7 @@ TABLE OF CONTENTS
 //Pagination dots
 .slick-dots li.slick-active button:before {
     opacity: .75;
-    color: $accent;
+    color: $accent !important;
 }
 
 /* ==========================================================================

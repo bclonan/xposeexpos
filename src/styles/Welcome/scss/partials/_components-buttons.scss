@@ -43,10 +43,6 @@ TABLE OF CONTENTS
             font-weight: 600;
         }
     }
-    &.is-bold {
-        border-width: 2px;
-        font-weight: 600;
-    }
     //Line height fix class
     &.no-lh {
         line-height: 0 !important;
@@ -201,16 +197,6 @@ TABLE OF CONTENTS
             position: relative;
             top: 2px;
             color: $primary !important;
-            transition: all 0.5s;
-        }
-    }
-    &.color-secondary {
-        i {
-            font-size: 9px;
-            margin-left: 10px;
-            position: relative;
-            top: 2px;
-            color: $secondary !important;
             transition: all 0.5s;
         }
     }

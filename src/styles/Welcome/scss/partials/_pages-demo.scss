@@ -181,8 +181,11 @@ TABLE OF CONTENTS
             &.is-landing-v2 {
                 background: #0082c8;
             }
-            &.is-landing-v3 {
+            &.is-landing-v3, &.is-landing-v5 {
                 background: $blue;
+            }
+            &.is-landing-v6 {
+                background: #0f7cff;
             }
             &.is-agency, &.is-dashboard {
                 background: #00D1B2;
@@ -246,6 +249,12 @@ TABLE OF CONTENTS
         font-size: 1.2rem;
         font-weight: 500;
         color: $blue-grey;
+        a {
+            color: $secondary;
+            &:hover {
+                color: $primary;
+            }
+        }
     }
 }
 

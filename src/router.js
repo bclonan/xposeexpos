@@ -10,72 +10,43 @@ import WelcomeView from './views/Welcome/WelcomeView'
 //Welcome Pages
 
 import HomePage from '@/components/Welcome/Page/Home';
-import WelcomePricing from '@/components/Welcome/Page/Pricing';
-import WelcomeFeatures from '@/components/Welcome/Page/Features';
+import WelcomeWorks from '@/components/Welcome/Page/Howitworks';
+import WelcomeSearch from '@/components/Welcome/Page/SearchPage';
+import WelcomeEventOrganizer from '@/components/Welcome/Page/EventOrganizer';
+import WelcomeExibitor from '@/components/Welcome/Page/Exibitor';
+import WelcomeContact from '@/components/Welcome/Page/Contact';
 import WelcomeLogin from '@/components/Welcome/Page/Login';
 
 import MainDash from './views/Main/Dashboard.vue';
 
 //Main Pages
 import DashHome from '@/components/Main/Pages/DashHome';
-//Main Assets
-import DashAssets from '@/components/Main/Pages/assets/AssetMain';
+//Main Message Page
+import DashMessages from '@/components/Main/Pages/messages/DashMessages';
 
-//Main Document Preivew
-import DashDocumentPreview from '@/components/Main/Pages/documentPreview/DocumentPreviewMain';
-//Main BotBuilder
-import DashBotBuilder from '@/components/Main/Pages/botbuilder/BotMain';
-import DashUsersBots from '@/components/Main/Pages/botbuilder/UsersBots';
-import DashUsersBotsTemplates from '@/components/Main/Pages/botbuilder/BotTemplates';
-import DashBotReplay from '@/components/Main/Pages/botbuilder/DashBotReplay';
+//Main Account Page
+import DashAccount from '@/components/Main/Pages/account/DashAccount';
 
-//Main Collaborate
-import DashCollaborate from '@/components/Main/Pages/collaborate/CollaborateMain';
-import DashCollaborateTeamView from '@/components/Main/Pages/collaborate/CollaborateTeamView';
+//Main  info Edit Page
+import DashEdit from '@/components/Main/Pages/edit/DashEdit';
 
-//Collaborate Team Pages
-import DashTeamViewMain from '@/components/Main/Pages/teamPage/TeamMain';
+//Main show edit
+import DashShow from '@/components/Main/Pages/editshow/DashShow';
+//Main show schedule
+import DashShowSchedule from '@/components/Main/Pages/showschedule/DashShowSchedule';
 
-//Story Forms
-import DashLeadForm from '@/components/Main/Pages/leadforms/LeadFormsMain';
-import DashUsersForms from '@/components/Main/Pages/leadforms/UsersLeadForms';
-import DashLeadFormTemplates from '@/components/Main/Pages/leadforms/LeadFormsTemplates';
 
-//Main Integrations
-import DashIntegrations from '@/components/Main/Pages/integrations/IntegrationsMain';
-import DashIntegrationsManage from '@/components/Main/Pages/integrations/IntegrationsManage';
+//Main Exibitor Chat
+import showchat from '@/components/Main/Pages/showchat/showchat';
 
-//Main Tasks
-import DashTasks from '@/components/Main/Pages/tasks/TasksMain';
+//Main info Edit Expo info
+import editShowInfo from '@/components/Main/Pages/showinfo/editShowInfo';
+//Main Confirm Attendee
+import ConfirmVendor from '@/components/Main/Pages/manage/vendors';
+//Main Show Schedule
+import editSchedule from '@/components/Main/Pages/editSchedule/editSchedule';
 
-//Main Updates
-import DashUpdates from '@/components/Main/Pages/updates/UpdatesMain';
 
-//Main Widgets
-import DashWidgets from '@/components/Main/Pages/widgets/WidgetsMain';
-import DashUsersWidgets from '@/components/Main/Pages/widgets/UsersWidgets';
-
-//Funnel Dashboard
-import FunnelDashView from './views/Funnel/FunnelDashboard'
-
-//Funnel Pages
-import FunnelHome from '@/components/Funnel/Pages/FunnelHome';
-import FunnelSteps from '@/components/Funnel/Pages/FunnelSteps';
-
-//Funnel Control
-import FunnelControl from '@/components/Funnel/Pages/FunnelControl';
-
-//Funnel Single Step Edit
-import funnelSingleStepEdit from '@/components/Funnel/Pages/SingleStepEdit';
-
-//Funnel Export 
-import funnelExportFunnel from '@/components/Funnel/Pages/ExportFunnel';
-
-//Funnel Single Page Edit
-import funnelSinglePageEdit from '@/components/Funnel/Pages/SinglePageEdit';
-
-//Funnel Step Templates
-import funnelStepTemplates from '@/components/Funnel/Pages/pageTemplates';
 
 Vue.use(Router)
 
@@ -91,14 +62,24 @@ const router = new Router({
           component: HomePage
         },
         {
-          path: 'pricing',
-          name: 'Pricing',
-          component: WelcomePricing
+          path: 'Howitworks',
+          name: 'Howitworks',
+          component: WelcomeWorks
         },
         {
-          path: 'features',
-          name: 'Features',
-          component: WelcomeFeatures
+          path: 'Browse',
+          name: 'Browse',
+          component: WelcomeSearch
+        },
+        {
+          path: 'Exhibitor',
+          name: 'Exhibitor',
+          component: WelcomeExibitor
+        },
+        {
+          path: 'Contact',
+          name: 'Contact',
+          component: WelcomeContact
         },
         {
           path: 'login',
@@ -120,227 +101,90 @@ const router = new Router({
           }
         },
         {
-          path: '/assets',
-          name: 'assets',
-          component: DashAssets,
+          path: '/editinfo',
+          name: 'editinfo',
+          component: DashEdit,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/documentPreview/:id',
-          name: 'documentPreview',
-          component: DashDocumentPreview,
+          path: '/manageshows',
+          name: 'manageshows',
+          component: DashShow,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/botbuilder',
-          name: 'botbuilder',
-          component: DashBotBuilder,
+          path: '/exibitorpage',
+          name: 'exibitorpage',
+          component: exibitorpage,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/botlist',
-          name: 'botlist',
-          component: DashUsersBots,
+          path: '/messages',
+          name: 'messages',
+          component: DashMessages,
+          meta: {
+            requiresAuth: true,
+          }
+        },
+
+        {
+          path: '/account',
+          name: 'account',
+          component: DashAccount,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/bottemplates',
-          name: 'bottemplates',
-          component: DashUsersBotsTemplates,
+          path: '/showchat',
+          name: 'showchat',
+          component: showchat,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/botReplay/:id',
-          name: 'botReplay',
-          component: DashBotReplay,
+          path: '/editshowinfo',
+          name: 'editshowinfo',
+          component: editShowInfo,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/leadforms',
-          name: 'leadforms',
-          component: DashLeadForm,
+          path: '/confirmVendor',
+          name: 'confirmVendor',
+          component: ConfirmVendor,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/leadformlist',
-          name: 'leadformlist',
-          component: DashUsersForms,
+          path: '/schedule',
+          name: 'schedule',
+          component: DashShowSchedule,
           meta: {
             requiresAuth: true,
           }
         },
         {
-          path: '/leadformtemplates',
-          name: 'leadformtemplates',
-          component: DashLeadFormTemplates,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/collaborate',
-          name: 'collaborate',
-          component: DashCollaborate,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/collaborateteam',
-          name: 'collaborateteam',
-          component: DashCollaborateTeamView,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/teamview/:id',
-          name: 'teamview',
-          component: DashTeamViewMain,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/integrations',
-          name: 'integrations',
-          component: DashIntegrations,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/manageintegrations',
-          name: 'manageintegrations',
-          component: DashIntegrationsManage,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/widgets',
-          name: 'widgets',
-          component: DashWidgets,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/userwidgets',
-          name: 'userwidgets',
-          component: DashUsersWidgets,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/tasks',
-          name: 'tasks',
-          component: DashTasks,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/updates',
-          name: 'updates',
-          component: DashUpdates,
+          path: '/editshowschedule',
+          name: 'editshowschedule',
+          component: editSchedule,
           meta: {
             requiresAuth: true,
           }
         },
       ]
     },
-    {
-      path: '/funneldash',
-      component: FunnelDashView,
-      children: [{
-          path: '',
-          name: 'FunnelHome',
-          component: FunnelHome,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/FunnelSteps',
-          name: 'FunnelSteps',
-          component: FunnelSteps,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/funnelControl',
-          name: 'funnelControl',
-          component: FunnelControl,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/singleStepEdit',
-          name: 'singleStepEdit',
-          component: funnelSingleStepEdit,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/singlePageEdit',
-          name: 'singlePageEdit',
-          component: funnelSinglePageEdit,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/exportFunnel',
-          name: 'exportFunnel',
-          component: funnelExportFunnel,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/stepTemplates',
-          name: 'stepTemplates',
-          component: funnelStepTemplates,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        /*
-             {
-               path: '/assets',
-               name: 'assets',
-               component: DashAssets
-             },*/
-      ]
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import ( /* webpackChunkName: "about" */ './views/About.vue')
-    }
+
+
   ]
 })
 
