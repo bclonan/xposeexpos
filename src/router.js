@@ -12,7 +12,7 @@ import WelcomeView from './views/Welcome/WelcomeView'
 import HomePage from '@/components/Welcome/Page/Home';
 import WelcomeWorks from '@/components/Welcome/Page/Howitworks';
 import WelcomeSearch from '@/components/Welcome/Page/SearchPage';
-import WelcomeEventOrganizer from '@/components/Welcome/Page/EventOrganizer';
+//import WelcomeEventOrganizer from '@/components/Welcome/Page/EventOrganizer';
 import WelcomeExibitor from '@/components/Welcome/Page/Exibitor';
 import WelcomeContact from '@/components/Welcome/Page/Contact';
 import WelcomeLogin from '@/components/Welcome/Page/Login';
