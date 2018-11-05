@@ -221,29 +221,34 @@
                     <div class="projects-list-wrapper">
                       <div class="list-header">
                         <div class="list-title">
-                          <span>Team Invites</span>
+                          <span>Your Expos</span>
 
                         </div>
 
                       </div>
                       <div class="list-body">
                         <div class="columns is-multiline">
-                          <div class="column is-4">
+                          <div class="column is-4" v-for="item in vendorExpos" :key="item.id">
                             <div class=" flex-card light-bordered light-raised">
 
                               <div class="card-content">
                                 <div class="info-block mt-40">
-                                  <h4>Team Name</h4>
-                                  <p>Team description</p>
+                                  <h4>{{item.vendor_expo_name}}</h4>
+                                  <p>{{item.vendor_expo_date_start}}</p>
                                 </div>
                                 <div class="level mb-40 mt-40">
                                   <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold">Deny</a>
+                                    <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('edit' , item.vendor_expo_id)">Edit</a>
                                   </div>
                                   <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn">Accept</a>
+                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('vendors' , item.vendor_expo_id)">Vendors</a>
                                   </div>
-
+                                  <div class="level-item">
+                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('analytics' , item.vendor_expo_id)">Analytics</a>
+                                  </div>
+                                  <div class="level-item">
+                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('messages' , item.vendor_expo_id)">Messages</a>
+                                  </div>
                                 </div>
                               </div>
 
@@ -284,10 +289,11 @@
   //Mixins
   import { activeModalToggle } from '@/components/Main/Mixins/activeModalToggle.js';
   import { activeTabMixin } from '@/components/Main/Mixins/activeTabMixin.js';
+  import { getVendorExpos } from '@/components/Main/Mixins/getVendorExpos.js';
 
   export default {
     name: 'DashCollaborateMain',
-    mixins: [activeModalToggle, activeTabMixin],
+    mixins: [activeModalToggle, activeTabMixin, getVendorExpos],
     data() {
       return {
         activeTabChosen: 'newTeam',
@@ -336,6 +342,11 @@
 
           //ref to new team doc
           var expocollection = fb.expoCollection.doc(expo_id);
+          //analytic ref
+          var expoA = fb.expoAnalytics.doc(expo_id);
+
+          //approval ref
+          var expoApprovals = fb.expoApproval.doc(expo_id);
 
           //create a new team
           const userteamRef = fb.usersCollection
@@ -348,12 +359,16 @@
           //add to users collabs
           batch.set(userteamRef, {
             expo_id: expo_id,
+            expo_name: this.expo_name,
+            expo_date_start: this.expo_date_start,
             expo_permissions: {
               owner: true,
               read: true,
               write: true
             },
-            expo_ref: expocollection
+            expo_ref: expocollection,
+            expo_analytic_ref: expoA,
+            expo_approval_ref: expoApprovals
           });
 
           //create new team
@@ -382,6 +397,20 @@
             expo_organizer_email: this.expo_organizer_email
           });
 
+          //analytics
+          batch.set(expoA, {
+            expo_id: expo_id,
+            expo_owner_id: currentUserid,
+            expo_organizer_email: this.expo_organizer_email
+          });
+
+          //aprobal
+          batch.set(expoApprovals, {
+            expo_id: expo_id,
+            expo_owner_id: currentUserid,
+            expo_organizer_email: this.expo_organizer_email
+          });
+
           //set
           return batch
             .commit()
@@ -396,6 +425,14 @@
         } else {
           return (this.feedback = 'All fields must be filled in');
         }
+      },
+      goto(l, i) {
+        console.log(l + i);
+        // this.$store.commit('chooseExpo/selectExpo', i);
+        this.$router.push({
+          path: `${l}/${i}`
+        });
+        return;
       }
     },
     computed: {

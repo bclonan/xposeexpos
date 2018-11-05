@@ -9,15 +9,13 @@
       <div class="hero-body ">
         <div class="container ">
           <div class="columns is-vcentered">
-
             <div class="column is-6 is-hero-title">
 
               <h2 class="subtitle is-4 pt-10 pb-10" style="color:white;">
-                Vendor Name
+                {{expoSelected.expo_name}}
               </h2>
               <p class="">
-
-                <input class="input rounded is-medium" type="text" placeholder="Find your Expo...." v-model="search">
+                {{expoSelected.expo_description}}
 
               </p>
             </div>
@@ -30,11 +28,22 @@
     <section class="section is-medium section-feature-grey">
       <div class="container">
 
+        <div class="column is-6 is-hero-title">
+
+          <h2 class="subtitle is-4 pt-10 pb-10" style="color:white;">
+            Vendor Name
+          </h2>
+          <p class="">
+
+            <input class="input rounded is-medium" type="text" placeholder="Find your Expo...." v-model="search">
+
+          </p>
+        </div>
         <div class="content-wrapper">
           <div class="columns is-multiline">
             <!--event card-->
             <div class="column is-4">
-              <div class="event-card" v-for="item in filteredList" :key="item.id">
+              <!--<div class="event-card" v-for="item in filteredList" :key="item.id">
                 <div class="card-date">
                   <div class="date">
                     <span class="day">05</span>
@@ -59,7 +68,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
             <!--eventcard-->
           </div>
@@ -75,10 +84,10 @@
 
   import Footer from '@/components/Welcome/Includes/Footer.vue';
 
-  import { getAllExpos } from '@/components/Welcome/mixins/getAllExpos.js';
+  import { getExpoVendors } from '@/components/Welcome/mixins/getExpoVendors.js';
   export default {
     name: 'ExpoCategory',
-    mixins: [getAllExpos],
+    mixins: [getExpoVendors],
     data() {
       return {
         textcolor: 'color:white;',
@@ -92,13 +101,17 @@
       NavBar,
       Footer
     },
-    computed: {},
+    computed: {
+      expoSelected() {
+        return this.$store.getters['chooseExpo/expoInfo'];
+      }
+    },
     methods: {
       navigateTo(i) {
-        this.$store.commit('chooseExpo/selectExpo', i);
-        this.$router.push({
-          path: `Categories/${i.expo_id}`
-        });
+        // this.$store.commit('chooseExpo/selectExpo', i);
+        //   this.$router.push({
+        //    path: `Categories/${i.expo_id}`
+        //  });
         return;
       }
     }

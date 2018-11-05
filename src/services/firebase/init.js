@@ -29,6 +29,8 @@ db.settings(settings);
 // firebase collections
 const usersCollection = db.collection('users');
 const expoCollection = db.collection('expo');
+const expoAnalytics = db.collection('expoAnalytics');
+const expoApproval = db.collection('expoApproval');
 const messagesCollection = db.collection('messages');
 const analyticsCollection = db.collection('analytics');
 // one to one chats
@@ -64,6 +66,8 @@ export {
   uploadFileFunc,
   fbStorage,
   fbstorageRef,
-  userFileStore
+  userFileStore,
+  expoAnalytics,
+  expoApproval
 
 };
