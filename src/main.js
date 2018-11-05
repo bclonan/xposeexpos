@@ -12,7 +12,7 @@ import UUID from 'vue-uuid';
 import Toasted from 'vue-toasted';
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 
 Vue.use(vClickOutside);

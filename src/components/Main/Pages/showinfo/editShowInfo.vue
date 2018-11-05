@@ -52,61 +52,44 @@
                       </div>
                       <div class="list-body">
                         <div class="columns is-multiline">
-                          <div class="column is-8 is-offset-2">
+                          <div class="column is-10 is-offset-1">
                             <div class="flex-card light-bordered light-raised">
                               <div class="card-body">
-                                <h2 class="title is-4 text-bold mb-20">Expo Info</h2>
+                                <h2 class="title is-4 text-bold mb-20">Event Information</h2>
                                 <p v-if="feedback">{{this.feedback}}</p>
                                 <form @submit.prevent="onSubmit">
-                                  <div class="columns mt-50">
+                                  <div class="columns mt-30">
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo Name</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Team Name" v-model="expo_name" />
+                                        <label>Name of expo</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Expo" v-model="expo_name" />
                                       </div>
 
                                     </div>
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo Contact</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Contact" v-model="expo_contact" />
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                  <div class="columns mt-50">
-                                    <div class="column">
-                                      <div class="control">
-                                        <label>Expo address</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Team Name" v-model="expo_address" />
+                                        <label>Expo start date</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="date" value="2018-02-28" min="2017-12-11" max="2180-2-23" v-model="expo_date_start" />
                                       </div>
 
                                     </div>
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo business address</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Contact" v-model="business_location" />
+                                        <label>Expo end date</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="date" value="2018-02-28" min="2017-12-11" max="2180-2-23" v-model="expo_date_end" />
                                       </div>
 
                                     </div>
                                   </div>
-                                  <div class="columns mt-50">
+                                  <div class="columns mt-30">
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo date</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Team Name" v-model="expo_date" />
+                                        <label>Address Line 1</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="55 street street" v-model="expo_address_address" />
                                       </div>
 
                                     </div>
-                                    <div class="column">
-                                      <div class="control">
-                                        <label>Expo time</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Contact" v-model="expo_time" />
-                                      </div>
 
-                                    </div>
-                                  </div>
-                                  <div class="columns mt-50">
                                     <div class="column">
                                       <div class="control">
                                         <label>Expo industry</label>
@@ -114,50 +97,109 @@
                                       </div>
 
                                     </div>
+                                  </div>
+                                  <div class="columns mt-30">
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo organizer</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Contact" v-model="expo_organizer" />
+                                        <label>City</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Newark" v-model="expo_address_town" />
+                                      </div>
+
+                                    </div>
+
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>State</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="NJ" v-model="expo_address_state" />
+                                      </div>
+
+                                    </div>
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>Country</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Ireland" v-model="expo_address_country" />
                                       </div>
 
                                     </div>
                                   </div>
-                                  <div class="columns mt-50">
+                                  <div class="columns mt-30">
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo contact</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Team Name" v-model="organizer_name" />
-                                      </div>
-
-                                    </div>
-                                    <div class="column">
-                                      <div class="control">
-                                        <label>Expo website</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Contact" v-model="expo_website" />
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                  <div class="columns mt-50">
-                                    <div class="column">
-                                      <div class="control">
-                                        <label>Expo number</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Team Name" v-model="expo_organizer_number" />
+                                        <label>Expo Promo website</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="supercoolexpo.com" v-model="expo_promo_website" />
                                       </div>
 
                                     </div>
 
                                   </div>
-                                  <div class="columns mt-10">
+                                  <div class="columns mt-30">
                                     <div class="column">
 
                                       <div class="control">
                                         <label>Expo Description</label>
-                                        <AppControlInput :inputClass="inputTypeTwo" rows="5" type="textarea" placeholder="Enter a expo description ..." v-model="expo_description" />
+                                        <AppControlInput :inputClass="inputTypeTwo" rows="5" type="textarea" placeholder="The biggest tech expo this side of mississippi ..." v-model="expo_description" />
 
                                       </div>
                                     </div>
                                   </div>
+
+                                  <h2 class="title is-4 text-bold mb-20">Organization Information</h2>
+                                  <div class="columns mt-30">
+
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>Organizer business address</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="77 address way" v-model="business_location" />
+                                      </div>
+
+                                    </div>
+                                  </div>
+
+                                  <div class="columns mt-30">
+
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>Business Name</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Expo Event Company .inc" v-model="businessname" />
+                                      </div>
+
+                                    </div>
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>Business Website</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="ExpoEventCompany.com" v-model="expo_organizer_website" />
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                  <div class="columns mt-30">
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>Point of contact name</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Sally Smith" v-model="organizer_name" />
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                                  <div class="columns mt-30">
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>Point of contact number</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="7327777777" v-model="expo_organizer_number" />
+                                      </div>
+
+                                    </div>
+                                    <div class="column">
+                                      <div class="control">
+                                        <label>Point of contact email</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="email" placeholder="youremail@business.com" v-model="expo_organizer_email" />
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+
                                   <div class="mt-30">
 
                                     <AppButton class="button btn-align no-lh raised primary-btn" type="submit">Create</AppButton>
@@ -260,16 +302,22 @@
         businessname: null,
         business_location: null,
         expo_description: null,
-        expo_date: null,
-        expo_address: null,
+        expo_date_start: null,
+        expo_address_town: null,
+        expo_address_zip: null,
+        expo_address_country: null,
+        expo_address_state: null,
+        expo_address_address: null,
         expo_time: null,
         expo_industry: null,
         expo_contact: null,
         expo_organizer: null,
-        expo_website: null,
+        expo_organizer_website: null,
         expo_organizer_number: null,
         expo_organizer_email: null,
-        expo_name: null
+        expo_name: null,
+        expo_promo_website: null,
+        expo_date_end: null
       };
     },
     components: {
@@ -278,7 +326,7 @@
     },
     methods: {
       onSubmit() {
-        if (this.teamName && this.teamTagline && this.teamDescription) {
+        if (this.businessname && this.expo_name) {
           // xyz user info
           const currentUserid = this.currentUser.uid;
 
@@ -290,9 +338,9 @@
           var expocollection = fb.expoCollection.doc(expo_id);
 
           //create a new team
-          const userteamRef = fb.expoCollection
+          const userteamRef = fb.usersCollection
             .doc(currentUserid)
-            .collection('teams')
+            .collection('expos')
             .doc();
 
           const batch = fb.db.batch();
@@ -312,18 +360,22 @@
           batch.set(expocollection, {
             expo_id: expo_id,
             expo_owner_id: currentUserid,
-            expo_owner_name: this.organizer_name,
-            expo_owner_businessname: this.business,
-            expo_owner_businessname: this.business_location,
+            expo_contact_name: this.organizer_name,
+            expo_owner_businessname: this.businessname,
+            expo_owner_businesLocation: this.business_location,
             expo_description: this.expo_description,
             expo_logo: 'https://place-hold.it/250x250',
-            expo_date: this.expo_date,
-            expo_address: this.expo_address,
-            expo_time: this.expo_time,
+            expo_date_start: this.expo_date_start,
+            expo_date_end: this.expo_date_end,
+            expo_address_town: this.expo_address_town,
+            expo_address_zip: this.expo_address_zip,
+            expo_address_country: this.expo_address_country,
+            expo_address_state: this.expo_address_state,
+            expo_address_address: this.expo_address_address,
             expo_industry: this.expo_industry,
-            expo_contact: this.expo_contact,
+            expo_promo_website: this.expo_promo_website,
             expo_organizer: this.expo_organizer,
-            expo_organizer_website: this.expo_website,
+            expo_organizer_website: this.expo_organizer_website,
             expo_organizer_number: this.expo_organizer_number,
             expo_name: this.expo_name,
             expo_message_id: uuid.v4(),

@@ -6,6 +6,12 @@
     </li>
     <li v-for="item in NavItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
       <i v-if="item.buttontype === 'route'" :class="item.icon" @click="navigateToRoute(item.to)"></i>
+
+      <i v-else :class="item.icon"></i>
+    </li>
+    <li v-if="currentUser" v-for="item in OrganizerItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
+      <i v-if="item.buttontype === 'route'" :class="item.icon" @click="navigateToRoute(item.to)"></i>
+
       <i v-else :class="item.icon"></i>
     </li>
   </ul>
@@ -22,12 +28,39 @@
     data() {
       return {
         extraClassItems: 'side-icon',
+        acctType: '',
+        OrganizerItems: [
+          {
+            name: 'manageshows',
+            icon: 'sl sl-icon-wrench',
+            menuName: '',
+            buttontype: 'route',
+            to: '/manageshows',
+            tag: 'i'
+          },
+          {
+            name: 'editshowinfo',
+            icon: 'sl sl-icon-folder-alt',
+            menuName: '',
+            buttontype: 'route',
+            to: '/editshowinfo',
+            tag: 'i'
+          },
+          {
+            name: 'confirmVendor',
+            icon: 'sl sl-icon-people',
+            menuName: '',
+            buttontype: 'route',
+            to: '/confirmVendor',
+            tag: 'i'
+          }
+        ],
         NavItems: [
           //name = tool name icon = icon for sidebar , menuname = prop to call for inner component
 
           {
             name: 'editinfo',
-            icon: 'sl sl-icon-folder-alt',
+            icon: 'sl sl-icon-book-open',
             menuName: '',
             buttontype: 'route',
             to: '/editinfo',
@@ -36,7 +69,7 @@
 
           {
             name: 'messages',
-            icon: 'sl sl-icon-folder-alt',
+            icon: 'sl sl-icon-speech',
             menuName: '',
             buttontype: 'route',
             to: '/messages',
@@ -44,42 +77,12 @@
           },
           {
             name: 'account',
-            icon: 'sl sl-icon-folder-alt',
+            icon: 'sl sl-icon-settings',
             menuName: '',
             buttontype: 'route',
             to: '/account',
             tag: 'i'
           }
-          /*
-                    {
-                                name: 'manageshows',
-                                icon: 'sl sl-icon-folder-alt',
-                                menuName: '',
-                                buttontype: 'route',
-                                to: '/manageshows',
-                                tag: 'i',
-                                vendorReq: 'true'
-                              },
-                              {
-                                name: 'editshowinfo',
-                                icon: 'sl sl-icon-folder-alt',
-                                menuName: '',
-                                buttontype: 'route',
-                                to: '/editshowinfo',
-                                tag: 'i',
-                                vendorReq: 'true'
-                              },
-                              {
-                                name: 'confirmVendor',
-                                icon: 'sl sl-icon-folder-alt',
-                                menuName: '',
-                                buttontype: 'route',
-                                to: '/confirmVendor',
-                                tag: 'i',
-                                vendorReq: 'true'
-                              },
-
-                              */
         ]
       };
     },
@@ -99,42 +102,6 @@
         this.$store.commit('mainPushMenu/resetPushMenu');
         this.$router.push(p);
         return;
-      },
-      checkvendor() {
-        const checkven = this.$store.getters.getUserProf.account_type;
-        console.log(checkven);
-        if (checkven === 'organizer') {
-          this.NavItems.push(
-            {
-              name: 'manageshows',
-              icon: 'sl sl-icon-money',
-              menuName: '',
-              buttontype: 'route',
-              to: '/manageshows',
-              tag: 'i',
-              vendorReq: 'true'
-            },
-            {
-              name: 'editshowinfo',
-              icon: 'sl sl-icon-folder-alt',
-              menuName: '',
-              buttontype: 'route',
-              to: '/editshowinfo',
-              tag: 'i',
-              vendorReq: 'true'
-            },
-            {
-              name: 'confirmVendor',
-              icon: 'sl sl-icon-folder-alt',
-              menuName: '',
-              buttontype: 'route',
-              to: '/confirmVendor',
-              tag: 'i',
-              vendorReq: 'true'
-            }
-          );
-        }
-        return;
       }
     },
     computed: {
@@ -142,11 +109,8 @@
         return this.$store.getters['mainPushMenu/showPushMenu'];
       },
       currentUser() {
-        return this.$store.state.currentUser;
+        return this.$store.getters.getUserProf.account_type;
       }
-    },
-    created() {
-      this.checkvendor();
     }
   };
 </script>
