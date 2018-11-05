@@ -41,6 +41,10 @@ import showchat from '@/components/Main/Pages/showchat/showchat';
 
 //Main info Edit Expo info
 import editShowInfo from '@/components/Main/Pages/showinfo/editShowInfo';
+// main manage show/analytics
+import manageshowInfo from '@/components/Main/Pages/showinfo/manageshowInfo';
+
+
 //Main Confirm Attendee
 import ConfirmVendor from '@/components/Main/Pages/manage/vendors';
 //Main Show Schedule
@@ -154,8 +158,16 @@ const router = new Router({
             requiresAuth: true,
           }
         },
+                {
+          path: '/manageshowInfo/:id',
+          name: 'manageshowInfo',
+          component: manageshowInfo,
+          meta: {
+            requiresAuth: true,
+          }
+        },
         {
-          path: '/confirmVendor',
+          path: '/confirmVendor/:id',
           name: 'confirmVendor',
           component: ConfirmVendor,
           meta: {

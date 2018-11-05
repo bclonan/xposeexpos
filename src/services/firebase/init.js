@@ -30,6 +30,7 @@ db.settings(settings);
 const usersCollection = db.collection('users');
 const expoCollection = db.collection('expo');
 const expoAnalytics = db.collection('expoAnalytics');
+const expoPagesCollection = db.collection('expoPages');
 const expoApproval = db.collection('expoApproval');
 const messagesCollection = db.collection('messages');
 const analyticsCollection = db.collection('analytics');
@@ -68,6 +69,7 @@ export {
   fbstorageRef,
   userFileStore,
   expoAnalytics,
-  expoApproval
+  expoApproval,
+  expoPagesCollection
 
 };
