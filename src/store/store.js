@@ -13,6 +13,9 @@ import funnelstepsPushMenu from './modules/FunnelUI/funnelStepPushMenu.js';
 import funnelSearchOverlay from './modules/FunnelUI/funnelSearchOverlay.js';
 import funnelFabMenu from './modules/FunnelUI/funnelFabMenu.js';
 
+//Choose Expo Search
+import chooseExpo from './modules/ExpoChoose/ExpoMainChoice.js';
+
 
 //firebase
 const fb = require('@/services/firebase/init.js');
@@ -255,7 +258,8 @@ const store = new Vuex.Store({
     funnelmainPushMenu,
     funnelstepsPushMenu,
     funnelSearchOverlay,
-    funnelFabMenu
+    funnelFabMenu,
+    chooseExpo
   },
 });
 

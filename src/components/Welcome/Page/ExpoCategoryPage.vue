@@ -13,7 +13,7 @@
             <div class="column is-6 is-hero-title">
 
               <h2 class="subtitle is-4 pt-10 pb-10" style="color:white;">
-                Expo Name
+                Vendor Name
               </h2>
               <p class="">
 
@@ -77,7 +77,7 @@
 
   import { getAllExpos } from '@/components/Welcome/mixins/getAllExpos.js';
   export default {
-    name: 'searchpage',
+    name: 'ExpoCategory',
     mixins: [getAllExpos],
     data() {
       return {
@@ -104,6 +104,3 @@
     }
   };
 </script>
-
-<style>
-</style>
