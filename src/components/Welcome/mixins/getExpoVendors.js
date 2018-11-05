@@ -1,6 +1,6 @@
 const fb = require('@/services/firebase/init.js');
 
-export const getExpoVedors = {
+export const getExpoVendors = {
   data() {
     return {
       searchVendor: '',
