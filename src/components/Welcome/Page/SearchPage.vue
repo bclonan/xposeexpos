@@ -31,63 +31,37 @@
       <div class="container">
 
         <div class="content-wrapper">
-          <div class="dropdown">
-            <div class="dropdown-trigger">
-              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-                <span>Click me</span>
-                <span class="icon is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <div class="dropdown-content">
-                <a href="#" class="dropdown-item">
-                  Overview
-                </a>
-                <a href="#" class="dropdown-item">
-                  Modifiers
-                </a>
-                <a href="#" class="dropdown-item">
-                  Grid
-                </a>
-                <a href="#" class="dropdown-item">
-                  Form
-                </a>
-                <a href="#" class="dropdown-item">
-                  Elements
-                </a>
-                <a href="#" class="dropdown-item">
-                  Components
-                </a>
-                <a href="#" class="dropdown-item">
-                  Layout
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">
-                  More
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dropdown is-hoverable">
-            <div class="dropdown-trigger">
-              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-                <span>Hover me</span>
-                <span class="icon is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-              <div class="dropdown-content">
-                <div class="dropdown-item">
-                  <p>You can insert
-                    <strong>any type of content</strong> within the dropdown menu.</p>
+          <div class="columns is-multiline">
+            <!--event card-->
+            <div class="column is-4">
+              <div class="event-card" v-for="item in filteredList" :key="item.id">
+                <div class="card-date">
+                  <div class="date">
+                    <span class="day">05</span>
+                    <span class="month">Nov</span>
+                  </div>
+                </div>
+                <div class="img-container">
+                  <img :src="item.expo_logo" :alt="item.expo_name" />
+                </div>
+                <div class="card-text">
+                  <div class="text text-container">
+                    <div class="text text-header">
+                      <h2 class="text text-title">{{item.expo_name}}</h2>
+                      <p class="text text-subtitle">{{item.expo_industry}}</p>
+                    </div>
+                    <div class="text text-details">
+                      <p class="text text-description">{{item.expo_description}}</p>
+                      <a @click="navigateTo(item.expo_id)" class="button btn-align btn-more is-link color-white mt-10">
+                        View Attendees
+                        <i class="sl sl-icon-arrow-right"></i>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            <!--eventcard-->
           </div>
         </div>
       </div>
@@ -110,14 +84,21 @@
         textcolor: 'color:white;',
         search: '',
 
-        exposResults: []
+        exposResults: [],
+        selected_expo_id: null
       };
     },
     components: {
       NavBar,
       Footer
     },
-    computed: {}
+    computed: {},
+    methods: {
+      navigateTo(i) {
+        this.$router.push(i);
+        return;
+      }
+    }
   };
 </script>
 

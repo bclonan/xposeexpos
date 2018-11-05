@@ -11,7 +11,7 @@ export const getAllExpos = {
   methods: {
     fetchExpos() {
 
-      const expoList = fb.expoCollection.orderBy("assetDate", "desc")
+      const expoList = fb.expoCollection.orderBy("expo_date_start", "desc")
 
       expoList.onSnapshot(
         (snapshot) => {
@@ -35,8 +35,8 @@ export const getAllExpos = {
                 expo_owner_businesLocation: doc.data().expo_owner_businesLocation,
                 expo_description: doc.data().expo_description,
                 expo_logo: doc.data().expo_logo,
-                expo_date_start: doc.data().expo_tags,
-                expo_date_end: doc.data().expo_description,
+                expo_date_start: doc.data().expo_date_start,
+                expo_date_end: doc.data().expo_date_end,
                 expo_address_town: doc.data().expo_address_town,
                 expo_address_zip: doc.data().expo_address_zip,
                 expo_address_country: doc.data().expo_address_country,
@@ -69,11 +69,11 @@ export const getAllExpos = {
     }
   },
   computed: {
-    /* filteredList() {
-       return this.exposResults.filter(expo => {
-         return expo.expo_name.toLowerCase().includes(this.search.toLowerCase());
-       });
-     }*/
+    filteredList() {
+      return this.exposResults.filter(expo => {
+        return expo.expo_name.toLowerCase().includes(this.search.toLowerCase());
+      });
+    }
   },
   created() {
     this.fetchExpos();
