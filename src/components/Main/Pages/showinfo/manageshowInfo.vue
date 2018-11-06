@@ -229,7 +229,7 @@
                             <p>And another one.</p>
 
                             <template slot="footer">
-                              <p>Here's some contact info</p>
+                              <component :is="pageFooterStyle" :pageHeaderData="pageHeaderData" />
                             </template>
                           </page-holder-template>
                           <!-- page template builder-->
@@ -338,7 +338,16 @@
             color: 'red',
             fontSize: '13px'
           },
-          headerClassNames: ['h2']
+          headerClassNames: ['h2'],
+          pageFooterStyle: '7',
+          pageFooterData: {
+            pageFooterImage: 'https://bulkitv2.cssninja.io/dashboard/assets/images/dashboard/feed-post-1.jpeg',
+            pageFooterText: 'headerText',
+            pageFooterStyle: {
+              color: 'red',
+              fontSize: '13px'
+            }
+          }
         }
       };
     },
