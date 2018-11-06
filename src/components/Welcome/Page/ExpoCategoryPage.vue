@@ -55,28 +55,14 @@
 
                   </ul>
                 </div>
-                <div class="level" v-if="!vendor_page_id">
-                  <div class="level-left">
-                    <div class="level-item">
-                      <a class="button  primary-btn raised">
-                        <i class="sl sl-icon-lock"></i> Back</a>
 
-                    </div>
-                  </div>
-                  <div class="level-right">
-                    <div class="level-item">
-                      <a class="button  secondary-btn raised">
-                        <i class="sl sl-icon-lock"></i> Message Exhibitor</a>
-                    </div>
-                  </div>
-                </div>
                 <!--vendorcontrolls-->
 
                 <!--/vendorcontrolss-->
 
               </div>
 
-              <div class="column is-4" v-if="vendor_page_id">
+              <div class="column is-4">
                 <div class="flex-card light-bordered light-raised">
                   <div class="card-body">
 
@@ -85,35 +71,7 @@
                 </div>
               </div>
               <!--vendorselected-->
-              <div class="column is-9" v-else>
-                <div class="flex-card featured-feed-post light-bordered light-raised">
-                  <div class="image">
-                    <img src="https://bulkitv2.cssninja.io/dashboard/assets/images/dashboard/feed-post-1.jpeg" alt="">
 
-                  </div>
-                  <div class="card-body is-responsive">
-                    <h2 class="responsive-title has-text-centered mt-40">How the new prototyping tools impact the design process</h2>
-
-                    <div class="post-body">
-                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no.
-                        <a href="#">Cu vim ludus equidem facilisis</a>, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
-
-                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no. Cu vim ludus equidem facilisis, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
-
-                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no. Cu vim ludus equidem facilisis, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
-
-                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no. Cu vim ludus equidem facilisis, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
-                    </div>
-                    <div class="post-share">
-                      <i class="fa fa-facebook-f"></i>
-                      <i class="fa fa-twitter"></i>
-                      <i class="fa fa-linkedin"></i>
-                      <i class="fa fa-tumblr"></i>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
               <div id="backtotop" class="visible">
                 <a href="#"></a>
               </div>

@@ -476,11 +476,11 @@
                               <template slot="header">
                                 <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
                               </template>
-                              <template slot="main">
-                                <p>A paragraph for the main content.</p>
-                                <p>And another one.</p>
+                              <span slot="main" v-for="item in pageContentList" :key="item.content_id">
 
-                              </template>
+                                <component :is="item.tagName" :contentClass="item.class" :contentStyle="item.style" :content="item.content" />
+
+                              </span>
 
                               <template slot="footer">
                                 <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
@@ -547,6 +547,9 @@
   import headerStyleFour from '@/components/Main/Pages/showinfo/blocks/Headers/headerStyleFour.vue';
 
   //Content
+  import contentTitle from '@/components/Main/Pages/showinfo/blocks/Content/titleOne.vue';
+  import contentText from '@/components/Main/Pages/showinfo/blocks/Content/textOne.vue';
+  import contentButton from '@/components/Main/Pages/showinfo/blocks/Content/buttonOne.vue';
   //Footers
   import footerStyleOne from '@/components/Main/Pages/showinfo/blocks/Footers/footerStyleOne.vue';
   import footerStyleTwo from '@/components/Main/Pages/showinfo/blocks/Footers/footerStyleTwo.vue';
@@ -605,7 +608,7 @@
           },
           headerClassNames: ['title is-1 mt-60']
         },
-        pageFooterStyle: 'footerStyleTwo',
+        pageFooterStyle: 'footerStyleOne',
         pageFooterData: {
           pageFooterImage: 'https://bulkitv2.cssninja.io/dashboard/assets/images/dashboard/feed-post-1.jpeg',
           pageFooterText: 'headerText',
@@ -613,7 +616,27 @@
             color: 'red',
             fontSize: '13px'
           }
-        }
+        },
+        pageContentList: [
+          {
+            tagName: 'contentTitle',
+            content: 'heywhatsup',
+            class: 'lol',
+            style: 'color:red;'
+          },
+          {
+            tagName: 'contentText',
+            content: 'heywhatsup',
+            class: 'lol',
+            style: 'color:red;'
+          },
+          {
+            tagName: 'contentButton',
+            content: 'heywhatsup',
+            class: 'lol',
+            style: 'color:red;'
+          }
+        ]
       };
     },
     components: {
@@ -628,7 +651,10 @@
       headerStyleFour,
       footerStyleOne,
       footerStyleTwo,
-      footerStyleThree
+      footerStyleThree,
+      contentTitle,
+      contentText,
+      contentButton
     },
     methods: {
       fetchExpoData() {
