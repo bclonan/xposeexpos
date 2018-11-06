@@ -12,7 +12,7 @@
     <create-task-modal />
     <create-note-modal />
     <create-project-modal />
-
+    <create-category-modal/>
     <invite-user-modal />
     <upload-assets-modal />
     <create-reminder-modal />
@@ -37,6 +37,8 @@
   import InviteUserModal from '@/components/Main/Includes/modals/InviteUserModal.vue';
   import CreateReminderModal from '@/components/Main/Includes/modals/ReminderModal.vue';
 
+  import createCategoryModal from '@/components/Main/Includes/modals/createCategoryModal.vue';
+
   //usedmodals
   import approveVendorModal from '@/components/Main/Includes/modals/OrganizerApprove.vue';
 
@@ -59,7 +61,8 @@
       'invite-user-modal': InviteUserModal,
       'create-reminder-modal': CreateReminderModal,
       'upload-assets-modal': UploadAssetModal,
-      'approve-vendor-modal': approveVendorModal
+      'approve-vendor-modal': approveVendorModal,
+      'create-category-modal': createCategoryModal
     },
     computed: {
       currentDashMode() {

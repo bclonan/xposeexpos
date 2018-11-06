@@ -10,7 +10,9 @@ export const uploadAsset = {
 
       feedback: null,
 
-      uploadProgress: null
+      uploadProgress: null,
+      new_category_name: null,
+      new_category_description: null
     };
   },
   methods: {
@@ -159,8 +161,118 @@ export const uploadAsset = {
         return;
       }
     },
+    addExpoCategory() {
+
+      let CreatedCategoryToast = this.$toasted.show("Successfully Created", {
+        theme: "primary",
+        type: 'success',
+        className: "successToast",
+        position: "bottom-right",
+        duration: 4000
+      });
+
+      if (this.new_category_description && this.new_category_name) {
+        const xID = this.$route.params.id;
+        const categoryList = fb.expoCollection.doc(xID).collection("categories").doc();
+        const category_id = uuid.v4();
+        var categorydata = {
+          category_id: category_id,
+          category_name: this.new_category_name,
+          category_description: this.new_category_description
+        };
+
+
+        categoryList.set(categorydata).then(() => {
+            CreatedCategoryToast;
+            this.new_category_name = null;
+            this.new_category_description = null;
+            this.$store.commit("toggleActiveModal/toggleModalOverlay", null);
+          })
+          .catch((err) => {
+            this.feedback = 'There was a problem creating the category please try again.';
+          });
+
+        // /add to store folder
+
+
+
+      } else {
+        this.feedback = 'You have to fill in all fields';
+        return;
+      }
+    },
+
     resetActiveModalOverlay() {
       this.selectedFile = null;
+      this.$store.commit("toggleActiveModal/toggleModalOverlay", null);
+
+      return;
+    }
+  },
+  computed: {
+    //User Info
+    currentUser() {
+      return this.$store.state.userProfile;
+    },
+
+  }
+};
+
+
+export const createCategory = {
+  data() {
+    return {
+
+      feedback: null,
+
+      new_category_name: null,
+      new_category_description: null
+    };
+  },
+  methods: {
+    addExpoCategory() {
+
+      let CreatedCategoryToast = this.$toasted.show("Successfully Created", {
+        theme: "primary",
+        type: 'success',
+        className: "successToast",
+        position: "bottom-right",
+        duration: 4000
+      });
+
+      if (this.new_category_description && this.new_category_name) {
+        const xID = this.$route.params.id;
+        const categoryList = fb.expoCollection.doc(xID).collection("categories").doc();
+        const category_id = uuid.v4();
+        var categorydata = {
+          category_id: category_id,
+          category_name: this.new_category_name,
+          category_description: this.new_category_description
+        };
+
+
+        categoryList.set(categorydata).then(() => {
+            CreatedCategoryToast;
+
+            this.$store.commit("toggleActiveModal/toggleModalOverlay", null);
+          })
+          .catch((err) => {
+            this.feedback = 'There was a problem creating the category please try again.';
+          });
+
+        // /add to store folder
+
+
+
+      } else {
+        this.feedback = 'You have to fill in all fields';
+        return;
+      }
+    },
+
+    resetActiveModalOverlay() {
+      this.new_category_name = null;
+      this.new_category_description = null;
       this.$store.commit("toggleActiveModal/toggleModalOverlay", null);
 
       return;

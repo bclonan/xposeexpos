@@ -41,8 +41,10 @@
                 <div class="flex-card light-bordered light-raised">
                   <div class="card-body">
                     <h2 class="title is-4 text-bold mb-20">Categories</h2>
-                    <hr/>
+                    <input class="input rounded is-medium" type="text" placeholder="Category Name" v-model="searchCategories">
 
+                    <hr/>
+                    <h4 class="title is-4 text-bold mb-20" v-for="item in filteredCategories" :key="item.category_id">{{item.category_name}}</h4>
                   </div>
                 </div>
               </div>
@@ -80,9 +82,10 @@
   import Footer from '@/components/Welcome/Includes/Footer.vue';
 
   import { getExpoVendors } from '@/components/Welcome/mixins/getExpoVendors.js';
+  import { getExpoCategories } from '@/components/Welcome/mixins/getExpoCategories.js';
   export default {
     name: 'ExpoCategory',
-    mixins: [getExpoVendors],
+    mixins: [getExpoVendors, getExpoCategories],
     data() {
       return {
         vendor_page_id: null,

@@ -9,7 +9,7 @@
 
       <i v-else :class="item.icon"></i>
     </li>
-    <li v-if="currentUser.account_type === 'organizer'" v-for="item in OrganizerItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
+    <li v-if="currentUser === 'organizer'" v-for="item in OrganizerItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
       <i v-if="item.buttontype === 'route'" :class="item.icon" @click="navigateToRoute(item.to)"></i>
 
       <i v-else :class="item.icon"></i>

@@ -24,13 +24,16 @@
                   <div class="tabs is-toggle is-fullwidth">
                     <ul>
                       <li class="tab-link" @click="setTheActiveTab('Analytics')" :class="[ isTabActiveNow === 'Analytics' ? 'is-active' : '']">
-                        <a>Analytics</a>
+                        <a>Overview</a>
+                      </li>
+                      <li class="tab-link" @click="setTheActiveTab('Categories')" :class="[ isTabActiveNow === 'Categories' ? 'is-active' : '']">
+                        <a>Categories</a>
                       </li>
                       <li class="tab-link" @click="setTheActiveTab('expoDescription')" :class="[ isTabActiveNow === 'expoDescription' ? 'is-active' : '']">
                         <a>Xpose Page</a>
                       </li>
                       <li class="tab-link" @click="setTheActiveTab('vendorList')" :class="[ isTabActiveNow === 'vendorList' ? 'is-active' : '']">
-                        <a>Approved Vendors</a>
+                        <a>Vendors</a>
                       </li>
                     </ul>
                   </div>
@@ -187,18 +190,16 @@
                       </div>
                     </div>
                   </div>
-                  <div class="navtab-content" :class="[ isTabActiveNow === 'vendorList' ? 'is-active' : '']">
+                  <div class="navtab-content" :class="[ isTabActiveNow === 'Categories' ? 'is-active' : '']">
                     <!-- Projects Group -->
                     <div class="projects-list-wrapper">
                       <div class="list-header">
                         <div class="list-title">
-                          <span>Your Expos</span>
+                          <span>Manage Categories</span>
                         </div>
                       </div>
-                      <div class="list-body">
-                        <div class="columns is-multiline">
-                        </div>
-                      </div>
+                      <category-table />
+
                     </div>
                   </div>
                   <div class="navtab-content" :class="[ isTabActiveNow === 'expoDescription' ? 'is-active' : '']">
@@ -213,18 +214,17 @@
                       <div class="list-body">
                         <div class="columns is-multiline">
                           <div class="column is-3">
-                             <h2 class="title is-4 text-bold mb-20">Content Blocks</h2>
+                            <h2 class="title is-4 text-bold mb-20">Content Blocks</h2>
                             <div class="flex-card light-bordered light-raised">
                               <div class="card-body">
 
                                 <hr/>
 
-
                               </div>
                             </div>
                           </div>
                           <div class="column is-9">
-                             <h2 class="title is-4 text-bold mb-20">Live Preview</h2>
+                            <h2 class="title is-4 text-bold mb-20">Live Preview</h2>
                             <div class="flex-card light-bordered light-raised">
                               <div class="card-body">
 
@@ -236,6 +236,21 @@
                       </div>
                     </div>
                   </div>
+                  <div class="navtab-content" :class="[ isTabActiveNow === 'vendorList' ? 'is-active' : '']">
+                    <!-- Projects Group -->
+                    <div class="projects-list-wrapper">
+                      <div class="list-header">
+                        <div class="list-title">
+                          <span>Your Expos</span>
+                        </div>
+                      </div>
+                      <div class="list-body">
+                        <div class="columns is-multiline">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -254,203 +269,187 @@
   import AppControlInput from '@/components/UI/Forms/AppControlInput.vue';
   import AppButton from '@/components/UI/Forms/AppButton.vue';
   //Additional
-  import {
-      mapState
-  } from 'vuex';
-  import {
-      uuid
-  } from 'vue-uuid';
+  import { mapState } from 'vuex';
+  import { uuid } from 'vue-uuid';
   // import fbase db
   const fb = require('@/services/firebase/init.js');
   //Components
 
   //Mixins
-  import {
-      activeModalToggle
-  } from '@/components/Main/Mixins/activeModalToggle.js';
-  import {
-      activeTabMixin
-  } from '@/components/Main/Mixins/activeTabMixin.js';
+  import { activeModalToggle } from '@/components/Main/Mixins/activeModalToggle.js';
+  import { activeTabMixin } from '@/components/Main/Mixins/activeTabMixin.js';
+
+  //category mixins
+  import categoryTable from '@/components/Main/Pages/showinfo/Includes/categoryTable.vue';
 
   export default {
-      name: 'DashCollaborateMain',
-      mixins: [activeModalToggle, activeTabMixin],
-      data() {
-          return {
-              activeTabChosen: 'Analytics',
-              inputTypeOne: 'input is-medium mt-5',
-              inputTypeTwo: 'textarea is-grow',
-              feedback: null,
-              randomID: uuid.v4(),
-              searchVendor: '',
-              searchCategory: '',
-              expoMainResults: [],
-              expoPageResults: [],
-              expoAnalyticResults: [],
-              expoVendorResults: [],
-              expoVendorRequestResults: [],
-              organizer_name: null,
-              expo_owner_businessname: null,
-              expo_owner_businesLocation: null,
-              expo_description: null,
-              expo_date_start: null,
-              expo_address_town: null,
-              expo_address_zip: null,
-              expo_address_country: null,
-              expo_address_state: null,
-              expo_address_address: null,
-              expo_time: null,
-              expo_contact: null,
-              expo_organizer: null,
-              expo_organizer_website: null,
-              expo_organizer_number: null,
-              expo_organizer_email: null,
-              expo_name: null,
-              expo_promo_website: null,
-              expo_date_end: null,
-              current_page_id: null,
-              expo_contact_name: null,
-              expopageResults: []
-          }
+    name: 'DashCollaborateMain',
+    mixins: [activeModalToggle, activeTabMixin],
+    data() {
+      return {
+        activeTabChosen: 'Analytics',
+        inputTypeOne: 'input is-medium mt-5',
+        inputTypeTwo: 'textarea is-grow',
+        feedback: null,
+        randomID: uuid.v4(),
+        searchVendor: '',
+        searchCategory: '',
+        expoMainResults: [],
+        expoPageResults: [],
+        expoAnalyticResults: [],
+        expoVendorResults: [],
+        expoVendorRequestResults: [],
+        organizer_name: null,
+        expo_owner_businessname: null,
+        expo_owner_businesLocation: null,
+        expo_description: null,
+        expo_date_start: null,
+        expo_address_town: null,
+        expo_address_zip: null,
+        expo_address_country: null,
+        expo_address_state: null,
+        expo_address_address: null,
+        expo_time: null,
+        expo_contact: null,
+        expo_organizer: null,
+        expo_organizer_website: null,
+        expo_organizer_number: null,
+        expo_organizer_email: null,
+        expo_name: null,
+        expo_promo_website: null,
+        expo_date_end: null,
+        current_page_id: null,
+        expo_contact_name: null,
+        expopageResults: []
+      };
+    },
+    components: {
+      AppControlInput,
+      AppButton,
+      categoryTable
+    },
+    methods: {
+      fetchExpoData() {
+        const xID = this.$route.params.id;
+        const expoRef = fb.expoCollection.doc(xID);
+        let expodat = [];
+        let pgdat = [];
+
+        expoRef
+          .get()
+          .then(res => {
+            this.expo_address_address = res.data().expo_address_address;
+
+            this.expo_id = res.data().expo_id;
+            this.expo_owner_id = res.data().expo_owner_id;
+            this.expo_contact_name = res.data().expo_contact_name;
+            this.expo_owner_businessname = res.data().expo_owner_businessname;
+            this.expo_owner_businesLocation = res.data().expo_owner_businesLocation;
+            this.expo_description = res.data().expo_description;
+            this.expo_logo = res.data().expo_logo;
+            this.expo_date_start = res.data().expo_date_start;
+            this.expo_date_end = res.data().expo_date_end;
+            this.expo_address_town = res.data().expo_address_town;
+            this.expo_address_zip = res.data().expo_address_zip;
+            this.expo_address_country = res.data().expo_address_country;
+            this.expo_address_state = res.data().expo_address_state;
+            this.expo_address_address = res.data().expo_address_address;
+            this.expo_industry = res.data().expo_industry;
+            this.expo_promo_website = res.data().expo_promo_website;
+            this.expo_organizer = res.data().expo_organizer;
+            this.expo_organizer_website = res.data().expo_organizer_website;
+            this.expo_organizer_number = res.data().expo_organizer_number;
+            this.expo_name = res.data().expo_name;
+            this.expo_message_id = res.data().expo_message_id;
+            this.expo_organizer_email = res.data().expo_organizer_email;
+            this.current_page_id = res.data().current_page_id;
+
+            if (this.current_page_id) {
+              let pgid = res.data().current_page_id;
+              const pgref = fb.expoCollection
+                .doc(xID)
+                .collection('expopages')
+                .doc(pgid);
+              pgref
+                .get()
+                .then(res => {
+                  this.expopageResults.push(res.data());
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+        return;
       },
-      components: {
-          AppControlInput,
-          AppButton
-      },
-      methods: {
+      onSubmit() {
+        const currentUserid = this.currentUser.uid;
 
-          fetchExpoData() {
-              const xID = this.$route.params.id;
-              const expoRef = fb.expoCollection.doc(xID);
-              let expodat = [];
-let pgdat = [];
+        const xID = this.$route.params.id;
 
+        // ref to current user expo ref
+        const userExpoRef = fb.usersCollection
+          .doc(currentUserid)
+          .collection('expos')
+          .doc(xID);
 
+        //ref to expo collection
+        const expoRef = fb.expoCollection.doc(xID);
 
-              expoRef.get().then(res => {
-                  this.expo_address_address = res.data().expo_address_address;
+        const batch = fb.db.batch();
 
-                  this.expo_id = res.data().expo_id
-                  this.expo_owner_id = res.data().expo_owner_id
-                  this.expo_contact_name = res.data().expo_contact_name
-                  this.expo_owner_businessname = res.data().expo_owner_businessname
-                  this.expo_owner_businesLocation = res.data().expo_owner_businesLocation
-                  this.expo_description = res.data().expo_description
-                  this.expo_logo = res.data().expo_logo
-                  this.expo_date_start = res.data().expo_date_start
-                  this.expo_date_end = res.data().expo_date_end
-                  this.expo_address_town = res.data().expo_address_town
-                  this.expo_address_zip = res.data().expo_address_zip
-                  this.expo_address_country = res.data().expo_address_country
-                  this.expo_address_state = res.data().expo_address_state
-                  this.expo_address_address = res.data().expo_address_address
-                  this.expo_industry = res.data().expo_industry
-                  this.expo_promo_website = res.data().expo_promo_website
-                  this.expo_organizer = res.data().expo_organizer
-                  this.expo_organizer_website = res.data().expo_organizer_website
-                  this.expo_organizer_number = res.data().expo_organizer_number
-                  this.expo_name = res.data().expo_name
-                  this.expo_message_id = res.data().expo_message_id
-                  this.expo_organizer_email = res.data().expo_organizer_email
-                  this.current_page_id = res.data().current_page_id
+        //add to users collabs
+        batch.update(userExpoRef, {
+          expo_name: this.expo_name,
+          expo_date_start: this.expo_date_start,
+          expo_date_end: this.expo_date_end
+        });
 
+        //create new team
+        batch.update(expoRef, {
+          expo_contact_name: this.expo_contact_name,
+          expo_owner_businessname: this.expo_owner_businessname,
+          expo_owner_businesLocation: this.expo_owner_businesLocation,
+          expo_description: this.expo_description,
+          expo_date_start: this.expo_date_start,
+          expo_date_end: this.expo_date_end,
+          expo_address_town: this.expo_address_town,
+          expo_address_zip: this.expo_address_zip,
+          expo_address_country: this.expo_address_country,
+          expo_address_state: this.expo_address_state,
+          expo_address_address: this.expo_address_address,
+          expo_promo_website: this.expo_promo_website,
+          expo_organizer: this.expo_organizer,
+          expo_organizer_website: this.expo_organizer_website,
+          expo_organizer_number: this.expo_organizer_number,
+          expo_name: this.expo_name,
+          expo_organizer_email: this.expo_organizer_email
+        });
 
-                  if(this.current_page_id){
-                    let pgid = res.data().current_page_id;
-                      const pgref = fb.expoCollection.doc(xID).collection('expopages').doc(pgid);
-                        pgref.get().then(res => {
-                          this.expopageResults.push(res.data())
-
-                           }).catch(err => {
-                  console.log(err)
-              })
-
-
-                  }
-
-
-
-              }).catch(err => {
-                  console.log(err)
-              })
-
-
-
-
-
-              return;
-
-          },
-          onSubmit() {
-
-              const currentUserid = this.currentUser.uid;
-
-              const xID = this.$route.params.id;
-
-              // ref to current user expo ref
-              const userExpoRef = fb.usersCollection.doc(currentUserid).collection('expos').doc(xID);
-
-              //ref to expo collection
-              const expoRef = fb.expoCollection.doc(xID);
-
-
-              const batch = fb.db.batch();
-
-              //add to users collabs
-              batch.update(userExpoRef, {
-
-                  expo_name: this.expo_name,
-                  expo_date_start: this.expo_date_start,
-                  expo_date_end: this.expo_date_end
-              });
-
-              //create new team
-              batch.update(expoRef, {
-
-                  expo_contact_name: this.expo_contact_name,
-                  expo_owner_businessname: this.expo_owner_businessname,
-                  expo_owner_businesLocation: this.expo_owner_businesLocation,
-                  expo_description: this.expo_description,
-                  expo_date_start: this.expo_date_start,
-                  expo_date_end: this.expo_date_end,
-                  expo_address_town: this.expo_address_town,
-                  expo_address_zip: this.expo_address_zip,
-                  expo_address_country: this.expo_address_country,
-                  expo_address_state: this.expo_address_state,
-                  expo_address_address: this.expo_address_address,
-                  expo_promo_website: this.expo_promo_website,
-                  expo_organizer: this.expo_organizer,
-                  expo_organizer_website: this.expo_organizer_website,
-                  expo_organizer_number: this.expo_organizer_number,
-                  expo_name: this.expo_name,
-                  expo_organizer_email: this.expo_organizer_email
-              });
-
-
-              //set
-              return batch
-                  .commit()
-                  .then(() => {
-                      console.log('success')
-                  })
-                  .catch(err => {
-                      this.feedback = err.message;
-                  });
-
-          },
-      },
-
-      computed: {
-    currentUser() {
-      return this.$store.state.currentUser;
+        //set
+        return batch
+          .commit()
+          .then(() => {
+            console.log('success');
+          })
+          .catch(err => {
+            this.feedback = err.message;
+          });
+      }
     },
 
-      },
-      created() {
-          this.fetchExpoData();
-
+    computed: {
+      currentUser() {
+        return this.$store.state.currentUser;
       }
-
+    },
+    created() {
+      this.fetchExpoData();
+    }
   };
 </script>
 

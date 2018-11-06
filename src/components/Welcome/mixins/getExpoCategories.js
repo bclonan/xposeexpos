@@ -3,18 +3,24 @@ const fb = require('@/services/firebase/init.js');
 export const getExpoCategories = {
   data() {
     return {
-      search: '',
+      searchCategories: '',
       categoriesResults: []
     }
   },
   methods: {
-    fetchExpoData() {
+    fetchExpoCategories() {
       const xID = this.$route.params.id;
-      const expoRef = fb.expoCollection.doc(xID).collection("expoCategories")
+      const expoRef = fb.expoCollection.doc(xID).collection("categories")
 
       expoRef.get()
         .then(snapshot => {
           snapshot.forEach(doc => {
+            this.categoriesResults.push({
+              id: doc.id,
+              category_id: doc.data().category_id,
+              category_name: doc.data().category_name,
+              category_description: doc.data().category_description,
+            })
             console.log(doc.id, '=>', doc.data());
 
           });
@@ -55,9 +61,9 @@ export const getExpoCategories = {
     }
   },
   computed: {
-    filteredList() {
-      return this.exposResults.filter(expo => {
-        return expo.expo_name.toLowerCase().includes(this.search.toLowerCase());
+    filteredCategories() {
+      return this.categoriesResults.filter(category => {
+        return category.category_name.toLowerCase().includes(this.searchCategories.toLowerCase());
       });
     },
     //expoID() {
@@ -65,7 +71,7 @@ export const getExpoCategories = {
     // }
   },
   created() {
-    this.fetchExpos();
+    this.fetchExpoCategories();
 
   }
 };
