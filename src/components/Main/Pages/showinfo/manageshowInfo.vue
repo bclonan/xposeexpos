@@ -332,19 +332,10 @@
                                     </form>
 
                                     <p class="menu-label">
-                                      Transactions
+                                      Add Content
                                     </p>
-                                    <ul class="menu-list">
-                                      <li>
-                                        <a>Payments</a>
-                                      </li>
-                                      <li>
-                                        <a>Transfers</a>
-                                      </li>
-                                      <li>
-                                        <a>Balance</a>
-                                      </li>
-                                    </ul>
+                                    <block-types-pane @dragOnBlock="dropBlock" />
+
                                   </aside>
 
                                   <!--/main-->
@@ -393,9 +384,7 @@
                                       Transactions
                                     </p>
                                     <ul class="menu-list">
-                                      <li>
-                                        <a>Payments</a>
-                                      </li>
+
                                       <li>
                                         <a>Transfers</a>
                                       </li>
@@ -414,58 +403,10 @@
                               </footer>
                             </div>
                             <div class="card navtab-content" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']">
-                              <header class="card-header">
-                                <p class="card-header-title">
-                                  Blocks
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                                  <span class="icon">
-                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                  </span>
-                                </a>
-                              </header>
-                              <div class="card-content">
-                                <div class="content">
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                  <a href="#">@bulmaio</a>.
-                                  <a href="#">#css</a>
-                                  <a href="#">#responsive</a>
-                                  <br>
-                                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                                </div>
-                              </div>
-                              <footer class="card-footer">
-                                <a @click.prevent="setTheActiveTabTwo('pgSettings')" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']" class="card-footer-item">Style</a>
-                                <a @click.prevent="setTheActiveTabTwo('pgBlocks')" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']" class="card-footer-item">Content</a>
-                                <a @click.prevent="setTheActiveTabTwo('pgStyles')" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']" class="card-footer-item">Options</a>
-                              </footer>
+
                             </div>
                             <div class="card navtab-content" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']">
-                              <header class="card-header">
-                                <p class="card-header-title">
-                                  Styles
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                                  <span class="icon">
-                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                  </span>
-                                </a>
-                              </header>
-                              <div class="card-content">
-                                <div class="content">
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                                  <a href="#">@bulmaio</a>.
-                                  <a href="#">#css</a>
-                                  <a href="#">#responsive</a>
-                                  <br>
-                                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                                </div>
-                              </div>
-                              <footer class="card-footer">
-                                <a @click.prevent="setTheActiveTabTwo('pgSettings')" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']" class="card-footer-item">Style</a>
-                                <a @click.prevent="setTheActiveTabTwo('pgBlocks')" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']" class="card-footer-item">Content</a>
-                                <a @click.prevent="setTheActiveTabTwo('pgStyles')" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']" class="card-footer-item">Options</a>
-                              </footer>
+
                             </div>
 
                             <!--styleeditor-->
@@ -476,8 +417,15 @@
                               <template slot="header">
                                 <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
                               </template>
+                              <draggable :pageContentList="pageContentList" class="dragArea" slot="main" @change="change" @start="dragStart" @end="dragEnd" :options="{group: {
+          name: 'blocks',
+          pull: false,
+          put: true,
+          sort: true
+        }}">
+                                <component v-for="blocks in pageContentList" :key="blocks.id" :is="blocks.tagName" :contentClass="blocks.class" :contentStyle="blocks.style" :content="blocks.content" :parentClass="blocks.parentClass" :parentStyle="blocks.parentStyle" />
 
-                              <component slot="main" v-for="item in pageContentList" :key="item.content_id" :is="item.tagName" :contentClass="item.class" :contentStyle="item.style" :content="item.content" :parentClass="item.parentClass" :parentStyle="item.parentStyle" />
+                              </draggable>
 
                               <template slot="footer">
                                 <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
@@ -536,7 +484,7 @@
   //category mixins
   import categoryTable from '@/components/Main/Pages/showinfo/Includes/categoryTable.vue';
   //block template holder
-  import pageHolderTemplate from '@/components/Main/Pages/showinfo/Includes/pageHolder.vue';
+  import pageHolderTemplate from '@/components/Main/Pages/showinfo/Includes/pageHolderEditable.vue';
   //Headers
   import headerStyleOne from '@/components/Main/Pages/showinfo/blocks/Headers/headerStyleOne.vue';
   import headerStyleTwo from '@/components/Main/Pages/showinfo/blocks/Headers/headerStyleTwo.vue';
@@ -555,6 +503,8 @@
   import footerStyleTwo from '@/components/Main/Pages/showinfo/blocks/Footers/footerStyleTwo.vue';
   import footerStyleThree from '@/components/Main/Pages/showinfo/blocks/Footers/footerStyleThree.vue';
   //content blocks
+  import draggable from 'vuedraggable';
+  import BlockTypesPane from '@/components/Main/Pages/showinfo/blocks/blockdata/blocksTypes.vue';
 
   export default {
     name: 'DashCollaborateMain',
@@ -617,40 +567,15 @@
             fontSize: '13px'
           }
         },
+        //
+
+        //
         pageContentList: [
           {
             tagName: 'contentTitle',
             content: 'heywhatsup',
             class: ['has-text-centered', 'lol'],
             style: ['color:red;', 'lol']
-          },
-          {
-            tagName: 'contentText',
-            content: 'heywhatsup',
-            class: ['has-text-centered', 'lol'],
-            style: ['color:red;', 'lol']
-          },
-          {
-            tagName: 'contentButton',
-            content: 'heywhatsup',
-            class: ['has-text-centered', 'lol'],
-            style: ['color:red;', 'lol'],
-            parentClass: ['section', 'text-centered'],
-            parentStyle: ['section', 'text-centered']
-          },
-          {
-            tagName: 'textSection',
-            content: 'heywhatggggggsup',
-            class: ['has-text-centered', 'lol'],
-            style: ['color:red;', 'lol'],
-            parentClass: ['text-centered']
-          },
-          {
-            tagName: 'textSection',
-            content: 'heywhatggggggsup',
-            class: ['has-text-centered', 'lol'],
-            style: ['color:red;', 'lol'],
-            parentClass: ['text-centered']
           }
         ]
       };
@@ -672,9 +597,15 @@
       contentText,
       contentButton,
       buttonSection,
-      textSection
+      textSection,
+      draggable,
+      BlockTypesPane
     },
     methods: {
+      dropBlock(u) {
+        this.pageContentList.push(u);
+        console.log(u);
+      },
       fetchExpoData() {
         const xID = this.$route.params.id;
         const expoRef = fb.expoCollection.doc(xID);
@@ -785,12 +716,39 @@
           .catch(err => {
             this.feedback = err.message;
           });
+      },
+      //dragable
+      change(evt) {
+        return console.log(evt);
+      },
+      dragStart(evt) {},
+      dragEnd(evt) {},
+      //addblocks
+      add(i) {
+        console.log(i);
+        this.pageContentList.push(i);
       }
     },
 
     computed: {
       currentUser() {
         return this.$store.state.currentUser;
+      },
+
+      draggableOptions() {
+        return {
+          group: {
+            pull: false,
+            put: false,
+            sort: true,
+            handle: '.handle',
+            animation: 100,
+            ghostClass: 'ghost',
+            delay: 0, // time in milliseconds to define when the sorting should start
+            touchStartThreshold: 0, // px, how many pixels the point should move before cancelling a delayed drag event
+            disabled: false // Disables the sortable if set to true.
+          }
+        };
       }
     },
     created() {

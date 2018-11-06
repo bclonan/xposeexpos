@@ -1,0 +1,36 @@
+[{
+    "blockName": "Title Block",
+    "tagName": "contentTitle",
+    "content": "Title Block",
+    "class": [""],
+    "style": []
+  },
+  {
+    "blockName": "Text Block",
+    "tagName": "textSection",
+    "content": "text goes here",
+    "class": [],
+    "style": [],
+    "parentClass": [],
+    "parentStyle": []
+  },
+  {
+    "blockName": "Button Block",
+    "tagName": "buttonSection",
+    "buttonLink": "",
+    "content": "button Text",
+    "class": [],
+    "style": [],
+    "parentClass": [],
+    "parentStyle": []
+  },
+  {
+    "tagName": "buttonSection",
+    "content": "Button Text",
+    "buttonLink": "yourwebsite.com",
+    "class": [],
+    "style": [],
+    "parentClass": [],
+    "parentStyle": []
+  }
+]
