@@ -10,7 +10,7 @@ export const getExpoVendors = {
   },
   methods: {
     fetchVendors() {
-      const xID = $route.params.id;
+      const xID = this.$route.params.id;
       const expoRef = fb.expoCollection.doc(xID).collection("approvedVendors")
 
       expoRef.get()

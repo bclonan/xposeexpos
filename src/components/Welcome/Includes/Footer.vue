@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer footer-light-medium">
+    <footer class="footer footer-light-medium" >
         <div class="container">
             <div class="columns">
                 <!-- Column -->

@@ -9,7 +9,7 @@ export const getExpoCategories = {
   },
   methods: {
     fetchExpoData() {
-      const xID = $route.params.id;
+      const xID = this.$route.params.id;
       const expoRef = fb.expoCollection.doc(xID).collection("expoCategories")
 
       expoRef.get()
