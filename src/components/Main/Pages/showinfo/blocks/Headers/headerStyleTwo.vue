@@ -1,6 +1,6 @@
 <template>
   <span>
-    <img :src="pageHeaderData.headerImage" alt="">
+    <img :src="pageHeaderData.headerImage" class="imgHeader" alt="">
   </span>
 </template>
 

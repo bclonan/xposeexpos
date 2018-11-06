@@ -1,6 +1,6 @@
 <template>
   <div class="image is-2by1">
-    <img :src="pageHeaderData.headerImage" alt="">
+    <img :src="pageHeaderData.headerImage" class="imgHeader" alt="">
 
   </div>
 </template>

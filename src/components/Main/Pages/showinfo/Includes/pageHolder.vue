@@ -4,16 +4,18 @@
       <header>
         <slot name="header"></slot>
       </header>
-      <main>
-        <div class="card-body is-responsive">
-          <slot></slot>
-        </div>
-      </main>
-      <footer>
-        <slot name="footer"></slot>
-      </footer>
-    </div>
+      <div class="card-body is-responsive">
+        <main>
 
+          <slot name="main"></slot>
+
+        </main>
+        <footer>
+          <slot name="footer"></slot>
+        </footer>
+      </div>
+
+    </div>
   </div>
 </template>
 

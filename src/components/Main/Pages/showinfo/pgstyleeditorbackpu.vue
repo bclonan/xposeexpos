@@ -215,10 +215,10 @@
                               <div class="tabs">
                                 <ul>
                                   <li class="tab-link" @click="setTheActiveTabTwo('pgSettings')" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']">
-                                    <a>Settings</a>
+                                    <a>Page Settings</a>
                                   </li>
                                   <li class="tab-link" @click="setTheActiveTabTwo('pgBlocks')" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']">
-                                    <a>Blocks</a>
+                                    <a>Content Blocks</a>
                                   </li>
                                   <li class="tab-link" @click="setTheActiveTabTwo('pgStyles')" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']">
                                     <a>Style Editor</a>
@@ -229,188 +229,32 @@
 
                             </div>
                             <div class="card navtab-content" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']">
+                              <header class="card-header">
 
-                              <div class="field">
-                                <label class=" card-header-title form-label">Editing</label>
-                                <div class="control mt-20">
-                                  <div class="select is-medium">
-                                    <select v-model="editTempArea">
-                                      <option disabled value="">{{editTempArea}}</option>
-                                      <option value="headerTemp">Header</option>
-                                      <option value="contentTemp">Content</option>
-                                      <option value="footerTemp">Footer</option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-
+                                <p class="card-header-title">
+                                  Component
+                                </p>
+                                <a href="#" class="card-header-icon" aria-label="more options">
+                                  <span class="icon">
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                  </span>
+                                </a>
+                              </header>
                               <div class="card-content">
                                 <div class="content">
-                                  <!--header edit-->
-                                  <aside class="menu navtab-content" :class="[ editTempArea === 'headerTemp' ? 'is-active' : '']">
-                                    <p class="menu-label">
-                                      Template Style
-                                    </p>
-                                    <div class="field">
-                                      <div class="control mt-20">
-                                        <div class="select is-small">
-                                          <select v-model="pageHeaderStyle">
-                                            <option disabled value="">Please select one</option>
-                                            <option value="headerStyleOne">Style One</option>
-                                            <option value="headerStyleTwo">Style Two</option>
-                                            <option value="headerStyleThree">Style Three</option>
-                                            <option value="headerStyleFour">Style Four</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <p class="menu-label">
-                                      Template Values
-                                    </p>
-
-                                    <form class="">
-                                      <div class="field">
-                                        <label class="form-label">Image Value</label>
-                                        <div class="control">
-                                          <input type="text" class="input is-medium">
-                                        </div>
-                                      </div>
-                                      <div class="field mt-20">
-                                        <label class="form-label">Text</label>
-                                        <div class="control">
-                                          <input type="email" class="input is-medium">
-                                        </div>
-                                      </div>
-
-                                      <div class="mt-20 has-text-right">
-                                        <button type="submit" class="button btn-align info-btn raised">Save</button>
-                                      </div>
-                                    </form>
-
-                                  </aside>
-                                  <!--/header-->
-                                  <aside class="menu navtab-content" :class="[ editTempArea === 'contentTemp' ? 'is-active' : '']">
-                                    <p class="menu-label">
-                                      Template Style
-                                    </p>
-                                    <div class="field">
-                                      <div class="control mt-20">
-                                        <div class="select is-small">
-                                          <select v-model="pageHeaderStyle">
-                                            <option disabled value="">Please select one</option>
-                                            <option value="headerStyleOne">Style One</option>
-                                            <option value="headerStyleTwo">Style Two</option>
-                                            <option value="headerStyleThree">Style Three</option>
-                                            <option value="headerStyleFour">Style Four</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <p class="menu-label">
-                                      Template Values
-                                    </p>
-
-                                    <form class="">
-                                      <div class="field">
-                                        <label class="form-label">Image Value</label>
-                                        <div class="control">
-                                          <input type="text" class="input is-medium">
-                                        </div>
-                                      </div>
-                                      <div class="field mt-20">
-                                        <label class="form-label">Text</label>
-                                        <div class="control">
-                                          <input type="email" class="input is-medium">
-                                        </div>
-                                      </div>
-
-                                      <div class="mt-20 has-text-right">
-                                        <button type="submit" class="button btn-align info-btn raised">Save</button>
-                                      </div>
-                                    </form>
-
-                                    <p class="menu-label">
-                                      Transactions
-                                    </p>
-                                    <ul class="menu-list">
-                                      <li>
-                                        <a>Payments</a>
-                                      </li>
-                                      <li>
-                                        <a>Transfers</a>
-                                      </li>
-                                      <li>
-                                        <a>Balance</a>
-                                      </li>
-                                    </ul>
-                                  </aside>
-
-                                  <!--/main-->
-                                  <aside class="menu navtab-content" :class="[ editTempArea === 'footerTemp' ? 'is-active' : '']">
-                                    <p class="menu-label">
-                                      Template Style
-                                    </p>
-                                    <div class="field">
-                                      <div class="control mt-20">
-                                        <div class="select is-small">
-                                          <select v-model="pageHeaderStyle">
-                                            <option disabled value="">Please select one</option>
-                                            <option value="headerStyleOne">Style One</option>
-                                            <option value="headerStyleTwo">Style Two</option>
-                                            <option value="headerStyleThree">Style Three</option>
-                                            <option value="headerStyleFour">Style Four</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <p class="menu-label">
-                                      Template Values
-                                    </p>
-
-                                    <form class="">
-                                      <div class="field">
-                                        <label class="form-label">Image Value</label>
-                                        <div class="control">
-                                          <input type="text" class="input is-medium">
-                                        </div>
-                                      </div>
-                                      <div class="field mt-20">
-                                        <label class="form-label">Text</label>
-                                        <div class="control">
-                                          <input type="email" class="input is-medium">
-                                        </div>
-                                      </div>
-
-                                      <div class="mt-20 has-text-right">
-                                        <button type="submit" class="button btn-align info-btn raised">Save</button>
-                                      </div>
-                                    </form>
-
-                                    <p class="menu-label">
-                                      Transactions
-                                    </p>
-                                    <ul class="menu-list">
-                                      <li>
-                                        <a>Payments</a>
-                                      </li>
-                                      <li>
-                                        <a>Transfers</a>
-                                      </li>
-                                      <li>
-                                        <a>Balance</a>
-                                      </li>
-                                    </ul>
-                                  </aside>
-                                  <!--/footer-->
+                                  <select v-model="pageHeaderStyle">
+                                    <option disabled value="">Please select one</option>
+                                    <option value="headerStyleOne">Style One</option>
+                                    <option value="headerStyleTwo">Style Two</option>
+                                    <option value="headerStyleThree">Style Three</option>
+                                    <option value="headerStyleFour">Style Four</option>
+                                  </select>
                                 </div>
                               </div>
                               <footer class="card-footer">
-                                <a @click.prevent="setTheActiveTabTwo('pgSettings')" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']" class="card-footer-item">Reset</a>
-
-                                <a @click.prevent="setTheActiveTabTwo('pgStyles')" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']" class="card-footer-item">Save</a>
+                                <a @click.prevent="setTheActiveTabTwo('pgSettings')" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']" class="card-footer-item">Style</a>
+                                <a @click.prevent="setTheActiveTabTwo('pgBlocks')" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']" class="card-footer-item">Content</a>
+                                <a @click.prevent="setTheActiveTabTwo('pgStyles')" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']" class="card-footer-item">Options</a>
                               </footer>
                             </div>
                             <div class="card navtab-content" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']">
@@ -468,6 +312,62 @@
                               </footer>
                             </div>
 
+                            <div class="flex-card light-bordered light-raised navtab-content" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']">
+                              <h2 class="title is-4 text-bold mb-20">Content Blocks</h2>
+
+                              <div class="card-body">
+
+                                <label class="form-label">Header Style</label>
+                                <div class="control">
+                                  <select v-model="pageHeaderStyle">
+                                    <option disabled value="">Please select one</option>
+                                    <option value="headerStyleOne">Style One</option>
+                                    <option value="headerStyleTwo">Style Two</option>
+                                    <option value="headerStyleThree">Style Three</option>
+                                    <option value="headerStyleFour">Style Four</option>
+                                  </select>
+                                </div>
+
+                                <!--
+                                <label class="form-label">Content Styles</label>
+                                <div class="control">
+                                  <select v-model="pageHeaderStyle">
+                                    <option disabled value="">Please select one</option>
+                                    <option value="headerStyleOne">Style One</option>
+                                    <option value="headerStyleTwo">Style Two</option>
+                                    <option value="headerStyleThree">Style Three</option>
+                                    <option value="headerStyleFour">Style Four</option>
+                                  </select>
+                                </div>
+                                -->
+
+                                <label class="form-label">Footer Style</label>
+                                <div class="control">
+                                  <select v-model="pageFooterStyle">
+                                    <option disabled value="">Please select one</option>
+                                    <option value="footerStyleOne">Style One</option>
+                                    <option value="footerStyleTwo">Style Two</option>
+                                    <option value="footerStyleThree">Style Three</option>
+                                  </select>
+                                </div>
+
+                              </div>
+                            </div>
+                            <div class="flex-card light-bordered light-raised navtab-content" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']">
+                              <h2 class="title is-4 text-bold mb-20">Content Blocks</h2>
+                              <hr/>
+                              <div class="card-body">
+
+                              </div>
+                            </div>
+                            <!--styleeditor-->
+                            <div class="flex-card light-bordered light-raised navtab-content" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']">
+                              <div class="card-body">
+
+                                <hr/>
+
+                              </div>
+                            </div>
                             <!--styleeditor-->
                           </div>
                           <!-- page template builder-->
@@ -561,7 +461,6 @@
         activeTabTwoChosen: 'pgSettings',
         inputTypeOne: 'input is-medium mt-5',
         inputTypeTwo: 'textarea is-grow',
-        editTempArea: 'headerTemp',
         feedback: null,
         randomID: uuid.v4(),
         searchVendor: '',

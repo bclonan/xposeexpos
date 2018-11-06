@@ -89,7 +89,6 @@
 
                                     </div>
 
-
                                   </div>
                                   <div class="columns mt-30">
                                     <div class="column">
@@ -326,6 +325,7 @@
           // xyz user info
           const currentUserid = this.currentUser.uid;
           let expo_pg_id = uuid.v4();
+          let expo_invite_key = uuid.v4();
           let expo_id = uuid.v4();
           // ref to current user team collection
           const currentUserRef = fb.usersCollection.doc(currentUserid).collection('expos');
@@ -343,7 +343,7 @@
             .doc(currentUserid)
             .collection('expos')
             .doc(expo_id);
-                    //create expos page placeholder
+          //create expos page placeholder
           const expospageref = fb.expoCollection
             .doc(expo_id)
             .collection('expopages')
@@ -390,7 +390,8 @@
             expo_message_id: uuid.v4(),
             expo_page_id: expo_pg_id,
             current_page_id: expo_pg_id,
-            expo_organizer_email: this.expo_organizer_email
+            expo_organizer_email: this.expo_organizer_email,
+            expo_invite_key: this.expo_invite_key
           });
 
           //analytics
@@ -407,23 +408,19 @@
             expo_organizer_email: this.expo_organizer_email
           });
 
-                    //expo page
+          //expo page
           batch.set(expospageref, {
             expo_id: expo_id,
-            expo_page_id: expo_pg_id,
+            expo_page_id: expo_pg_id
           });
 
           //set
           return batch
             .commit()
             .then(() => {
-
-
-
-
               /*this.$router.push({
-                path: `/teamview/${expo_id}`
-              });*/
+                  path: `/teamview/${expo_id}`
+                });*/
             })
             .catch(err => {
               this.feedback = err.message;
