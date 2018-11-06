@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div class="hero is-small is-theme-secondary" style="background-color:lightblue;">
+    <div class="hero is-small is-theme-secondary" style="background-color:#f44242;">
 
       <!-- Navbar partial -->
       <NavBar :textcolor="textcolor" />
@@ -8,73 +8,66 @@
       <!-- Hero content -->
       <div class="hero-body ">
         <div class="container ">
-          <div class="columns is-vcentered">
+          <div class="columns is-centered  pb-10">
 
-            <div class="column is-12 is-hero-title">
+            <div class="column is-6 is-offset-1 is-hero-title">
               <h1 class="title is-1 mt-60"> {{expoSelected.expo_name}}</h1>
-              <h2 class="subtitle is-4 pt-10 pb-10" style="color:white;">
-                {{expoSelected.expo_address_town}} {{expoSelected.expo_address_state}}
-              </h2>
+
+            </div>
+          </div>
+          <div class="columns is-12 is-centered">
+
+            <div class="column is-4 is-offset-1 is-hero-title">
               <h3>{{expoSelected.expo_start_date}} {{expoSelected.expo_end_date}}</h3>
-              <p style="color:white;">
-                {{expoSelected.expo_description}}
-
-              </p>
+            </div>
+            <div class="column is-4 is-offset-1 is-hero-title">
+              <h3> {{expoSelected.expo_description}}</h3>
             </div>
 
           </div>
         </div>
+
       </div>
-
     </div>
-    <section class="section is-medium section-feature-grey">
+
+    <section class="section mb-50">
       <div class="container">
+        <div class="projects-list-wrapper">
 
-        <div class="column is-6 is-hero-title">
+          <div class="list-body">
+            <div class="columns is-multiline">
+              <div class="column is-3">
 
-          <h2 class="subtitle is-4 pt-10 pb-10" style="color:white;">
-            Vendor Name
-          </h2>
-          <p class="">
+                <div class="flex-card light-bordered light-raised">
+                  <div class="card-body">
+                    <h2 class="title is-4 text-bold mb-20">Categories</h2>
+                    <hr/>
 
-            <input class="input rounded is-medium" type="text" placeholder="Find your Expo...." v-model="search">
-
-          </p>
-        </div>
-        <div class="content-wrapper">
-          <div class="columns is-multiline">
-            <!--event card-->
-            <div class="column is-4">
-              <!--<div class="event-card" v-for="item in filteredList" :key="item.id">
-                <div class="card-date">
-                  <div class="date">
-                    <span class="day">05</span>
-                    <span class="month">Nov</span>
                   </div>
                 </div>
-                <div class="img-container">
-                  <img :src="item.expo_logo" :alt="item.expo_name" />
-                </div>
-                <div class="card-text">
-                  <div class="text text-container">
-                    <div class="text text-header">
-                      <h2 class="text text-title">{{item.expo_name}}</h2>
-                      <p class="text text-subtitle">{{item.expo_industry}}</p>
-                    </div>
-                    <div class="text text-details">
-                      <p class="text text-description">{{item.expo_description}}</p>
-                      <a @click="navigateTo(item)" class="button btn-align btn-more is-link color-white mt-10">
-                        View Attendees
-                        <i class="sl sl-icon-arrow-right"></i>
-                      </a>
-                    </div>
+              </div>
+              <div class="column is-4" v-if="!vendor_page_id">
+                <div class="flex-card light-bordered light-raised">
+                  <div class="card-body">
+
+                    <hr/>
                   </div>
                 </div>
-              </div>-->
+              </div>
+              <!--vendorselected-->
+              <div class="column is-9" v-else>
+                <div class="flex-card light-bordered light-raised">
+                  <div class="card-body">
+
+                    <hr/>
+                  </div>
+                </div>
+              </div>
+              <!--/vendorselected-->
             </div>
-            <!--eventcard-->
           </div>
         </div>
+
       </div>
     </section>
     <Footer />
@@ -92,7 +85,8 @@
     mixins: [getExpoVendors],
     data() {
       return {
-        textcolor: 'color:white;',
+        vendor_page_id: null,
+        textcolor: 'color:grey;',
         search: '',
 
         exposResults: [],

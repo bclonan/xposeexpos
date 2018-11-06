@@ -1,11 +1,10 @@
 <template>
   <!-- Main dashboard container -->
-  <div>
-    <!-- removed column -->
-    <router-view />
-    <!-- removed column -->
 
-  </div>
+  <!-- removed column -->
+  <router-view />
+  <!-- removed column -->
+
   <!-- Main dashboard container -->
 </template>
 

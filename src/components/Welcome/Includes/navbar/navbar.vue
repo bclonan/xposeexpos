@@ -1,10 +1,13 @@
 <template>
-  <nav class="navbar navbar-wrapper is-transparent is-static">
+  <nav class="navbar navbar-wrapper is-transparent is-static" style="background-color:white;">
     <div class="container">
       <!-- Brand -->
       <div class="navbar-brand">
-        <router-link to="home" class="navbar-item">
-          <img src="assets/images/logos/bulkit-blue.svg" alt="">
+        <router-link to="/" class="navbar-item">
+          <h1 class="title components-title is-3" style="color:red;">
+            xposexpos
+          </h1>
+
         </router-link>
 
         <!-- Responsive toggle -->
@@ -31,9 +34,7 @@
           <!-- Dropdown -->
 
           <!-- Navbar item -->
-          <router-link to="Browse" class="navbar-item is-slide is-centered-tablet" :style="textcolor">
-            Browse
-          </router-link>
+
         </div>
 
         <!-- Navbar end -->
@@ -42,18 +43,30 @@
 
           <!-- Navbar item -->
 
-          <router-link to="Howitworks" class="navbar-item is-slide is-centered-tablet" :style="textcolor">
-            How it Works?
+          <router-link to="/Howitworks" class="navbar-item is-slide is-centered-tablet" style="color:grey;">
+            <h1 class="title components-title is-6">
+              How it works?
+            </h1>
+
           </router-link>
-          <router-link to="Contact" class="navbar-item is-slide is-centered-tablet" href="#" :style="textcolor">
-            Contact
+
+          <router-link to="/Contact" class="navbar-item is-slide is-centered-tablet" href="#" style="color:grey;">
+            <h1 class="title components-title is-6">
+              Contact
+            </h1>
+          </router-link>
+          <router-link to="/Browse" class="navbar-item is-slide is-centered-tablet">
+            <h1 class="title components-title is-6" style="color:blue;">
+              Browse
+            </h1>
+          </router-link>
+          <router-link to="/login" class="navbar-item is-slide is-centered-tablet" style="color:grey;">
+            <h1 class="title components-title is-6">
+              Login
+            </h1>
           </router-link>
           <!-- Signup button -->
-          <div class="navbar-item is-button is-centered-tablet">
-            <router-link to="login" class="button button-cta is-bold btn-align secondary-btn raised">
-              Login
-            </router-link>
-          </div>
+
         </div>
       </div>
     </div>
