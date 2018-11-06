@@ -476,11 +476,8 @@
                               <template slot="header">
                                 <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
                               </template>
-                              <span slot="main" v-for="item in pageContentList" :key="item.content_id">
 
-                                <component :is="item.tagName" :contentClass="item.class" :contentStyle="item.style" :content="item.content" :parentClass="item.parentClass" :parentStyle="item.parentStyle" />
-
-                              </span>
+                              <component slot="main" v-for="item in pageContentList" :key="item.content_id" :is="item.tagName" :contentClass="item.class" :contentStyle="item.style" :content="item.content" :parentClass="item.parentClass" :parentStyle="item.parentStyle" />
 
                               <template slot="footer">
                                 <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
@@ -624,35 +621,35 @@
           {
             tagName: 'contentTitle',
             content: 'heywhatsup',
-            class: 'lol',
-            style: 'color:red;'
+            class: ['has-text-centered', 'lol'],
+            style: ['color:red;', 'lol']
           },
           {
             tagName: 'contentText',
             content: 'heywhatsup',
-            class: 'lol',
-            style: 'color:red;'
+            class: ['has-text-centered', 'lol'],
+            style: ['color:red;', 'lol']
           },
           {
             tagName: 'contentButton',
             content: 'heywhatsup',
-            class: 'lol',
-            style: 'color:red;',
+            class: ['has-text-centered', 'lol'],
+            style: ['color:red;', 'lol'],
             parentClass: ['section', 'text-centered'],
             parentStyle: ['section', 'text-centered']
           },
           {
             tagName: 'textSection',
             content: 'heywhatggggggsup',
-            class: 'lol',
-            style: 'color:red;',
+            class: ['has-text-centered', 'lol'],
+            style: ['color:red;', 'lol'],
             parentClass: ['text-centered']
           },
           {
             tagName: 'textSection',
             content: 'heywhatggggggsup',
-            class: 'lol',
-            style: 'color:red;',
+            class: ['has-text-centered', 'lol'],
+            style: ['color:red;', 'lol'],
             parentClass: ['text-centered']
           }
         ]

@@ -1,5 +1,5 @@
 <template>
-  <p :style="[contentStyle]" :class="contentClass">
+  <p :style="styleBind" :class="contentClass">
     {{content}}</p>
 </template>
 
@@ -7,7 +7,14 @@
   export default {
     name: 'textOne',
 
-    props: ['contentClass', 'contentStyle', 'content']
+    props: ['contentClass', 'contentStyle', 'content'],
+    computed: {
+      styleBind() {
+        var b = this.contentStyle.join('');
+
+        return b;
+      }
+    }
   };
 </script>
 
