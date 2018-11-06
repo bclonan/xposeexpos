@@ -76,7 +76,7 @@ const router = new Router({
           component: WelcomeSearch
         },
         {
-          path: 'Exhibitor/:id',
+          path: 'Exhibitor/:id/:pgid',
           name: 'Exhibitor',
           component: WelcomeExibitor
         },
