@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div class="hero is-small is-theme-secondary" style="background-color:#f44242;">
+    <div class="hero is-small is-theme-secondary" style="background-color:lightgrey;">
 
       <!-- Navbar partial -->
       <NavBar :textcolor="textcolor" />
@@ -145,7 +145,9 @@
         search: '',
 
         exposResults: [],
-        selected_expo_id: null
+        selected_expo_id: null,
+        vendor_page_style: 'imgheader',
+        vendor_page_info: [{}]
       };
     },
     components: {
