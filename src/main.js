@@ -10,6 +10,9 @@ const fb = require('@/services/firebase/init.js');
 import vClickOutside from 'v-click-outside';
 import UUID from 'vue-uuid';
 import Toasted from 'vue-toasted';
+//jsonhtml
+import JsonHtml from '@/components/Main/Pages/showinfo/JSONEditor/JSONHtml.vue'
+Vue.component('json-html', JsonHtml)
 
 
 Vue.config.productionTip = true

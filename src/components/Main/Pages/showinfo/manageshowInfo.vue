@@ -206,7 +206,8 @@
                     <div class="projects-list-wrapper">
                       <div class="list-header">
                         <div class="list-title">
-                          <span>Expo Creation Page</span>
+                          <span>Xpose Page Manager</span>
+
 
                         </div>
                       </div>
@@ -216,21 +217,73 @@
                              <h2 class="title is-4 text-bold mb-20">Content Blocks</h2>
                             <div class="flex-card light-bordered light-raised">
                               <div class="card-body">
+                                <!-- building blocks-->
+ <block-types-pane />
+                                <!-- Building Blocks-->
 
-                                <hr/>
 
 
                               </div>
                             </div>
                           </div>
                           <div class="column is-9">
-                             <h2 class="title is-4 text-bold mb-20">Live Preview</h2>
-                            <div class="flex-card light-bordered light-raised">
-                              <div class="card-body">
 
+                <div class="navigation-tabs full-pills rounded primary animated-tabs">
+            <div class="tabs is-centered">
+                <ul>
+                                       <li class="tab-link" @click="setTheactiveSecondTab('Creation')" :class="[ isTabactiveSecondNow === 'Creation' ? 'is-active' : '']">
+                        <a>Live Preview</a>
+                      </li>
+
+                     <li class="tab-link" @click="setTheactiveSecondTab('pageSettingsTab')" :class="[ isTabactiveSecondNow === 'pageSettingsTab' ? 'is-active' : '']">
+                        <a>Page Settings</a>
+                      </li>
+                      <li class="tab-link" @click="setTheactiveSecondTab('pageContactSettings')" :class="[ isTabactiveSecondNow === 'pageContactSettings' ? 'is-active' : '']">
+                        <a>Contact Settings</a>
+                      </li>
+                </ul>
+            </div>
+
+
+        </div>
+                            <div class="flex-card light-bordered light-raised">
+
+                              <div class="card-body">
+<div class="navtab-content" :class="[ isTabactiveSecondNow === 'Creation' ? 'is-active' : '']">
+
+                                   <div class="blockEditor">
+
+    <block-view-pane @pick-node="selectNode" />
+
+
+  </div>
+  <div>
+ <node-properties-pane
+      v-if="this.editing"
+      :element="this.editing.element"
+      :block="this.editing.block"
+    />
+
+  </div>
+
+
+                            </div>
+
+                            <!-- pg settings-->
+<div class="navtab-content" :class="[ isTabactiveSecondNow === 'pageSettingsTab' ? 'is-active' : '']">
+                                <p>Lorem ipsum dolor sit amet, ad blandit intellegam cum, nulla legere possit id vim, clita nullam graecis duo ne. Ea utamur tacimates reprehendunt est, ut ponderum abhorreant pri, facete regione cotidieque cu mea. Vis at duis veritus incorrupte, saperet propriae corrumpit cu eam, eligendi oportere honestatis sed id. Persius volumus has no, ex pro nisl commodo dissentias, at sed appareat consequat consectetuer.</p>
+                            </div>
+                            <!-- pg settings-->
+
+                            <!-- contact settings -->
+<div class="navtab-content" :class="[ isTabactiveSecondNow === 'pageContactSettings' ? 'is-active' : '']">
+                                <p>Lorem ipsum dolor sit amet, ad blandit intellegam cum, nulla legere possit id vim, clita nullam graecis duo ne. Ea utamur tacimates reprehendunt est, ut ponderum abhorreant pri, facete regione cotidieque cu mea. Vis at duis veritus incorrupte, saperet propriae corrumpit cu eam, eligendi oportere honestatis sed id. Persius volumus has no, ex pro nisl commodo dissentias, at sed appareat consequat consectetuer.</p>
+                            </div>
+                            <!-- contact settings-->
                                 <hr/>
                               </div>
                             </div>
+
                           </div>
                         </div>
                       </div>
@@ -271,13 +324,25 @@
   import {
       activeTabMixin
   } from '@/components/Main/Mixins/activeTabMixin.js';
+  import {
+      activeSecondTabMixin
+  } from '@/components/Main/Mixins/activeSecondTabMixin.js';
+
+  //Dragable
+  import draggable from 'vuedraggable'
+  //Block trying
+
+  import BlockTypesPane from '@/components/Main/Pages/showinfo/pageeditor/BlockTypesPane'
+import BlockViewPane from '@/components/Main/Pages/showinfo/pageeditor/BlockViewPane'
+import NodePropertiesPane from '@/components/Main/Pages/showinfo/pageeditor/NodePropertiesPane'
 
   export default {
       name: 'DashCollaborateMain',
-      mixins: [activeModalToggle, activeTabMixin],
+      mixins: [activeModalToggle, activeTabMixin, activeSecondTabMixin],
       data() {
           return {
               activeTabChosen: 'Analytics',
+              activeSecondTabChosen: 'Creation',
               inputTypeOne: 'input is-medium mt-5',
               inputTypeTwo: 'textarea is-grow',
               feedback: null,
@@ -310,12 +375,17 @@
               expo_date_end: null,
               current_page_id: null,
               expo_contact_name: null,
-              expopageResults: []
+              expopageResults: [],
+              //added
+               editing: null,
           }
       },
       components: {
           AppControlInput,
-          AppButton
+          AppButton,
+          BlockTypesPane,
+          BlockViewPane,
+          NodePropertiesPane
       },
       methods: {
 
@@ -438,11 +508,28 @@ let pgdat = [];
                   });
 
           },
+              selectNode(node) {
+      if (this.editing) {
+        // Clean up red border style
+        this.editing.element.style.border = this.editing.element.oldBorder
+      }
+
+      this.editing = node
+
+      if (this.editing) {
+        // If a node was selected, add a red border
+        this.editing.element.oldBorder = this.editing.element.style.border
+        this.editing.element.style.border = '1px solid red'
+      }
+    }
       },
 
       computed: {
     currentUser() {
       return this.$store.state.currentUser;
+    },
+      blocks() {
+      return this.$store.state["blockeditor/blocks"];
     },
 
       },
@@ -454,5 +541,11 @@ let pgdat = [];
   };
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.blockEditor {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+}
 </style>

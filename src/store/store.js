@@ -15,7 +15,8 @@ import funnelFabMenu from './modules/FunnelUI/funnelFabMenu.js';
 
 //Choose Expo Search
 import chooseExpo from './modules/ExpoChoose/ExpoMainChoice.js';
-
+//Block Store
+import blockeditor from './modules/blocks/BlocksStore.js';
 
 //firebase
 const fb = require('@/services/firebase/init.js');
@@ -92,6 +93,7 @@ const store = new Vuex.Store({
     currentChat: '',
     currentChatFriendsName: '',
     funnelData: [],
+     blocks: [],
   },
   actions: {
     clearData({
@@ -259,7 +261,8 @@ const store = new Vuex.Store({
     funnelstepsPushMenu,
     funnelSearchOverlay,
     funnelFabMenu,
-    chooseExpo
+    chooseExpo,
+    blockeditor
   },
 });
 
