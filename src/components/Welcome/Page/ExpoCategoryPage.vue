@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div class="hero is-small is-theme-secondary" style="background-color:#0C4767;">
+    <div class="hero is-small is-theme-secondary" style="background-color:lightblue;">
 
       <!-- Navbar partial -->
       <NavBar :textcolor="textcolor" />
@@ -9,12 +9,14 @@
       <div class="hero-body ">
         <div class="container ">
           <div class="columns is-vcentered">
-            <div class="column is-6 is-hero-title">
 
+            <div class="column is-12 is-hero-title">
+              <h1 class="title is-1 mt-60"> {{expoSelected.expo_name}}</h1>
               <h2 class="subtitle is-4 pt-10 pb-10" style="color:white;">
-                {{expoSelected.expo_name}}
+                {{expoSelected.expo_address_town}} {{expoSelected.expo_address_state}}
               </h2>
-              <p class="">
+              <h3>{{expoSelected.expo_start_date}} {{expoSelected.expo_end_date}}</h3>
+              <p style="color:white;">
                 {{expoSelected.expo_description}}
 
               </p>
