@@ -76,7 +76,7 @@ const router = new Router({
           component: WelcomeSearch
         },
         {
-          path: 'Exhibitor',
+          path: 'Exhibitor/:id',
           name: 'Exhibitor',
           component: WelcomeExibitor
         },
@@ -158,7 +158,7 @@ const router = new Router({
             requiresAuth: true,
           }
         },
-                {
+        {
           path: '/manageshowInfo/:id',
           name: 'manageshowInfo',
           component: manageshowInfo,

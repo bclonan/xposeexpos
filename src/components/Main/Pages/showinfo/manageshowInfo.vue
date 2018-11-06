@@ -350,18 +350,18 @@
                                   <!--/main-->
                                   <aside class="menu navtab-content" :class="[ editTempArea === 'footerTemp' ? 'is-active' : '']">
                                     <p class="menu-label">
-                                      Template Style
+                                      Footer Style
                                     </p>
                                     <div class="field">
                                       <div class="control mt-20">
                                         <div class="select is-small">
-                                          <select v-model="pageHeaderStyle">
+                                          <select v-model="pageFooterStyle">
                                             <option disabled value="">Please select one</option>
-                                            <option value="headerStyleOne">Style One</option>
-                                            <option value="headerStyleTwo">Style Two</option>
-                                            <option value="headerStyleThree">Style Three</option>
-                                            <option value="headerStyleFour">Style Four</option>
+                                            <option value="footerStyleOne">Style One</option>
+                                            <option value="footerStyleTwo">Style Two</option>
+                                            <option value="footerStyleThree">Style Three</option>
                                           </select>
+
                                         </div>
                                       </div>
                                     </div>
@@ -471,21 +471,22 @@
                             <!--styleeditor-->
                           </div>
                           <!-- page template builder-->
+                          <div class="column is-9">
+                            <page-holder-template>
+                              <template slot="header">
+                                <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
+                              </template>
+                              <template slot="main">
+                                <p>A paragraph for the main content.</p>
+                                <p>And another one.</p>
 
-                          <page-holder-template>
-                            <template slot="header">
-                              <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
-                            </template>
-                            <template slot="main">
-                              <p>A paragraph for the main content.</p>
-                              <p>And another one.</p>
+                              </template>
 
-                            </template>
-
-                            <template slot="footer">
-                              <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
-                            </template>
-                          </page-holder-template>
+                              <template slot="footer">
+                                <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
+                              </template>
+                            </page-holder-template>
+                          </div>
                           <!-- page template builder-->
                         </div>
                       </div>
