@@ -21,7 +21,7 @@ export const getExpoCategories = {
               category_name: doc.data().category_name,
               category_description: doc.data().category_description,
             })
-            console.log(doc.id, '=>', doc.data());
+
 
           });
         })

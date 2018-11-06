@@ -37,7 +37,7 @@
                       </li>
                     </ul>
                   </div>
-                  <div class="navtab-content" :class="[ isTabActiveNow === 'Analytics' ? 'is-active' : '']">
+                  <div class="navtab-content" :class="[ isTabActiveNow === 'expoDescription' ? 'is-active' : '']">
                     <!-- Projects Group -->
                     <div class="projects-list-wrapper">
                       <div class="list-header">
@@ -202,15 +202,10 @@
 
                     </div>
                   </div>
-                  <div class="navtab-content" :class="[ isTabActiveNow === 'expoDescription' ? 'is-active' : '']">
+                  <div class="navtab-content" :class="[ isTabActiveNow === 'Analytics' ? 'is-active' : '']">
                     <!-- Projects Group -->
                     <div class="projects-list-wrapper">
-                      <div class="list-header">
-                        <div class="list-title">
-                          <span>Expo Creation Page</span>
 
-                        </div>
-                      </div>
                       <div class="list-body">
                         <div class="columns is-multiline">
                           <div class="column is-3">
@@ -223,15 +218,21 @@
                               </div>
                             </div>
                           </div>
-                          <div class="column is-9">
-                            <h2 class="title is-4 text-bold mb-20">Live Preview</h2>
-                            <div class="flex-card light-bordered light-raised">
-                              <div class="card-body">
+                          <!-- page template builder-->
 
-                                <hr/>
-                              </div>
-                            </div>
-                          </div>
+                          <page-holder-template>
+                            <template slot="header">
+                              <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
+                            </template>
+
+                            <p>A paragraph for the main content.</p>
+                            <p>And another one.</p>
+
+                            <template slot="footer">
+                              <p>Here's some contact info</p>
+                            </template>
+                          </page-holder-template>
+                          <!-- page template builder-->
                         </div>
                       </div>
                     </div>
@@ -281,6 +282,13 @@
 
   //category mixins
   import categoryTable from '@/components/Main/Pages/showinfo/Includes/categoryTable.vue';
+  //block template holder
+  import pageHolderTemplate from '@/components/Main/Pages/showinfo/Includes/pageHolder.vue';
+  //block Building Area Templates
+  import headerStyleOne from '@/components/Main/Pages/showinfo/blocks/Headers/headerStyleOne.vue';
+  import headerStyleTwo from '@/components/Main/Pages/showinfo/blocks/Headers/headerStyleTwo.vue';
+  import headerStyleThree from '@/components/Main/Pages/showinfo/blocks/Headers/headerStyleThree.vue';
+  //content blocks
 
   export default {
     name: 'DashCollaborateMain',
@@ -320,13 +328,29 @@
         expo_date_end: null,
         current_page_id: null,
         expo_contact_name: null,
-        expopageResults: []
+        expopageResults: [],
+        //testdata
+        pageHeaderStyle: 'headerStyleTwo',
+        pageHeaderData: {
+          headerImage: 'https://bulkitv2.cssninja.io/dashboard/assets/images/dashboard/feed-post-1.jpeg',
+          headerText: 'headerText',
+          headerStyle: {
+            color: 'red',
+            fontSize: '13px'
+          },
+          headerClassNames: ['h2']
+        }
       };
     },
     components: {
       AppControlInput,
       AppButton,
-      categoryTable
+      categoryTable,
+      pageHolderTemplate,
+      //buildingblocks
+      headerStyleOne,
+      headerStyleTwo,
+      headerStyleThree
     },
     methods: {
       fetchExpoData() {

@@ -30,25 +30,53 @@
       </div>
     </div>
 
-    <section class="section mb-50">
+    <section class="section mb-50 ">
       <div class="container">
         <div class="projects-list-wrapper">
 
           <div class="list-body">
             <div class="columns is-multiline">
+
               <div class="column is-3">
 
-                <div class="flex-card light-bordered light-raised">
-                  <div class="card-body">
-                    <h2 class="title is-4 text-bold mb-20">Categories</h2>
-                    <input class="input rounded is-medium" type="text" placeholder="Category Name" v-model="searchCategories">
+                <div class="flex-card light-bordered light-raised padding-10">
 
-                    <hr/>
-                    <h4 class="title is-4 text-bold mb-20" v-for="item in filteredCategories" :key="item.category_id">{{item.category_name}}</h4>
+                  <h3 class="card-heading">Categories</h3>
+                  <input class="input rounded is-medium" type="text" placeholder="Category Name" v-model="searchCategories">
+                  <ul class="user-list">
+                    <li v-for="item in filteredCategories" :key="item.category_id">
+
+                      <div class="user-list-info">
+                        <div class="name">{{item.category_name}}</div>
+                        <div class="position">{{item.category_description}}</div>
+                      </div>
+                      <div class="user-list-status is-online"></div>
+                    </li>
+
+                  </ul>
+                </div>
+                <div class="level" v-if="!vendor_page_id">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <a class="button  primary-btn raised">
+                        <i class="sl sl-icon-lock"></i> Back</a>
+
+                    </div>
+                  </div>
+                  <div class="level-right">
+                    <div class="level-item">
+                      <a class="button  secondary-btn raised">
+                        <i class="sl sl-icon-lock"></i> Message Exhibitor</a>
+                    </div>
                   </div>
                 </div>
+                <!--vendorcontrolls-->
+
+                <!--/vendorcontrolss-->
+
               </div>
-              <div class="column is-4" v-if="!vendor_page_id">
+
+              <div class="column is-4" v-if="vendor_page_id">
                 <div class="flex-card light-bordered light-raised">
                   <div class="card-body">
 
@@ -58,12 +86,36 @@
               </div>
               <!--vendorselected-->
               <div class="column is-9" v-else>
-                <div class="flex-card light-bordered light-raised">
-                  <div class="card-body">
+                <div class="flex-card featured-feed-post light-bordered light-raised">
+                  <div class="image">
+                    <img src="https://bulkitv2.cssninja.io/dashboard/assets/images/dashboard/feed-post-1.jpeg" alt="">
 
-                    <hr/>
+                  </div>
+                  <div class="card-body is-responsive">
+                    <h2 class="responsive-title has-text-centered mt-40">How the new prototyping tools impact the design process</h2>
+
+                    <div class="post-body">
+                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no.
+                        <a href="#">Cu vim ludus equidem facilisis</a>, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
+
+                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no. Cu vim ludus equidem facilisis, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
+
+                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no. Cu vim ludus equidem facilisis, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
+
+                      <p>Lorem ipsum dolor sit amet, id qui elit explicari, mel ne stet semper. Duo audiam antiopam petentium in, diceret appetere aliquando pri id. Qui porro dolor deserunt ad, nec inani dolorum qualisque in, vidit apeirian partiendo ea est. Duo cu qualisque mediocritatem, graece iuvaret eripuit in usu, usu congue impedit percipitur no. Cu vim ludus equidem facilisis, dico ullum labitur ad mel. Id odio aperiam eripuit quo, dolores forensibus per te. </p>
+                    </div>
+                    <div class="post-share">
+                      <i class="fa fa-facebook-f"></i>
+                      <i class="fa fa-twitter"></i>
+                      <i class="fa fa-linkedin"></i>
+                      <i class="fa fa-tumblr"></i>
+                    </div>
                   </div>
                 </div>
+
+              </div>
+              <div id="backtotop" class="visible">
+                <a href="#"></a>
               </div>
               <!--/vendorselected-->
             </div>
@@ -112,7 +164,78 @@
         //    path: `Categories/${i.expo_id}`
         //  });
         return;
+      },
+      resetSelectedVendor() {
+        this.selected_vendor_id = null;
+        return;
       }
     }
   };
 </script>
+
+<style >
+  #backtotop {
+    position: fixed;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    bottom: 25px;
+    margin: 0 25px 0 0;
+    z-index: 9999;
+    transition: 0.35s;
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+    transition: all 0.5s;
+  }
+  #backtotop.visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  #backtotop.visible a:hover {
+    outline: none;
+    opacity: 0.9;
+    background: #7f00ff;
+  }
+  #backtotop a {
+    outline: none;
+    text-decoration: none;
+    border: 0 none;
+    display: block;
+    width: 46px;
+    height: 46px;
+    background-color: #66676b;
+    opacity: 1;
+    transition: all 0.3s;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 26px;
+  }
+  body #backtotop a {
+    outline: none;
+    color: #fff;
+  }
+  #backtotop a:after {
+    outline: none;
+    content: '\f106';
+    font-family: 'FontAwesome';
+    position: relative;
+    display: block;
+    top: 50%;
+    -webkit-transform: translateY(-55%);
+    transform: translateY(-55%);
+  }
+  ::-webkit-input-placeholder {
+    color: #cecece;
+  }
+  ::-moz-placeholder {
+    color: #cecece;
+  }
+  :-ms-input-placeholder {
+    color: #cecece;
+  }
+  :-moz-placeholder {
+    color: #cecece;
+  }
+</style>
