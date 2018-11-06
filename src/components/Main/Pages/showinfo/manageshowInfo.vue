@@ -478,7 +478,7 @@
                               </template>
                               <span slot="main" v-for="item in pageContentList" :key="item.content_id">
 
-                                <component :is="item.tagName" :contentClass="item.class" :contentStyle="item.style" :content="item.content" />
+                                <component :is="item.tagName" :contentClass="item.class" :contentStyle="item.style" :content="item.content" :parentClass="item.parentClass" :parentStyle="item.parentStyle" />
 
                               </span>
 
@@ -550,6 +550,9 @@
   import contentTitle from '@/components/Main/Pages/showinfo/blocks/Content/titleOne.vue';
   import contentText from '@/components/Main/Pages/showinfo/blocks/Content/textOne.vue';
   import contentButton from '@/components/Main/Pages/showinfo/blocks/Content/buttonOne.vue';
+  //content sections
+  import textSection from '@/components/Main/Pages/showinfo/blocks/Content/textSecton.vue';
+  import buttonSection from '@/components/Main/Pages/showinfo/blocks/Content/buttonSection.vue';
   //Footers
   import footerStyleOne from '@/components/Main/Pages/showinfo/blocks/Footers/footerStyleOne.vue';
   import footerStyleTwo from '@/components/Main/Pages/showinfo/blocks/Footers/footerStyleTwo.vue';
@@ -634,7 +637,23 @@
             tagName: 'contentButton',
             content: 'heywhatsup',
             class: 'lol',
-            style: 'color:red;'
+            style: 'color:red;',
+            parentClass: ['section', 'text-centered'],
+            parentStyle: ['section', 'text-centered']
+          },
+          {
+            tagName: 'textSection',
+            content: 'heywhatggggggsup',
+            class: 'lol',
+            style: 'color:red;',
+            parentClass: ['text-centered']
+          },
+          {
+            tagName: 'textSection',
+            content: 'heywhatggggggsup',
+            class: 'lol',
+            style: 'color:red;',
+            parentClass: ['text-centered']
           }
         ]
       };
@@ -654,7 +673,9 @@
       footerStyleThree,
       contentTitle,
       contentText,
-      contentButton
+      contentButton,
+      buttonSection,
+      textSection
     },
     methods: {
       fetchExpoData() {

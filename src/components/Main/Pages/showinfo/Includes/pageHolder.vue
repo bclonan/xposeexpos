@@ -6,9 +6,9 @@
     </header>
     <div class="card-body is-responsive">
       <main>
-
-        <slot name="main"></slot>
-
+        <div class="post-body">
+          <slot name="main"></slot>
+        </div>
       </main>
       <footer>
         <slot name="footer"></slot>

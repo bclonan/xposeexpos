@@ -1,13 +1,13 @@
 <template>
   <div :class="parentClass" :style="[parentStyle]">
-    <p :style="[contentStyle]" :class="contentClass">
-      {{content}}</p>
+    <button :style="[contentStyle]" :class="contentClass" :href="buttonLink">
+      {{content}}</button>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'textSection',
+    name: 'buttonSection',
     props: ['contentClass', 'contentStyle', 'content', 'buttonLink', 'parentClass', 'parentStyle']
   };
 </script>
