@@ -21,9 +21,8 @@
                   <div class="field pb-10" v-if="!isLogin">
                     <div class="control has-icons-right">
                       <AppControlInput :inputClass="inputClass" type="text" placeholder="Name" v-model="name"></AppControlInput>
-
                       <span class="icon is-medium is-right">
-                        <i class="sl sl-icon-user"></i>
+                      <i class="sl sl-icon-user"></i>
                       </span>
                     </div>
                   </div>
@@ -32,32 +31,55 @@
                   <div class="field pb-10" v-if="!isLogin">
                     <div class="control has-icons-right">
                       <AppControlInput :inputClass="inputClass" type="text" placeholder="Username" v-model="username"></AppControlInput>
-
                       <span class="icon is-medium is-right">
-                        <i class="sl sl-icon-user"></i>
+                      <i class="sl sl-icon-user"></i>
                       </span>
                     </div>
                   </div>
                   <!-- /username-->
-
+                  <!-- username-->
+                  <!-- /username-->
                   <!-- email-->
                   <div class="field pb-10">
                     <div class="control has-icons-right">
                       <AppControlInput :inputClass="inputClass" type="email" placeholder="Email" v-model="email"></AppControlInput>
                       <span class="icon is-medium is-right">
-                        <i class="sl sl-icon-user"></i>
+                      <i class="sl sl-icon-user"></i>
                       </span>
                     </div>
                   </div>
                   <!-- /email-->
-
                   <!-- password -->
                   <div class="field pb-10">
                     <div class="control has-icons-right">
                       <AppControlInput :inputClass="inputClass" type="password" placeholder="Password" v-model="password"></AppControlInput>
                       <span class="icon is-medium is-right">
-                        <i class="sl sl-icon-lock"></i>
+                      <i class="sl sl-icon-lock"></i>
                       </span>
+                    </div>
+                  </div>
+                  <div class="fieldpb-10" v-if="!isLogin">
+                    <div class="control">
+                      <ul>
+                        <li class="mb-20">
+                          <!-- Radio -->
+                          <label class="radio-wrap is-accent">
+                          <input type="radio" class="b-radio" name="radio-group-3" value="organizer" v-model="account_type">
+                          <span></span>
+                          Expo Organizer
+                          </label>
+                          <!-- /Radio -->
+                        </li>
+                        <li class="mb-20">
+                          <!-- Radio -->
+                          <label class="radio-wrap is-accent">
+                          <input type="radio" class="b-radio" name="radio-group-3" value="exhibitor" v-model="account_type" >
+                          <span></span>
+                          Exhibitor
+                          </label>
+                          <!-- /Radio -->
+                        </li>
+                      </ul>
                     </div>
                   </div>
                   <h6 class="danger-text has-text-centered" v-if="feedback"> {{ feedback }}</h6>
@@ -75,6 +97,10 @@
                 </p>
               </form>
             </div>
+            <!-- expo organizer login form -->
+            <!-- expo organizer login form -->
+            <!-- Vendor Login Form -->
+            <!-- Vendor Login Form -->
             <!-- recover form-->
             <div class="login-form-wrapper" v-if="showForgotPassword">
               <form class="animated preFadeInLeft fadeInLeft" @submit.prevent="resetPassword" v-if="!passwordResetSuccess">
@@ -86,7 +112,7 @@
                     <div class="control has-icons-right">
                       <AppControlInput :inputClass="inputClass" type="email" placeholder="Email address" v-model="email"></AppControlInput>
                       <span class="icon is-medium is-right">
-                        <i class="sl sl-icon-paper-plane"></i>
+                      <i class="sl sl-icon-paper-plane"></i>
                       </span>
                     </div>
                   </div>
@@ -98,12 +124,10 @@
                     <AppButton class="button button-cta btn-align primary-btn is-fullwidth btn-outlined is-bold rounded raised no-lh" type="submit">Reset</AppButton>
                   </div>
                 </div>
-
               </form>
               <div v-else>
                 <h1>Email Sent</h1>
                 <p>check your email for a link to reset your password</p>
-
               </div>
               <p class="has-text-centered">
                 <button @click="togglePasswordReset" class="button">Back to login</button>
@@ -114,7 +138,6 @@
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
@@ -142,7 +165,8 @@
         passwordResetSuccess: false,
         performingRequest: false,
         errorMsg: '',
-        showForgotPassword: false
+        showForgotPassword: false,
+        account_type: null
       };
     },
     components: {
@@ -203,7 +227,7 @@
                       linkdin: '',
                       twitter: '',
                       phone: '',
-                      account_type: 'vendor'
+                      account_type: this.account_type
                     });
                   })
                   .then(() => {
