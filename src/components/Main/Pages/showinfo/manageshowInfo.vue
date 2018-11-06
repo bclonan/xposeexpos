@@ -211,6 +211,7 @@
                         <div class="columns is-multiline">
 
                           <div class="column is-3">
+
                             <div class="navigation-tabs simple-tabs animated-tabs">
                               <div class="tabs">
                                 <ul>
@@ -292,44 +293,15 @@
                                   <!--/header-->
                                   <aside class="menu navtab-content" :class="[ editTempArea === 'contentTemp' ? 'is-active' : '']">
                                     <p class="menu-label">
-                                      Template Style
+                                      Toggle Sorting
                                     </p>
                                     <div class="field">
                                       <div class="control mt-20">
                                         <div class="select is-small">
-                                          <select v-model="pageHeaderStyle">
-                                            <option disabled value="">Please select one</option>
-                                            <option value="headerStyleOne">Style One</option>
-                                            <option value="headerStyleTwo">Style Two</option>
-                                            <option value="headerStyleThree">Style Three</option>
-                                            <option value="headerStyleFour">Style Four</option>
-                                          </select>
+                                          <input type="checkbox" v-model="draggediting">
                                         </div>
                                       </div>
                                     </div>
-
-                                    <p class="menu-label">
-                                      Template Values
-                                    </p>
-
-                                    <form class="">
-                                      <div class="field">
-                                        <label class="form-label">Image Value</label>
-                                        <div class="control">
-                                          <input type="text" class="input is-medium">
-                                        </div>
-                                      </div>
-                                      <div class="field mt-20">
-                                        <label class="form-label">Text</label>
-                                        <div class="control">
-                                          <input type="email" class="input is-medium">
-                                        </div>
-                                      </div>
-
-                                      <div class="mt-20 has-text-right">
-                                        <button type="submit" class="button btn-align info-btn raised">Save</button>
-                                      </div>
-                                    </form>
 
                                     <p class="menu-label">
                                       Add Content
@@ -413,7 +385,7 @@
                           </div>
                           <!-- page template builder-->
                           <div class="column is-9">
-                            <page-holder-template>
+                            <page-holder-template v-if="draggediting">
                               <template slot="header">
                                 <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
                               </template>
@@ -431,6 +403,19 @@
                                 <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
                               </template>
                             </page-holder-template>
+
+                            <page-holder-template v-else>
+                              <template slot="header">
+                                <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
+                              </template>
+
+                              <component slot="main" v-for="blocks in pageContentList" :key="blocks.id" :is="blocks.tagName" :contentClass="blocks.class" :contentStyle="blocks.style" :content="blocks.content" :parentClass="blocks.parentClass" :parentStyle="blocks.parentStyle" />
+
+                              <template slot="footer">
+                                <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
+                              </template>
+                            </page-holder-template>
+
                           </div>
                           <!-- page template builder-->
                         </div>
@@ -516,6 +501,7 @@
         inputTypeOne: 'input is-medium mt-5',
         inputTypeTwo: 'textarea is-grow',
         editTempArea: 'headerTemp',
+        draggediting: true,
         feedback: null,
         randomID: uuid.v4(),
         searchVendor: '',

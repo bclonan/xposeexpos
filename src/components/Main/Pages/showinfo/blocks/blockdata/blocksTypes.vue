@@ -25,8 +25,8 @@
             blockName: 'Text Block',
             tagName: 'textSection',
             content: 'heywhatggggggsup',
-            class: ['has-text-centered', 'lol'],
-            style: ['color:red;', 'lol'],
+            class: [''],
+            style: [''],
             parentClass: [''],
             parentStyle: ['']
           },
