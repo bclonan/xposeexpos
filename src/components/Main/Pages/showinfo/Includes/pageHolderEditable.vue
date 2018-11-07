@@ -7,7 +7,9 @@
     <div class="card-body is-responsive">
       <main>
         <div class="post-body">
-          <slot name="main"></slot>
+          <slot name="main">
+            <h1>Here might be a page title</h1>
+          </slot>
         </div>
       </main>
       <footer>

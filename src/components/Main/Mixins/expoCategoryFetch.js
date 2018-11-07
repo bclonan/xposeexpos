@@ -29,7 +29,6 @@ export const getAllCategories = {
                 category_name: doc.data().category_name,
                 category_description: doc.data().category_description
               });
-              console.log(doc.data())
               //console.log(doc.data().file_ref)
             }
             if (change.type === 'modified') {

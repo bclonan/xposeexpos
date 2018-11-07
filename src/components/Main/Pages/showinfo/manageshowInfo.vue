@@ -297,8 +297,8 @@
                                     </p>
                                     <div class="field">
                                       <div class="control mt-20">
-                                        <div class="select is-small">
-                                          <input type="checkbox" v-model="draggediting">
+                                        <div class="checkbox">
+                                          <label><input type="checkbox" v-model="editable">Enable drag and drop</label>
                                         </div>
                                       </div>
                                     </div>
@@ -369,9 +369,9 @@
                                 </div>
                               </div>
                               <footer class="card-footer">
-                                <a @click.prevent="setTheActiveTabTwo('pgSettings')" :class="[ isTabActiveNowTwo === 'pgSettings' ? 'is-active' : '']" class="card-footer-item">Reset</a>
+                                <a @click.prevent="pullOrigionalData" class="card-footer-item">Reset</a>
 
-                                <a @click.prevent="setTheActiveTabTwo('pgStyles')" :class="[ isTabActiveNowTwo === 'pgStyles' ? 'is-active' : '']" class="card-footer-item">Save</a>
+                                <a @click.prevent="saveThePage" class="card-footer-item">Save</a>
                               </footer>
                             </div>
                             <div class="card navtab-content" :class="[ isTabActiveNowTwo === 'pgBlocks' ? 'is-active' : '']">
@@ -385,31 +385,15 @@
                           </div>
                           <!-- page template builder-->
                           <div class="column is-9">
-                            <page-holder-template v-if="draggediting">
+                            <page-holder-template>
                               <template slot="header">
                                 <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
                               </template>
-                              <draggable :pageContentList="pageContentList" class="dragArea" slot="main" @change="change" @start="dragStart" @end="dragEnd" :options="{group: {
-          name: 'blocks',
-          pull: false,
-          put: true,
-          sort: true
-        }}">
-                                <component v-for="blocks in pageContentList" :key="blocks.id" :is="blocks.tagName" :contentClass="blocks.class" :contentStyle="blocks.style" :content="blocks.content" :parentClass="blocks.parentClass" :parentStyle="blocks.parentStyle" />
+                              {{checklistholder}}
+                              <draggable :pageContentListHolder="pageContentListHolder" class="dragArea" v-model="pageContentListHolder" slot="main" :move="onMove" :options="dragOptions">
+                                <component v-for="blocks in pageContentListHolder" :key="blocks.id" :is="blocks.tagName" :contentClass="blocks.class" :contentStyle="blocks.style" :content="blocks.content" :parentClass="blocks.parentClass" :parentStyle="blocks.parentStyle" :editable="editable" />
 
                               </draggable>
-
-                              <template slot="footer">
-                                <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
-                              </template>
-                            </page-holder-template>
-
-                            <page-holder-template v-else>
-                              <template slot="header">
-                                <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
-                              </template>
-
-                              <component slot="main" v-for="blocks in pageContentList" :key="blocks.id" :is="blocks.tagName" :contentClass="blocks.class" :contentStyle="blocks.style" :content="blocks.content" :parentClass="blocks.parentClass" :parentStyle="blocks.parentStyle" />
 
                               <template slot="footer">
                                 <component :is="pageFooterStyle" :pageFooterData="pageFooterData" />
@@ -497,11 +481,12 @@
     data() {
       return {
         activeTabChosen: 'Analytics',
+        currenteditingpage: null,
         activeTabTwoChosen: 'pgSettings',
         inputTypeOne: 'input is-medium mt-5',
         inputTypeTwo: 'textarea is-grow',
         editTempArea: 'headerTemp',
-        draggediting: true,
+        editable: false,
         feedback: null,
         randomID: uuid.v4(),
         searchVendor: '',
@@ -534,36 +519,14 @@
         expo_contact_name: null,
         expopageResults: [],
         //testdata
-        pageHeaderStyle: 'headerStyleOne',
-        pageHeaderData: {
-          headerImage: 'https://bulkitv2.cssninja.io/dashboard/assets/images/dashboard/feed-post-1.jpeg',
-          headerText: 'headerText',
-          headerStyle: {
-            color: 'red',
-            fontSize: '13px'
-          },
-          headerClassNames: ['title is-1 mt-60']
-        },
-        pageFooterStyle: 'footerStyleOne',
-        pageFooterData: {
-          pageFooterImage: 'https://bulkitv2.cssninja.io/dashboard/assets/images/dashboard/feed-post-1.jpeg',
-          pageFooterText: 'headerText',
-          pageFooterStyle: {
-            color: 'red',
-            fontSize: '13px'
-          }
-        },
-        //
-
-        //
-        pageContentList: [
-          {
-            tagName: 'contentTitle',
-            content: 'heywhatsup',
-            class: ['has-text-centered', 'lol'],
-            style: ['color:red;', 'lol']
-          }
-        ]
+        pageHeaderStyle: null,
+        pageHeaderData: {},
+        pageFooterStyle: null,
+        pageFooterData: {},
+        pagecontentbackuptwo: [],
+        pageContentListHolder: [],
+        pageContentList: [],
+        orgitionalPageData: []
       };
     },
     components: {
@@ -588,10 +551,47 @@
       BlockTypesPane
     },
     methods: {
-      dropBlock(u) {
-        this.pageContentList.push(u);
-        console.log(u);
+      onMove({ relatedContext, draggedContext }) {
+        const relatedElement = relatedContext.element;
+        const draggedElement = draggedContext.element;
+        return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed;
       },
+      dropBlock(u) {
+        this.pageContentListHolder.push(u);
+      },
+      pullOrigionalData() {
+        this.pagecontentbackuptwo = this.pageContentListHolder;
+        this.pageContentListHolder = this.orgitionalPageData;
+        return;
+      },
+      saveThePage() {
+        var docData = {
+          pageHeaderStyle: this.pageHeaderStyle,
+          pageHeaderData: {
+            headerImage: this.pageHeaderData.headerImage,
+            headerText: this.pageHeaderData.headerText,
+            headerStyle: this.pageHeaderData.headerStyle,
+
+            headerClassNames: this.pageHeaderData.headerClassNames
+          },
+          pageFooterStyle: this.pageFooterStyle,
+          pageFooterData: {
+            pageFooterImage: this.pageFooterData.pageFooterImage,
+            pageFooterText: this.pageFooterData.pageFooterText,
+            pageFooterStyle: this.pageFooterData.pageFooterStyle
+          },
+          pageContentList: this.pageContentListHolder
+        };
+        fb.expoPagesCollection
+          .doc(this.currenteditingpage)
+          .set(docData)
+          .then(function() {
+            console.log('Document successfully written!');
+          });
+
+        return;
+      },
+
       fetchExpoData() {
         const xID = this.$route.params.id;
         const expoRef = fb.expoCollection.doc(xID);
@@ -626,17 +626,28 @@
             this.expo_message_id = res.data().expo_message_id;
             this.expo_organizer_email = res.data().expo_organizer_email;
             this.current_page_id = res.data().current_page_id;
+            this.expo_pg_id = res.data().expo_page_id;
 
-            if (this.current_page_id) {
-              let pgid = res.data().current_page_id;
-              const pgref = fb.expoCollection
-                .doc(xID)
-                .collection('expopages')
-                .doc(pgid);
+            if (this.expo_pg_id) {
+              let pgid = res.data().expo_page_id;
+
+              const pgref = fb.expoPagesCollection.doc(pgid);
               pgref
                 .get()
-                .then(res => {
-                  this.expopageResults.push(res.data());
+                .then(result => {
+                  this.currenteditingpage = pgid;
+
+                  this.pageHeaderStyle = result.data().pageHeaderStyle;
+                  //console.log(pgref);
+                  this.pageHeaderData = result.data().pageHeaderData;
+                  this.pageFooterStyle = result.data().pageFooterStyle;
+                  this.pageFooterData = result.data().pageFooterData;
+
+                  if (result.data().pageContentList) {
+                    this.pageContentListHolder.push(result.data().pageContentList);
+                    this.orgitionalPageData.push(result.data().pageContentList);
+                  } else {
+                  }
                 })
                 .catch(err => {
                   console.log(err);
@@ -705,14 +716,14 @@
       },
       //dragable
       change(evt) {
-        return console.log(evt);
+        //return console.log(evt);
       },
       dragStart(evt) {},
       dragEnd(evt) {},
       //addblocks
-      add(i) {
-        console.log(i);
-        this.pageContentList.push(i);
+      changeEditStyle() {
+        this.draggediting = !this.draggediting;
+        return;
       }
     },
 
@@ -720,20 +731,21 @@
       currentUser() {
         return this.$store.state.currentUser;
       },
+      checklistholder() {
+        if (this.pageContentListHolder) {
+          return false;
+        } else {
+          return true;
+        }
+      },
 
-      draggableOptions() {
+      dragOptions() {
         return {
-          group: {
-            pull: false,
-            put: false,
-            sort: true,
-            handle: '.handle',
-            animation: 100,
-            ghostClass: 'ghost',
-            delay: 0, // time in milliseconds to define when the sorting should start
-            touchStartThreshold: 0, // px, how many pixels the point should move before cancelling a delayed drag event
-            disabled: false // Disables the sortable if set to true.
-          }
+          animation: 0,
+          group: 'description',
+          disabled: !this.editable,
+          ghostClass: 'ghost',
+          animation: 100
         };
       }
     },

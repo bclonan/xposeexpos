@@ -8,7 +8,7 @@
 <script>
   export default {
     name: 'textSection',
-    props: ['contentClass', 'contentStyle', 'content', 'buttonLink', 'parentClass', 'parentStyle'],
+    props: ['contentClass', 'contentStyle', 'content', 'buttonLink', 'parentClass', 'parentStyle', 'editable'],
     computed: {
       styleBind() {
         var b = this.contentStyle.join('');

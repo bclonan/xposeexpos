@@ -119,10 +119,6 @@
     },
     methods: {
       navigateTo(i) {
-        // this.$store.commit('chooseExpo/selectExpo', i);
-        //   this.$router.push({
-        //    path: `Categories/${i.expo_id}`
-        //  });
         return;
       },
       resetSelectedVendor() {

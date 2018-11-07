@@ -325,7 +325,9 @@
           // xyz user info
           const currentUserid = this.currentUser.uid;
           let expo_pg_id = uuid.v4();
-          let expo_invite_key = uuid.v4();
+          let currentPageVersion = uuid.v4();
+          let expoinvKey = uuid.v4();
+          let expofreekey = uuid.v4();
           let expo_id = uuid.v4();
           // ref to current user team collection
           const currentUserRef = fb.usersCollection.doc(currentUserid).collection('expos');
@@ -344,10 +346,7 @@
             .collection('expos')
             .doc(expo_id);
           //create expos page placeholder
-          const expospageref = fb.expoCollection
-            .doc(expo_id)
-            .collection('expopages')
-            .doc(expo_pg_id);
+          const expospageref = fb.expoPagesCollection.doc(expo_pg_id);
 
           const batch = fb.db.batch();
 
@@ -389,9 +388,10 @@
             expo_name: this.expo_name,
             expo_message_id: uuid.v4(),
             expo_page_id: expo_pg_id,
-            current_page_id: expo_pg_id,
+            page_current_version: currentPageVersion,
             expo_organizer_email: this.expo_organizer_email,
-            expo_invite_key: this.expo_invite_key
+            expo_invite_key: expoinvKey,
+            expo_free_key: expofreekey
           });
 
           //analytics
@@ -411,7 +411,24 @@
           //expo page
           batch.set(expospageref, {
             expo_id: expo_id,
-            expo_page_id: expo_pg_id
+            page_id: expo_pg_id,
+            paid_xpose: true,
+            expo_pg_live: true,
+            pageHeaderStyle: 'headerStyleOne',
+            pageHeaderData: {
+              headerImage: 'https://phylat.com/images/placeholderimgs/imgplaceholder.jpg',
+              headerText: 'Header Text',
+              headerStyle: [''],
+
+              headerClassNames: ['title is-1 mt-60']
+            },
+            pageFooterStyle: 'footerStyleOne',
+            pageFooterData: {
+              pageFooterImage: 'https://phylat.com/images/placeholderimgs/imgplaceholder.jpg',
+              pageFooterText: 'headerText',
+              pageFooterStyle: ['']
+            },
+            pageContentList: ['']
           });
 
           //set
@@ -419,8 +436,8 @@
             .commit()
             .then(() => {
               /*this.$router.push({
-                  path: `/teamview/${expo_id}`
-                });*/
+                              path: `/teamview/${expo_id}`
+                            });*/
             })
             .catch(err => {
               this.feedback = err.message;
