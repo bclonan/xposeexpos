@@ -41,6 +41,9 @@ import showchat from '@/components/Main/Pages/showchat/showchat';
 
 //Main info Edit Expo info
 import editShowInfo from '@/components/Main/Pages/showinfo/editShowInfo';
+
+
+import addShows from '@/components/Main/Pages/shows/addShows';
 // main manage show/analytics
 import manageshowInfo from '@/components/Main/Pages/showinfo/manageshowInfo';
 
@@ -110,9 +113,9 @@ const router = new Router({
           }
         },
         {
-          path: '/editinfo',
-          name: 'editinfo',
-          component: DashEdit,
+          path: '/addShows',
+          name: 'addShows',
+          component: addShows,
           meta: {
             requiresAuth: true,
           }

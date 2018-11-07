@@ -57,7 +57,14 @@
         ],
         NavItems: [
           //name = tool name icon = icon for sidebar , menuname = prop to call for inner component
-
+          {
+            name: 'addshows',
+            icon: 'sl sl-icon-folder-alt',
+            menuName: '',
+            buttontype: 'route',
+            to: '/addShows',
+            tag: 'i'
+          },
           {
             name: 'editinfo',
             icon: 'sl sl-icon-book-open',
