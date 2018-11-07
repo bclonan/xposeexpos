@@ -23,13 +23,6 @@
 
               </div>
             </div>
-            <div class="column is-4 is-offset-1 is-hero-title">
-
-              <div class="buttons">
-                <span class="button is-success">Send Message</span>
-
-              </div>
-            </div>
 
           </div>
         </div>
@@ -43,8 +36,52 @@
 
           <div class="list-body">
             <div class="columns is-multiline">
+
+              <!--vendorselected-->
               <div class="column is-12">
-                <page-holder-template>
+                <div class="content-wrapper" v-if="sendMsgActive">
+                  <div class="columns is-vcentered">
+                    <div class="column  is-5 is-offset-3">
+                      <!-- Signup form -->
+                      <div class="flex-card is-not-supported light-bordered">
+                        <div class="quick-signup">
+                          <form>
+                            <h3 class="title is-4 has-text-centered">Send Message</h3>
+
+                            <div class="control-material is-secondary">
+                              <input class="material-input" type="text" required="">
+                              <span class="material-highlight"></span>
+                              <span class="bar"></span>
+                              <label>Email *</label>
+                            </div>
+                            <div class="control-material is-secondary">
+                              <input class="material-input" type="text" required="">
+                              <span class="material-highlight"></span>
+                              <span class="bar"></span>
+                              <label>Full name *</label>
+                            </div>
+                            <div class="control-material is-secondary">
+                              <input class="material-input" type="text" required="">
+                              <span class="material-highlight"></span>
+                              <span class="bar"></span>
+                              <label>Password *</label>
+                            </div>
+
+                            <div class="submit-wrapper">
+                              <a href="#" class="button button-cta is-bold is-fullwidth btn-align primary-btn raised no-lh">
+                                Send Message
+                              </a>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Signup info card -->
+
+                  </div>
+                </div>
+
+                <page-holder-template v-else>
                   <template slot="header">
                     <component :is="pageHeaderStyle" :pageHeaderData="pageHeaderData" />
                   </template>
@@ -56,9 +93,7 @@
                   </template>
                 </page-holder-template>
               </div>
-              <!--vendorselected-->
-
-              <div id="backtotop" class="visible">
+              <div id="backtotop" class="visible" @click="sendMessage">
                 <a href="#"></a>
               </div>
               <!--/vendorselected-->
@@ -76,14 +111,16 @@
   import NavBar from '@/components/Welcome/Includes/navbar/navbar.vue';
   import Footer from '@/components/Welcome/Includes/Footer.vue';
   import { getVendorPage } from '@/components/Welcome/mixins/getVendorInfo.js';
+  import { activeMessageModalMixin } from '@/components/Welcome/mixins/messageModalMixin.js';
 
   export default {
     name: 'exibitorPage',
-    mixins: [getVendorPage],
+    mixins: [getVendorPage, activeMessageModalMixin],
     data() {
       return {
         expo_id: null,
-        textcolor: 'color:grey;'
+        textcolor: 'color:grey;',
+        sendMsgActive: false
       };
     },
     components: {
@@ -106,6 +143,11 @@
       resetSelectedVendor() {
         this.selected_vendor_id = null;
         return;
+      },
+      sendMessage() {
+        let msgtarg = this.message_id;
+        this.sendMsgActive = !this.sendMsgActive;
+        console.log(msgtarg);
       }
     }
   };

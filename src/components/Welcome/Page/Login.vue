@@ -8,7 +8,7 @@
     </transition>
 
     <div class="columns is-fullheight" v-if="!typeSelected" style="min-height:100vh">
-      <div class="column is-6" @click.stop="settype('vendor')" style="background-color:green;">
+      <div class="column is-6" @click="settype('vendor')" style="background-color:green;">
         <div class="section-title-wrapper" style="padding-top:50%">
 
           <h2 class="title light-text text-bold main-title is-2 has-text-centered">
@@ -19,7 +19,7 @@
           </h3>
         </div>
       </div>
-      <div class="column is-6 is-fullheight" @click.stop="settype('organizer')">
+      <div class="column is-6 is-fullheight" @click="settype('organizer')">
         <div class="section-title-wrapper" style="padding-top:50%">
 
           <h2 class="title dark-text text-bold main-title is-2 has-text-centered">
@@ -40,7 +40,7 @@
             <!-- Classic inputs -->
             <div id="classic" class="login-form-wrapper" :class="{ 'is-hidden': showForgotPassword }">
               <!-- Classic login form -->
-              <form id="login-form" v-if="acttype" class="animated preFadeInLeft fadeInLeft" @submit.prevent="onSubmit">
+              <form id="login-form" class="animated preFadeInLeft fadeInLeft" @submit.prevent="onSubmit">
                 <div class="flex-card auth-card is-light-raised light-bordered card-overflow">
                   <div class="auth-card-header header-primary">
                     <router-link to="/"><img src="../../../styles/Main/images/logos/xyzlogo.png" alt="XYZ Leads"></router-link>

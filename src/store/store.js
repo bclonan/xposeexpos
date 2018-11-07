@@ -6,7 +6,7 @@ import toggleMainModal from './modules/MainUI/toggleModalOverlay.js';
 import mainSidebarRight from './modules/MainUI/toggleChat.js';
 import mainToggleProfile from './modules/MainUI/toggleProfileOverlay.js';
 import toggleActiveModal from './modules/MainUI/toggleActiveModal.js';
-
+import toggleMessageModal from './modules/messageModal/sendMessageModal';
 //funnel modules
 import funnelmainPushMenu from './modules/FunnelUI/funnelPushMenu.js';
 import funnelstepsPushMenu from './modules/FunnelUI/funnelStepPushMenu.js';
@@ -259,7 +259,8 @@ const store = new Vuex.Store({
     funnelstepsPushMenu,
     funnelSearchOverlay,
     funnelFabMenu,
-    chooseExpo
+    chooseExpo,
+    toggleMessageModal
   },
 });
 

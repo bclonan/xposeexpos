@@ -74,14 +74,6 @@
             to: '/addShows',
             tag: 'i'
           },
-          {
-            name: 'editinfo',
-            icon: 'sl sl-icon-book-open',
-            menuName: '',
-            buttontype: 'route',
-            to: '/editinfo',
-            tag: 'i'
-          },
 
           {
             name: 'messages',

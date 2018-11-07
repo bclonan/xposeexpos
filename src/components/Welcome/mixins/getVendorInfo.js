@@ -56,7 +56,7 @@ export const getVendorPage = {
         .get()
         .then(result => {
           this.message_id = result.data().message_id;
-
+          this.vendor_id = result.data().pg_owner_id;
           this.pageHeaderStyle = result.data().pageHeaderStyle;
 
           this.pageHeaderData = result.data().pageHeaderData;
