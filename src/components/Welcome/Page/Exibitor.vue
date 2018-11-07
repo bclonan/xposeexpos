@@ -49,16 +49,16 @@
                             <h3 class="title is-4 has-text-centered">Send Message</h3>
 
                             <div class="control-material is-secondary">
-                              <input class="material-input" type="text" required="">
+                              <input class="material-input" type="text" required="" v-model="fromemail">
                               <span class="material-highlight"></span>
                               <span class="bar"></span>
                               <label>Email *</label>
                             </div>
                             <div class="control-material is-secondary">
-                              <input class="material-input" type="text" required="">
+                              <input class="material-input" type="text" required="" v-model="fromname">
                               <span class="material-highlight"></span>
                               <span class="bar"></span>
-                              <label>Full name *</label>
+                              <label>Name *</label>
                             </div>
                             <div class="control-material is-secondary">
                               <input class="material-input" type="text" required="">
