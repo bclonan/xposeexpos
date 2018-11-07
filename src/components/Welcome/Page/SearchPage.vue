@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div class="hero is-small is-theme-secondary" style="background-color:#0C4767;">
+    <div class="hero is-small is-theme-secondary" style="background-color:#ff00ff;">
 
       <!-- Navbar partial -->
       <NavBar :textcolor="textcolor" />

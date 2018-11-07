@@ -50,11 +50,6 @@
 
           </router-link>
 
-          <router-link to="/Contact" class="navbar-item is-slide is-centered-tablet" href="#" style="color:grey;">
-            <h1 class="title components-title is-6">
-              Contact
-            </h1>
-          </router-link>
           <router-link to="/Browse" class="navbar-item is-slide is-centered-tablet">
             <h1 class="title components-title is-6" style="color:blue;">
               Browse

@@ -11,7 +11,7 @@ export const getExpoVendors = {
   methods: {
     fetchVendors() {
       const xID = this.$route.params.id;
-      const expoRef = fb.expoCollection.doc(xID).collection("approvedVendors")
+      const expoRef = fb.expoCollection.doc(xID).collection("vendors")
 
       expoRef.get()
         .then(snapshot => {

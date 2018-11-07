@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div class="hero is-small is-theme-secondary" style="background-color:lightgrey;">
+    <div class="hero is-small is-theme-secondary" style="background-color:#0066ff;">
 
       <!-- Navbar partial -->
       <NavBar :textcolor="textcolor" />
@@ -8,84 +8,64 @@
       <!-- Hero content -->
       <div class="hero-body ">
         <div class="container ">
-          <div class="columns is-centered  pb-10">
+          <div class="columns   pb-10">
 
             <div class="column is-6 is-offset-1 is-hero-title">
-              <h1 class="title is-1 mt-60"> {{expoSelected.expo_name}}</h1>
-
-            </div>
-          </div>
-          <div class="columns is-12 is-centered">
-
-            <div class="column is-4 is-offset-1 is-hero-title">
-              <h3>{{expoSelected.expo_start_date}} {{expoSelected.expo_end_date}}</h3>
-            </div>
-            <div class="column is-4 is-offset-1 is-hero-title">
-              <h3> {{expoSelected.expo_description}}</h3>
-            </div>
-            <div class="column is-4 is-offset-1 is-hero-title">
-              <div class="buttons" @click.prevent="gotoPage(expoSelected.expo_page_id)">
+              <h1 class="title is-1 " style="color:white;"> {{expoSelected.expo_name}} :
+                <span class="title is-1" style="color:white;">{{expoSelected.expo_address_state}}</span>
+                <h2 class="title is-5" style="color:white;">{{expoSelected.expo_date_start}} {{expoSelected.expo_date_start_month}}</h2>
+                <h2 class="title is-4" style="color:white;">{{expoSelected.expo_description}} </h2>
+              </h1>
+              <div class="buttons" @click.prevent="navigateTo(expoSelected.expo_page_id)">
                 <span class="button is-success">Organizers Page</span>
 
               </div>
-            </div>
+              <router-link to="/Browse">
+                <span class="button is-success">Go Back</span>
 
+              </router-link>
+              <input class="input rounded is-medium" type="text" placeholder="Find an exhibitor" v-model="search">
+            </div>
           </div>
+
         </div>
 
       </div>
     </div>
 
-    <section class="section mb-50 ">
+    <section class="section is-small section-feature-grey">
       <div class="container">
-        <div class="projects-list-wrapper">
 
-          <div class="list-body">
-            <div class="columns is-multiline">
+        <div class="content-wrapper">
+          <div class="columns is-multiline">
+            <!--event card-->
+            <div class="column is-4" v-for="item in vendorResults" :key="item.id">
+              <div class="event-card">
 
-              <div class="column is-3">
-
-                <div class="flex-card light-bordered light-raised padding-10">
-
-                  <h3 class="card-heading">Categories</h3>
-                  <input class="input rounded is-medium" type="text" placeholder="Category Name" v-model="searchCategories">
-                  <ul class="user-list">
-                    <li v-for="item in filteredCategories" :key="item.category_id">
-
-                      <div class="user-list-info">
-                        <div class="name">{{item.category_name}}</div>
-                        <div class="position">{{item.category_description}}</div>
-                      </div>
-                      <div class="user-list-status is-online"></div>
-                    </li>
-
-                  </ul>
+                <div class="img-container">
+                  <img :src="item.expo_logo" :alt="item.expo_owner_businessname" />
                 </div>
+                <div class="card-text">
+                  <div class="text text-container">
+                    <div class="text text-header">
+                      <h2 class="text text-title">{{item.expo_owner_businessname}}</h2>
 
-                <!--vendorcontrolls-->
+                    </div>
+                    <div class="text text-details">
+                      <p class="text text-description">{{item.expo_description}}</p>
+                      <a @click="navigateTo(item)" class="button btn-align btn-more is-link color-white mt-10">
+                        View Attendees
+                        <i class="sl sl-icon-arrow-right"></i>
+                      </a>
 
-                <!--/vendorcontrolss-->
-
-              </div>
-
-              <div class="column is-4">
-                <div class="flex-card light-bordered light-raised">
-                  <div class="card-body">
-
-                    <hr/>
+                    </div>
                   </div>
                 </div>
               </div>
-              <!--vendorselected-->
-
-              <div id="backtotop" class="visible">
-                <a href="#"></a>
-              </div>
-              <!--/vendorselected-->
             </div>
+            <!--eventcard-->
           </div>
         </div>
-
       </div>
     </section>
     <Footer />
@@ -97,11 +77,12 @@
 
   import Footer from '@/components/Welcome/Includes/Footer.vue';
 
-  import { getExpoVendors } from '@/components/Welcome/mixins/getExpoVendors.js';
+  import { getVendorThumbs } from '@/components/Welcome/mixins/getVendorThumbs.js';
+  //import { getExpoVendors } from '@/components/Welcome/mixins/getExpoVendors.js';
   import { getExpoCategories } from '@/components/Welcome/mixins/getExpoCategories.js';
   export default {
     name: 'ExpoCategory',
-    mixins: [getExpoVendors, getExpoCategories],
+    mixins: [getVendorThumbs, getExpoCategories],
     data() {
       return {
         vendor_page_id: null,
@@ -109,9 +90,7 @@
         search: '',
 
         exposResults: [],
-        selected_expo_id: null,
-        vendor_page_style: 'imgheader',
-        vendor_page_info: [{}]
+        selected_expo_id: null
       };
     },
     components: {
@@ -124,12 +103,12 @@
       }
     },
     methods: {
-      gotoPage(i) {
+      navigateTo(i) {
         const xID = this.$route.params.id;
         this.$router.push({
-          path: `/Exhibitor/${xID}/${i}`
+          path: `/Exhibitor/${xID}/${i.expo_page_id}`
         });
-        return;
+
         return;
       },
       resetSelectedVendor() {

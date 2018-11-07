@@ -15,7 +15,7 @@
             Exhibitor
           </h2>
           <h3 class="subtitle light-text has-text-centered is-4">
-            Exhibitor
+            Choose if you show
           </h3>
         </div>
       </div>
@@ -26,24 +26,11 @@
             Organizer
           </h2>
           <h3 class="subtitle has-text-centered is-4">
-            Exhibitor
+            Choose if you Host Expos
           </h3>
         </div>
       </div>
 
-      <div class="content column is-6" style="background-color: blue;">
-        <div class="column is-12">
-          <div class="section-title-wrapper">
-
-            <h2 class="title dark-text text-bold main-title is-2 has-text-centered">
-              Organizer
-            </h2>
-            <h3 class="subtitle has-text-centered is-4">
-
-            </h3>
-          </div>
-        </div>
-      </div>
     </div>
 
     <section class="section" v-else>

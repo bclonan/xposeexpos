@@ -59,7 +59,7 @@ export const getAllExpos = {
                 expo_page_id: doc.data().expo_page_id,
                 page_current_version: doc.data().page_current_version
               });
-              console.log(doc.data())
+
               //console.log(doc.data().file_ref)
             }
             if (change.type === 'modified') {
