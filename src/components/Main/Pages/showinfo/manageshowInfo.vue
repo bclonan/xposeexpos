@@ -648,7 +648,7 @@
                   this.pageFooterData = result.data().pageFooterData;
 
                   if (result.data().pageContentList) {
-                    this.pageContentListHolder.push(result.data().pageContentList);
+                    this.pageContentListHolder = result.data().pageContentList;
                     //this.orgitionalPageData.push(result.data().pageContentList);
                     this.orgitionalPageData = result.data().pageContentList;
                   } else {
