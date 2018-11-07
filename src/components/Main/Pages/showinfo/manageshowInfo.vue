@@ -565,10 +565,10 @@
         return;
       },
       saveThePage() {
-        var ar = this.pageContentListHolder;
-        ar.shift(); // returns "zero"
-        console.log(ar);
-
+        /*var ar = this.pageContentListHolder;
+          ar.shift(); // returns "zero"
+          console.log(ar);
+  */
         var docData = {
           pageHeaderStyle: this.pageHeaderStyle,
           pageHeaderData: {
