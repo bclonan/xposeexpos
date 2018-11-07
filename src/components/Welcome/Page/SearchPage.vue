@@ -33,12 +33,12 @@
         <div class="content-wrapper">
           <div class="columns is-multiline">
             <!--event card-->
-            <div class="column is-4">
-              <div class="event-card" v-for="item in filteredList" :key="item.id">
+            <div class="column is-4" v-for="item in filteredList" :key="item.id">
+              <div class="event-card">
                 <div class="card-date">
                   <div class="date">
-                    <span class="day">05</span>
-                    <span class="month">Nov</span>
+                    <span class="day">{{item.expo_date_start}}</span>
+                    <span class="month">{{item.expo_date_start_month}}</span>
                   </div>
                 </div>
                 <div class="img-container">
@@ -56,6 +56,7 @@
                         View Attendees
                         <i class="sl sl-icon-arrow-right"></i>
                       </a>
+
                     </div>
                   </div>
                 </div>
@@ -92,7 +93,12 @@
       NavBar,
       Footer
     },
-    computed: {},
+    computed: {
+      dateFormating() {
+        let newdate = this.exposResults.expo_single_day_format;
+        return newdate;
+      }
+    },
     methods: {
       navigateTo(i) {
         this.$store.commit('chooseExpo/selectExpo', i);

@@ -23,6 +23,12 @@
             <div class="column is-4 is-offset-1 is-hero-title">
               <h3> {{expoSelected.expo_description}}</h3>
             </div>
+            <div class="column is-4 is-offset-1 is-hero-title">
+              <div class="buttons" @click.prevent="gotoPage(expoSelected.expo_page_id)">
+                <span class="button is-success">Organizers Page</span>
+
+              </div>
+            </div>
 
           </div>
         </div>
@@ -118,7 +124,12 @@
       }
     },
     methods: {
-      navigateTo(i) {
+      gotoPage(i) {
+        const xID = this.$route.params.id;
+        this.$router.push({
+          path: `/Exhibitor/${xID}/${i}`
+        });
+        return;
         return;
       },
       resetSelectedVendor() {

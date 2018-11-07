@@ -518,7 +518,6 @@
         current_page_id: null,
         expo_contact_name: null,
         expopageResults: [],
-        //testdata
         pageHeaderStyle: null,
         pageHeaderData: {},
         pageFooterStyle: null,
@@ -566,10 +565,16 @@
       },
       saveThePage() {
         /*var ar = this.pageContentListHolder;
-          ar.shift(); // returns "zero"
-          console.log(ar);
-  */
+              ar.shift(); // returns "zero"
+              console.log(ar);
+      */
         var docData = {
+          expo_id: this.expo_id,
+          expo_owner_id: this.expo_owner_id,
+          page_owner_id: this.currentUser.uid,
+
+          paid_xpos: this.paidcheck,
+          message_id: this.expo_message_id,
           pageHeaderStyle: this.pageHeaderStyle,
           pageHeaderData: {
             headerImage: this.pageHeaderData.headerImage,
@@ -640,7 +645,7 @@
                 .get()
                 .then(result => {
                   this.currenteditingpage = pgid;
-
+                  this.paidcheck = result.data().paid_xpos;
                   this.pageHeaderStyle = result.data().pageHeaderStyle;
                   //console.log(pgref);
                   this.pageHeaderData = result.data().pageHeaderData;

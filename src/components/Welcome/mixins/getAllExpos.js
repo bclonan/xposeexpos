@@ -18,14 +18,19 @@ export const getAllExpos = {
           snapshot.docChanges().forEach((change) => {
             if (change.type == 'added') {
               const doc = change.doc;
-              const doctimeCreated = doc.data().expo_create_date;
+              const doctimeCreated = doc.data().expo_date_start;
               const formatedCreated = new Date(doctimeCreated);
               var month = formatedCreated.getUTCMonth() + 1; //months from 1-12
               var day = formatedCreated.getUTCDate();
               var year = formatedCreated.getUTCFullYear();
 
               var newdate = year + "/" + month + "/" + day;
+              Date.shortMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+              function short_months(dt) {
+                return Date.shortMonths[dt.getMonth()];
+              }
+              const dt = new Date(doctimeCreated);
               this.exposResults.push({
                 id: doc.id,
                 expo_id: doc.data().expo_id,
@@ -35,7 +40,8 @@ export const getAllExpos = {
                 expo_owner_businesLocation: doc.data().expo_owner_businesLocation,
                 expo_description: doc.data().expo_description,
                 expo_logo: doc.data().expo_logo,
-                expo_date_start: doc.data().expo_date_start,
+                expo_date_start: day,
+                expo_date_start_month: short_months(dt),
                 expo_date_end: doc.data().expo_date_end,
                 expo_address_town: doc.data().expo_address_town,
                 expo_address_zip: doc.data().expo_address_zip,
@@ -50,6 +56,8 @@ export const getAllExpos = {
                 expo_name: doc.data().expo_name,
                 expo_message_id: doc.data().expo_message_id,
                 expo_organizer_email: doc.data().expo_organizer_email,
+                expo_page_id: doc.data().expo_page_id,
+                page_current_version: doc.data().page_current_version
               });
               console.log(doc.data())
               //console.log(doc.data().file_ref)
