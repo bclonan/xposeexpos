@@ -4,16 +4,18 @@
     <li class="main-logo">
       <router-link to="/main"><img src="@/styles/Main/images/logos/square-violet.svg" alt="xyz"></router-link>
     </li>
-    <li v-for="item in NavItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
-      <i v-if="item.buttontype === 'route'" :class="item.icon" @click="navigateToRoute(item.to)"></i>
 
-      <i v-else :class="item.icon"></i>
-    </li>
     <li v-if="currentUser === 'organizer'" v-for="item in OrganizerItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
       <i v-if="item.buttontype === 'route'" :class="item.icon" @click="navigateToRoute(item.to)"></i>
 
       <i v-else :class="item.icon"></i>
     </li>
+    <li v-else-if="currentUser === 'vendor'" v-for="item in NavItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
+      <i v-if="item.buttontype === 'route'" :class="item.icon" @click="navigateToRoute(item.to)"></i>
+
+      <i v-else :class="item.icon"></i>
+    </li>
+
   </ul>
   <!-- /Side icon menu -->
 </template>
@@ -31,14 +33,6 @@
         acctType: '',
         OrganizerItems: [
           {
-            name: 'manageshows',
-            icon: 'sl sl-icon-wrench',
-            menuName: '',
-            buttontype: 'route',
-            to: '/manageshows',
-            tag: 'i'
-          },
-          {
             name: 'editshowinfo',
             icon: 'sl sl-icon-folder-alt',
             menuName: '',
@@ -52,6 +46,22 @@
             menuName: '',
             buttontype: 'route',
             to: '/confirmVendor',
+            tag: 'i'
+          },
+          {
+            name: 'messages',
+            icon: 'sl sl-icon-speech',
+            menuName: '',
+            buttontype: 'route',
+            to: '/messages',
+            tag: 'i'
+          },
+          {
+            name: 'account',
+            icon: 'sl sl-icon-settings',
+            menuName: '',
+            buttontype: 'route',
+            to: '/account',
             tag: 'i'
           }
         ],

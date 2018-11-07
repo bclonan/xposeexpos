@@ -1,6 +1,6 @@
 const fb = require('@/services/firebase/init.js');
 
-export const getVendorExpos = {
+export const getExhibitorExpos = {
   data() {
     return {
       vendorExpos: [],
@@ -9,7 +9,7 @@ export const getVendorExpos = {
   methods: {
     fetchAssets() {
 
-      const expoList = fb.usersCollection.doc(this.currentUser.user_id).collection("expos").orderBy("expo_date_start", "desc")
+      const expoList = fb.usersCollection.doc(this.currentUser.uid).collection("expos").orderBy("expo_date_start", "desc")
 
       expoList.onSnapshot(
         (snapshot) => {
@@ -26,9 +26,10 @@ export const getVendorExpos = {
 
               this.vendorExpos.push({
                 id: doc.id,
-                vendor_expo_id: doc.data().expo_id,
-                vendor_expo_name: doc.data().expo_name,
-                vendor_expo_date_start: doc.data().expo_date_start
+                expo_id: doc.data().expo_id,
+                expo_name: doc.data().expo_name,
+                expo_date_start: doc.data().expo_date_start,
+                expo_page_id: doc.data().vendor_page_id
               });
               console.log(doc.data())
               //console.log(doc.data().file_ref)
@@ -48,11 +49,9 @@ export const getVendorExpos = {
     }
   },
   computed: {
-
     currentUser() {
-      return this.$store.getters.getUserProf;
-    }
-
+      return this.$store.state.currentUser;
+    },
   },
   created() {
     this.fetchAssets();

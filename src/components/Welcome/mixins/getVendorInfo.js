@@ -17,7 +17,6 @@ import footerStyleThree from '@/components/Main/Pages/showinfo/blocks/Footers/fo
 
 export const getVendorPage = {
   components: {
-
     pageHolderTemplate,
     //buildingblocks
     headerStyleOne,
@@ -31,7 +30,7 @@ export const getVendorPage = {
     contentText,
     contentButton,
     textSection,
-    buttonSection,
+    buttonSection
   },
   data() {
     return {
@@ -46,7 +45,7 @@ export const getVendorPage = {
       pageContentListHolder: [],
       analyticId: null,
       message_id: null
-    }
+    };
   },
   methods: {
     fetchVendors() {
@@ -59,30 +58,22 @@ export const getVendorPage = {
           this.message_id = result.data().message_id;
 
           this.pageHeaderStyle = result.data().pageHeaderStyle;
-          console.log(xID);
+
           this.pageHeaderData = result.data().pageHeaderData;
           this.pageFooterStyle = result.data().pageFooterStyle;
           this.pageFooterData = result.data().pageFooterData;
 
           if (result.data().pageContentList) {
             this.pageContentListHolder = result.data().pageContentList;
-            //this.orgitionalPageData.push(result.data().pageContentList);
-
           }
         })
         .catch(err => {
           console.log(err);
         });
-
-
-
     }
   },
-  computed: {
-
-  },
+  computed: {},
   created() {
     this.fetchVendors();
-
   }
 };

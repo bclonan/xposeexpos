@@ -7,7 +7,7 @@
         <li>
           <router-link to="/main">Home</router-link>
         </li>
-        <li>Collaborate</li>
+        <li>Shows</li>
       </ul>
     </nav>
     <!-- /Breadcrumbs -->
@@ -18,7 +18,7 @@
       <div class="columns">
         <div class="column">
           <!-- Main content -->
-          <div class="section-wrapper">s
+          <div class="section-wrapper">
             <!-- Dashboard content -->
             <div class="columns dashboard-columns">
 
@@ -60,14 +60,14 @@
                                   <div class="columns mt-30">
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo Name</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Expo" v-model="expo_name" />
+                                        <label>Expo</label>
+                                        <expo-select-list :expoChoices="expoChoices" @selected="updateChoice" />
                                       </div>
 
                                     </div>
                                     <div class="column">
                                       <div class="control">
-                                        <label>Expo Auto Verify Code</label>
+                                        <label>Expo Auto Verify Code (optional)</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="4401240140-1400124-0124" v-model="autoverifycode" />
                                       </div>
 
@@ -82,23 +82,7 @@
                                     <div class="column">
                                       <div class="control">
                                         <label>Business Name</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Expo Event Company .inc" v-model="expo_owner_businessname" />
-                                      </div>
-
-                                    </div>
-                                    <div class="column">
-                                      <div class="control">
-                                        <label>Business Website</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="ExpoEventCompany.com" v-model="expo_organizer_website" />
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                  <div class="columns mt-30">
-                                    <div class="column">
-                                      <div class="control">
-                                        <label>Point of contact name</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Sally Smith" v-model="expo_contact_name" />
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Expo Event Company .inc" v-model="businessname" />
                                       </div>
 
                                     </div>
@@ -107,15 +91,8 @@
                                   <div class="columns mt-30">
                                     <div class="column">
                                       <div class="control">
-                                        <label>Point of contact number</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="7327777777" v-model="expo_organizer_number" />
-                                      </div>
-
-                                    </div>
-                                    <div class="column">
-                                      <div class="control">
-                                        <label>Point of contact email</label>
-                                        <AppControlInput :inputClass="inputTypeOne" type="email" placeholder="youremail@business.com" v-model="expo_organizer_email" />
+                                        <label>Your Name</label>
+                                        <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Sally Smith" v-model="contact_name" />
                                       </div>
 
                                     </div>
@@ -155,20 +132,14 @@
 
                               <div class="card-content">
                                 <div class="info-block mt-40">
-                                  <h4>{{item.vendor_expo_name}}</h4>
-                                  <p>{{item.vendor_expo_date_start}}</p>
+                                  <h4>{{item.expo_name}}</h4>
+                                  <p>{{item.expo_date_start}}</p>
                                 </div>
                                 <div class="level mb-40 mt-40">
                                   <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('manageshowInfo' , item.vendor_expo_id)">Manage</a>
-                                  </div>
-                                  <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('confirmVendor' , item.vendor_expo_id)">Vendors</a>
+                                    <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('vendorManageShows' , item.expo_page_id)">Manage</a>
                                   </div>
 
-                                  <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('messages' , item.vendor_expo_id)">Messages</a>
-                                  </div>
                                 </div>
                               </div>
 
@@ -205,154 +176,32 @@
   // import fbase db
   const fb = require('@/services/firebase/init.js');
   //Components
-
+  //import expoAutoComplete from '@/components/Main/Pages/shows/Includes/expoAutocomplete.vue';
+  import expoSelectList from '@/components/Main/Pages/shows/Includes/expoSelectList.vue';
   //Mixins
   import { activeModalToggle } from '@/components/Main/Mixins/activeModalToggle.js';
   import { activeTabMixin } from '@/components/Main/Mixins/activeTabMixin.js';
-  import { getVendorExpos } from '@/components/Main/Mixins/getVendorExpos.js';
+  import { getExhibitorExpos } from '@/components/Main/Mixins/getExhibitorExpos.js';
+
+  import { expoSelectListMixin } from '@/components/Main/Mixins/expoSelectMixin.js';
+  import { addNewExpoVendor } from '@/components/Main/Mixins/addNewExpoVendor.js';
 
   export default {
     name: 'DashCollaborateMain',
-    mixins: [activeModalToggle, activeTabMixin, getVendorExpos],
+    mixins: [activeModalToggle, activeTabMixin, getExhibitorExpos, expoSelectListMixin, addNewExpoVendor],
     data() {
       return {
         activeTabChosen: 'newTeam',
         inputTypeOne: 'input is-medium mt-5',
-        inputTypeTwo: 'textarea is-grow',
-        autoverifycode: null
+        inputTypeTwo: 'textarea is-grow'
       };
     },
     components: {
       AppControlInput,
-      AppButton
+      AppButton,
+      expoSelectList
     },
     methods: {
-      onSubmit() {
-        if (this.expo_owner_businessname && this.expo_name) {
-          // xyz user info
-          const currentUserid = this.currentUser.uid;
-          let expo_pg_id = uuid.v4();
-          let currentPageVersion = uuid.v4();
-          let expoinvKey = uuid.v4();
-          let expofreekey = uuid.v4();
-          let expo_id = uuid.v4();
-          // ref to current user team collection
-          const currentUserRef = fb.usersCollection.doc(currentUserid).collection('expos');
-
-          //ref to new team doc
-          var expocollection = fb.expoCollection.doc(expo_id);
-          //analytic ref
-          var expoA = fb.expoAnalytics.doc(expo_id);
-
-          //approval ref
-          var expoApprovals = fb.expoApproval.doc(expo_id);
-
-          //create a new team
-          const userteamRef = fb.usersCollection
-            .doc(currentUserid)
-            .collection('expos')
-            .doc(expo_id);
-          //create expos page placeholder
-          const expospageref = fb.expoPagesCollection.doc(expo_pg_id);
-
-          const batch = fb.db.batch();
-
-          //add to users collabs
-          batch.set(userteamRef, {
-            expo_id: expo_id,
-            expo_name: this.expo_name,
-            expo_date_start: this.expo_date_start,
-            expo_permissions: {
-              owner: true,
-              read: true,
-              write: true
-            },
-            expo_ref: expocollection,
-            expo_analytic_ref: expoA,
-            expo_approval_ref: expoApprovals
-          });
-
-          //create new team
-          batch.set(expocollection, {
-            expo_id: expo_id,
-            expo_owner_id: currentUserid,
-            expo_contact_name: this.expo_contact_name,
-            expo_owner_businessname: this.expo_owner_businessname,
-            expo_owner_businesLocation: this.business_location,
-            expo_description: this.expo_description,
-            expo_logo: 'https://place-hold.it/250x250',
-            expo_date_start: this.expo_date_start,
-            expo_date_end: this.expo_date_end,
-            expo_address_town: this.expo_address_town,
-            expo_address_zip: this.expo_address_zip,
-            expo_address_country: this.expo_address_country,
-            expo_address_state: this.expo_address_state,
-            expo_address_address: this.expo_address_address,
-            expo_promo_website: this.expo_promo_website,
-            expo_organizer: this.expo_organizer,
-            expo_organizer_website: this.expo_organizer_website,
-            expo_organizer_number: this.expo_organizer_number,
-            expo_name: this.expo_name,
-            expo_message_id: uuid.v4(),
-            expo_page_id: expo_pg_id,
-            page_current_version: currentPageVersion,
-            expo_organizer_email: this.expo_organizer_email,
-            expo_invite_key: expoinvKey,
-            expo_free_key: expofreekey
-          });
-
-          //analytics
-          batch.set(expoA, {
-            expo_id: expo_id,
-            expo_owner_id: currentUserid,
-            expo_organizer_email: this.expo_organizer_email
-          });
-
-          //aprobal
-          batch.set(expoApprovals, {
-            expo_id: expo_id,
-            expo_owner_id: currentUserid,
-            expo_organizer_email: this.expo_organizer_email
-          });
-
-          //expo page
-          batch.set(expospageref, {
-            expo_id: expo_id,
-            page_id: expo_pg_id,
-            paid_xpose: true,
-            expo_pg_live: true,
-            pageHeaderStyle: 'headerStyleOne',
-            pageHeaderData: {
-              headerImage: 'https://phylat.com/images/placeholderimgs/imgplaceholder.jpg',
-              headerText: 'Header Text',
-              headerStyle: [''],
-
-              headerClassNames: ['title is-1 mt-60']
-            },
-            pageFooterStyle: 'footerStyleOne',
-            pageFooterData: {
-              pageFooterImage: 'https://phylat.com/images/placeholderimgs/imgplaceholder.jpg',
-              pageFooterText: 'headerText',
-              pageFooterStyle: ['']
-            },
-            pageContentList: ['']
-          });
-
-          //set
-          return batch
-            .commit()
-            .then(() => {
-              /*this.$router.push({
-                                                  path: `/teamview/${expo_id}`
-                                                });*/
-            })
-            .catch(err => {
-              this.feedback = err.message;
-            });
-        } else {
-          return (this.feedback = 'All fields must be filled in');
-        }
-      },
       goto(l, i) {
         console.log(l + i);
         // this.$store.commit('chooseExpo/selectExpo', i);
@@ -362,9 +211,7 @@
         return;
       }
     },
-    computed: {
-      ...mapState(['currentUser'])
-    }
+    computed: {}
   };
 </script>
 

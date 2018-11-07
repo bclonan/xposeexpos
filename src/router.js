@@ -46,7 +46,7 @@ import editShowInfo from '@/components/Main/Pages/showinfo/editShowInfo';
 import addShows from '@/components/Main/Pages/shows/addShows';
 // main manage show/analytics
 import manageshowInfo from '@/components/Main/Pages/showinfo/manageshowInfo';
-
+import vendorManageShows from '@/components/Main/Pages/showinfo/vendorManageShows';
 
 //Main Confirm Attendee
 import ConfirmVendor from '@/components/Main/Pages/manage/vendors';
@@ -165,6 +165,14 @@ const router = new Router({
           path: '/manageshowInfo/:id',
           name: 'manageshowInfo',
           component: manageshowInfo,
+          meta: {
+            requiresAuth: true,
+          }
+        },
+        {
+          path: '/vendorManageShows/:id',
+          name: 'vendorManageShows',
+          component: vendorManageShows,
           meta: {
             requiresAuth: true,
           }

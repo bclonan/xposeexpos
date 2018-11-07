@@ -19,7 +19,7 @@
           </h3>
         </div>
       </div>
-      <div class="column is-6 is-fullheight" @click.stop="settype('vendor')">
+      <div class="column is-6 is-fullheight" @click.stop="settype('organizer')">
         <div class="section-title-wrapper" style="padding-top:50%">
 
           <h2 class="title dark-text text-bold main-title is-2 has-text-centered">
@@ -210,30 +210,7 @@
                             </span>
                           </div>
                         </div>
-                        <div class="fieldpb-10" v-if="!isLogin">
-                          <div class="control">
-                            <ul>
-                              <li class="mb-20">
-                                <!-- Radio -->
-                                <label class="radio-wrap is-accent">
-                                  <input type="radio" class="b-radio" name="radio-group-3" value="organizer" v-model="account_type">
-                                  <span></span>
-                                  Expo Organizer
-                                </label>
-                                <!-- /Radio -->
-                              </li>
-                              <li class="mb-20">
-                                <!-- Radio -->
-                                <label class="radio-wrap is-accent">
-                                  <input type="radio" class="b-radio" name="radio-group-3" value="exhibitor" v-model="account_type">
-                                  <span></span>
-                                  Exhibitor
-                                </label>
-                                <!-- /Radio -->
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
+
                         <h6 class="danger-text has-text-centered" v-if="feedback"> {{ feedback }}</h6>
                         <!-- /password -->
                         <p class="has-text-left pt-10 pb-10">
@@ -295,6 +272,7 @@
   import * as functions from 'firebase/functions';
   // import fbase db
   const fb = require('@/services/firebase/init.js');
+  import { uuid } from 'vue-uuid';
 
   export default {
     name: 'AuthPage',
@@ -386,7 +364,8 @@
                       linkdin: '',
                       twitter: '',
                       phone: '',
-                      account_type: this.account_type
+                      account_type: this.account_type,
+                      user_message_id: uuid.v4()
                     });
                   })
                   .then(() => {

@@ -5,7 +5,7 @@
             <!-- Nav left -->
             <div class="navbar-brand">
                 <!-- Logout button -->
-                <div class="navbar-item nav-icon logout-button"  @click="logout">
+                <div class="navbar-item nav-icon logout-button" @click="logout">
                     <i class="sl sl-icon-power"></i>
                 </div>
                 <!-- /Logout button -->
@@ -62,44 +62,44 @@
 </template>
 
 <script>
-import NotificationDropdown from "@/components/Main/Includes/navbar/dropdowns/notification-dropdown.vue";
-import MessageDropdown from "@/components/Main/Includes/navbar/dropdowns/messages-dropdown.vue";
-import { modalToggleMixin } from "@/components/Main/Mixins/modalToggle.js";
-//fbase
-const fb = require("@/services/firebase/init.js");
+    import NotificationDropdown from '@/components/Main/Includes/navbar/dropdowns/notification-dropdown.vue';
+    import MessageDropdown from '@/components/Main/Includes/navbar/dropdowns/messages-dropdown.vue';
+    import { modalToggleMixin } from '@/components/Main/Mixins/modalToggle.js';
+    //fbase
+    const fb = require('@/services/firebase/init.js');
 
-export default {
-  name: "MainNavbar",
-  mixins: [modalToggleMixin],
-  components: {
-    NotificationDropdown,
-    MessageDropdown
-  },
-  methods: {
-    toggleNavLeft() {
-      this.$store.commit("mainNavLeft/toggleNavLeft");
-    },
-    toggleChatRight() {
-      this.$store.commit("mainSidebarRight/toggleChatMenu");
-    },
-    logout() {
-      fb.auth
-        .signOut()
-        .then(() => {
-          this.$store.dispatch("clearData");
-          this.$router.push({
-            name: "login"
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  },
-  computed: {
-    sidebarStoreMenu() {
-      return this.$store.getters["mainPushMenu/showPushMenu"];
-    }
-  }
-};
+    export default {
+      name: 'MainNavbar',
+      mixins: [modalToggleMixin],
+      components: {
+        NotificationDropdown,
+        MessageDropdown
+      },
+      methods: {
+        toggleNavLeft() {
+          this.$store.commit('mainNavLeft/toggleNavLeft');
+        },
+        toggleChatRight() {
+          this.$store.commit('mainSidebarRight/toggleChatMenu');
+        },
+        logout() {
+          fb.auth
+            .signOut()
+            .then(() => {
+              this.$store.dispatch('clearData');
+              this.$router.push({
+                path: '/'
+              });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      },
+      computed: {
+        sidebarStoreMenu() {
+          return this.$store.getters['mainPushMenu/showPushMenu'];
+        }
+      }
+    };
 </script>

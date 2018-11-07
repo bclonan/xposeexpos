@@ -1,34 +1,33 @@
 const fb = require('@/services/firebase/init.js');
-export const expolistAutocomplete = {
+export const expoSelectListMixin = {
   data() {
     return {
       search: '',
-      expoList: [],
-      isOpen: false
-    }
+      expoChoices: [],
+
+    };
   },
   methods: {
     fetchExpos() {
-
-      const expoListCol = fb.expoCollection.orderBy("expo_date_start", "desc")
+      const expoListCol = fb.expoCollection.orderBy('expo_date_start', 'desc');
 
       expoListCol.onSnapshot(
-        (snapshot) => {
-          snapshot.docChanges().forEach((change) => {
+        snapshot => {
+          snapshot.docChanges().forEach(change => {
             if (change.type == 'added') {
               const doc = change.doc;
 
-              this.expoList.push({
+              this.expoChoices.push({
                 id: doc.id,
                 expo_id: doc.data().expo_id,
                 expo_owner_id: doc.data().expo_owner_id,
                 expo_message_id: doc.data().expo_message_id,
                 expo_free_key: doc.data().expo_free_key,
                 expo_invite_key: doc.data().expo_invite_key,
-                expo_name: doc.data().expo_name
-
+                expo_name: doc.data().expo_name,
+                expo_date_start: doc.data().expo_date_start
               });
-              console.log(doc.data())
+              console.log(doc.data());
               //console.log(doc.data().file_ref)
             }
             if (change.type === 'modified') {
@@ -39,25 +38,24 @@ export const expolistAutocomplete = {
             }
           });
         },
-        (error) => {
+        error => {
           this.feedback = error;
-        },
+        }
       );
     },
     onChange() {
       let r = this.expoList.length;
-      console.log(r)
+      console.log(r);
     }
   },
   computed: {
     filteredTyping() {
-      return this.expoList.filter(expo => {
+      return this.expoChoices.filter(expo => {
         return expo.expo_name.toLowerCase().includes(this.search.toLowerCase());
       });
     }
   },
   created() {
     this.fetchExpos();
-
   }
 };

@@ -7,7 +7,7 @@
         <li>
           <router-link to="/main">Home</router-link>
         </li>
-        <li>Collaborate</li>
+        <li>Expo Manager</li>
       </ul>
     </nav>
     <!-- /Breadcrumbs -->
@@ -18,7 +18,7 @@
       <div class="columns">
         <div class="column">
           <!-- Main content -->
-          <div class="section-wrapper">s
+          <div class="section-wrapper">
             <!-- Dashboard content -->
             <div class="columns dashboard-columns">
 
@@ -230,14 +230,14 @@
                                 </div>
                                 <div class="level mb-40 mt-40">
                                   <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('manageshowInfo' , item.vendor_expo_id)">Manage</a>
+                                    <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('manageshowInfo' , item.expo_id)">Manage</a>
                                   </div>
                                   <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('confirmVendor' , item.vendor_expo_id)">Vendors</a>
+                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('confirmVendor' , item.expo_id)">Vendors</a>
                                   </div>
 
                                   <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('messages' , item.vendor_expo_id)">Messages</a>
+                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('messages' , item.expo_id)">Messages</a>
                                   </div>
                                 </div>
                               </div>
@@ -279,7 +279,7 @@
   //Mixins
   import { activeModalToggle } from '@/components/Main/Mixins/activeModalToggle.js';
   import { activeTabMixin } from '@/components/Main/Mixins/activeTabMixin.js';
-  import { getVendorExpos } from '@/components/Main/Mixins/getVendorExpos.js';
+  import { getVendorExpos } from '@/components/Main/Mixins/getExhibitorExpos.js';
 
   export default {
     name: 'DashCollaborateMain',
@@ -323,7 +323,7 @@
       onSubmit() {
         if (this.expo_owner_businessname && this.expo_name) {
           // xyz user info
-          const currentUserid = this.currentUser.uid;
+          const currentUserid = this.currentUser.user_id;
           let expo_pg_id = uuid.v4();
           let currentPageVersion = uuid.v4();
           let expoinvKey = uuid.v4();
@@ -436,8 +436,8 @@
             .commit()
             .then(() => {
               /*this.$router.push({
-                              path: `/teamview/${expo_id}`
-                            });*/
+                                                  path: `/teamview/${expo_id}`
+                                                });*/
             })
             .catch(err => {
               this.feedback = err.message;
@@ -456,7 +456,9 @@
       }
     },
     computed: {
-      ...mapState(['currentUser'])
+      currentUser() {
+        return this.$store.getters.getUserProf;
+      }
     }
   };
 </script>
