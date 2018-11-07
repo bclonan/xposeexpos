@@ -565,6 +565,10 @@
         return;
       },
       saveThePage() {
+        var ar = this.pageContentListHolder;
+        ar.shift(); // returns "zero"
+        console.log(ar);
+
         var docData = {
           pageHeaderStyle: this.pageHeaderStyle,
           pageHeaderData: {
@@ -645,7 +649,8 @@
 
                   if (result.data().pageContentList) {
                     this.pageContentListHolder.push(result.data().pageContentList);
-                    this.orgitionalPageData.push(result.data().pageContentList);
+                    //this.orgitionalPageData.push(result.data().pageContentList);
+                    this.orgitionalPageData = result.data().pageContentList;
                   } else {
                   }
                 })
