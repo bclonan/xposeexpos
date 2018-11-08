@@ -22,7 +22,7 @@ export const sendMessageMixin = {
       let sender_email = this.fromEmail;
       let msgContent = this.message_content;
       let msgTopic = this.msgTopic;
-      let msgToId = this.msgToId;
+      let msgToId = this.vendor_id;
 
       if (this.new_category_description && this.new_category_name) {
         const msgTocoll = fb.usersCollection
