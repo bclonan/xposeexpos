@@ -45,7 +45,8 @@
                       <!-- Signup form -->
                       <div class="flex-card is-not-supported light-bordered">
                         <div class="quick-signup">
-                          <form>
+                          <form v-if="!successMessage">
+                            <p v-if="feedback">{{feedback}}</p>
                             <h3 class="title is-4 has-text-centered">Send Message</h3>
 
                             <div class="control-material is-secondary">
@@ -79,6 +80,9 @@
                               </a>
                             </div>
                           </form>
+                          <div v-else>
+                            <h3 class="title is-4 has-text-centered">Your Message has been sent</h3>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -99,7 +103,7 @@
                   </template>
                 </page-holder-template>
               </div>
-              <div id="backtotop" class="visible" @click="sendAnonymousMessage">
+              <div id="backtotop" class="visible" @click="sendMessage">
                 <a href="#"></a>
               </div>
               <!--/vendorselected-->

@@ -11,20 +11,22 @@ export const sendMessageMixin = {
       message_status: false,
       message_content: null,
       message_topic: null,
-      pg_owner_id: null
+      pg_owner_id: null,
+      successMessage: null
     };
   },
   methods: {
     sendAnonymousMessage() {
+      console.log('sending');
       let msg_id = uuid.v4();
       let sender_id = 'none';
       let sender_name = this.fromname;
       let sender_email = this.fromEmail;
       let msgContent = this.message_content;
-      let msgTopic = this.msgTopic;
+      let msgTopic = this.message_topic;
       let msgToId = this.vendor_id;
 
-      if (this.new_category_description && this.new_category_name) {
+      if (sender_name && msgToId) {
         const msgTocoll = fb.usersCollection
           .doc(msgToId)
           .collection('messages')
@@ -36,7 +38,7 @@ export const sendMessageMixin = {
           sender_msg_id: sender_id,
           sender_email: sender_email,
           sender_name: sender_name,
-          message_status: message_status,
+          message_status: this.message_status,
           message_content: msgContent,
           message_topic: msgTopic,
           message_date: Date.now()
@@ -45,7 +47,12 @@ export const sendMessageMixin = {
         msgTocoll
           .set(mData)
           .then(() => {
-            this.feedback = 'done';
+            this.successMessage = !this.successMessage;
+            this.fromname = null;
+            this.fromEmail = null;
+            this.message_topic = null;
+            this.message_content = null;
+            return;
           })
           .catch(err => {
             this.feedback = 'There was a problem creating the category please try again.';

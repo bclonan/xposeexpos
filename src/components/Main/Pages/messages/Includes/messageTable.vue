@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="flex-card is-document-list light-bordered card-overflow">
+    <div class="flex-card is-document-list light-bordered card-overflow" v-if="!messageSelected">
       <!-- Documents table -->
       <table class="table contacts-table">
         <!-- Table header -->
@@ -127,6 +127,42 @@
         </tbody>
       </table>
     </div>
+    <!--showmsg-->
+    <div class="column is-10 is-offset-1" v-else>
+      <div class="flex-card featured-feed-post light-bordered light-raised">
+
+        <div class="card-body is-responsive">
+
+          <div class="post-meta">
+            <div class="author-meta">
+              <div class="author-name">From:
+                <span>{{messageSelected.sender_name}}</span>
+                <br/>
+                <span>{{messageSelected.sender_email}}</span>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="post-body">
+            <p>
+              <b>Topic</b>
+            </p>
+            <p>{{messageSelected.message_topic}}</p>
+            <p>
+              <b>Content</b>
+            </p>
+            <p>{{messageSelected.message_content}} </p>
+
+          </div>
+          <div class="post-share">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--/showmsg-->
   </div>
 </template>
 
@@ -145,7 +181,7 @@
         return;
       },
       viewMessage(u) {
-        this.messageSelected.push(u);
+        this.messageSelected = u;
         return;
       },
       deleteMessage(u) {
@@ -153,7 +189,7 @@
         return;
       },
       clearMessage() {
-        this.messageSelected = [];
+        this.messageSelected = null;
         return;
       }
     }

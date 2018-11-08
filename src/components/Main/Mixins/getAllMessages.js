@@ -9,9 +9,9 @@ export const getAllMessages = {
     };
   },
   methods: {
-    fetchRequests() {
+    getAllMessages() {
       const xID = this.currentUser.user_id;
-      const expoList = fb.usersCollection.doc(xID).collection("messages").orderBy("expo_date_start", "desc")
+      const requestCollection = fb.usersCollection.doc(xID).collection("messages")
 
       requestCollection.onSnapshot(
         snapshot => {
@@ -30,8 +30,7 @@ export const getAllMessages = {
                 message_topic: doc.data().message_topic,
                 message_date: doc.data().message_date,
               });
-              console.log(doc.data());
-              //console.log(doc.data().file_ref)
+
             }
             if (change.type === 'modified') {
               // console.log("Modified doc: ");
