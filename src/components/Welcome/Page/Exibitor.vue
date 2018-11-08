@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="submit-wrapper">
-                              <a href="#" class="button button-cta is-bold is-fullwidth btn-align primary-btn raised no-lh">
+                              <a href="#" class="button button-cta is-bold is-fullwidth btn-align primary-btn raised no-lh" @click.prevent="sendAnonymousMessage">
                                 Send Message
                               </a>
                             </div>
@@ -111,11 +111,11 @@
   import NavBar from '@/components/Welcome/Includes/navbar/navbar.vue';
   import Footer from '@/components/Welcome/Includes/Footer.vue';
   import { getVendorPage } from '@/components/Welcome/mixins/getVendorInfo.js';
-  import { activeMessageModalMixin } from '@/components/Welcome/mixins/messageModalMixin.js';
+  import { sendMessageMixin } from '@/components/Main/Mixins/sendMessageMixin.js';
 
   export default {
     name: 'exibitorPage',
-    mixins: [getVendorPage, activeMessageModalMixin],
+    mixins: [getVendorPage, sendMessageMixin],
     data() {
       return {
         expo_id: null,
