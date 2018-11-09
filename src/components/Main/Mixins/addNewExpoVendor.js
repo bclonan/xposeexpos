@@ -26,10 +26,12 @@ export const addNewExpoVendor = {
       return;
     },
     onSubmit() {
+       let currentUserid = this.currentUser.user_id;
+        let usermessageId = this.currentUser.user_message_id;
+        console.log(currentUserid)
       if (this.businessname && this.choosenExpoId) {
 
-        const currentUserid = this.currentUser.user_id;
-        const usermessageId = this.currentUser.user_message_id;
+
         let expo_id = this.choosenExpoId;
         let vendor_id = uuid.v4();
         let buzname = this.businessname;
