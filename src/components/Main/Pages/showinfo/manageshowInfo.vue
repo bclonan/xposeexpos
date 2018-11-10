@@ -391,7 +391,7 @@
                               </template>
                               {{checklistholder}}
                               <draggable :pageContentListHolder="pageContentListHolder" class="dragArea" v-model="pageContentListHolder" slot="main" :move="onMove" :options="dragOptions">
-                                <component v-for="blocks in pageContentListHolder" :key="blocks.id" :is="blocks.tagName" :contentClass="blocks.class" :contentStyle="blocks.style" :content="blocks.content" :parentClass="blocks.parentClass" :parentStyle="blocks.parentStyle" :editable="editable" />
+                                <component v-for="blocks in pageContentListHolder" :key="blocks.id" :is="blocks.tagName" :contentClass="blocks.class" :contentStyle="blocks.style" :content="blocks.content" :parentClass="blocks.parentClass" :parentStyle="blocks.parentStyle" :editable="editable" @updateStyle="updateStyle" />
 
                               </draggable>
 
@@ -569,9 +569,9 @@
       },
       saveThePage() {
         /*var ar = this.pageContentListHolder;
-                                              ar.shift(); // returns "zero"
-                                              console.log(ar);
-                                      */
+                                                  ar.shift(); // returns "zero"
+                                                  console.log(ar);
+                                          */
         var docData = {
           expo_id: this.expo_id,
           expo_owner_id: this.expo_owner_id,
@@ -868,6 +868,9 @@
           .catch(function(error) {
             console.error('Error removing document: ', error);
           });
+        console.log(i);
+      },
+      updateStyle(i) {
         console.log(i);
       }
     },

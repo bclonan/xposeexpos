@@ -144,10 +144,7 @@
         this.$router.push({
           path: `/Categories/${xID}`
         });
-        // this.$store.commit('chooseExpo/selectExpo', i);
-        //   this.$router.push({
-        //    path: `/Categories/${xID}`
-        //  });
+
         return;
       },
       resetSelectedVendor() {
@@ -157,7 +154,6 @@
       sendMessage() {
         let msgtarg = this.message_id;
         this.sendMsgActive = !this.sendMsgActive;
-        console.log(msgtarg);
       }
     }
   };

@@ -1,20 +1,20 @@
 <template>
-<nav class="main-menu">
-    <div class="main-menu-inner">
-        
-        <Icon-Menu />
+    <nav class="main-menu">
+        <div class="main-menu-inner">
 
-        <Profile-Menu />
-        
-    </div>
-</nav>
+            <Icon-Menu />
+
+            <!--<Profile-Menu />-->
+
+        </div>
+    </nav>
 </template>
 
 <script>
-    import IconMenu from "@/components/Main/Includes/sidebar/menu/icon-menu.vue";
-    import ProfileMenu from "@/components/Main/Includes/sidebar/menu/profile-menu.vue";
+    import IconMenu from '@/components/Main/Includes/sidebar/menu/icon-menu.vue';
+    import ProfileMenu from '@/components/Main/Includes/sidebar/menu/profile-menu.vue';
     export default {
-      name: "MainSidebar",
+      name: 'MainSidebar',
       components: {
         IconMenu,
         ProfileMenu

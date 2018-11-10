@@ -28,8 +28,6 @@ export const expolistAutocomplete = {
                 expo_name: doc.data().expo_name
 
               });
-              console.log(doc.data())
-              //console.log(doc.data().file_ref)
             }
             if (change.type === 'modified') {
               // console.log("Modified doc: ");
@@ -46,7 +44,6 @@ export const expolistAutocomplete = {
     },
     onChange() {
       let r = this.expoList.length;
-      console.log(r)
     }
   },
   computed: {

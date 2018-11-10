@@ -1,5 +1,7 @@
 const fb = require('@/services/firebase/init.js');
-import { uuid } from 'vue-uuid';
+import {
+  uuid
+} from 'vue-uuid';
 export const sendMessageMixin = {
   data() {
     return {
@@ -57,8 +59,6 @@ export const sendMessageMixin = {
           .catch(err => {
             this.feedback = 'There was a problem creating the category please try again.';
           });
-
-        // /add to store folder
       } else {
         this.feedback = 'You have to fill in all fields';
         return;
@@ -73,7 +73,6 @@ export const sendMessageMixin = {
     }
   },
   computed: {
-    //User Info
     currentUser() {
       return this.$store.state.userProfile;
     }

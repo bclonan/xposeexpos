@@ -54,15 +54,15 @@
             buttontype: 'route',
             to: '/messages',
             tag: 'i'
-          },
-          {
-            name: 'account',
-            icon: 'sl sl-icon-settings',
-            menuName: '',
-            buttontype: 'route',
-            to: '/account',
-            tag: 'i'
           }
+          /*{
+              name: 'account',
+              icon: 'sl sl-icon-settings',
+              menuName: '',
+              buttontype: 'route',
+              to: '/account',
+              tag: 'i'
+            }*/
         ],
         NavItems: [
           //name = tool name icon = icon for sidebar , menuname = prop to call for inner component
@@ -82,15 +82,15 @@
             buttontype: 'route',
             to: '/messages',
             tag: 'i'
-          },
-          {
-            name: 'account',
-            icon: 'sl sl-icon-settings',
-            menuName: '',
-            buttontype: 'route',
-            to: '/account',
-            tag: 'i'
           }
+          /*{
+              name: 'account',
+              icon: 'sl sl-icon-settings',
+              menuName: '',
+              buttontype: 'route',
+              to: '/account',
+              tag: 'i'
+            }*/
         ]
       };
     },
