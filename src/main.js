@@ -8,17 +8,15 @@ const fb = require('@/services/firebase/init.js');
 
 //Outside Packages
 import vClickOutside from 'v-click-outside';
-import VueFeatherIcon from 'vue-feather-icon';
 import UUID from 'vue-uuid';
 import Toasted from 'vue-toasted';
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 
 Vue.use(vClickOutside);
 //Funnel Dashboard
-Vue.use(VueFeatherIcon);
 Vue.use(UUID);
 Vue.use(Toasted)
 let app = null;

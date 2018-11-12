@@ -16,7 +16,7 @@ TABLE OF CONTENTS
 ========================================================================== */
 
 @import 'partials/layout-colors';
-@import 'partials/themes-blue';
+@import 'partials/themes-main';
 @import 'partials/layout-utils';
 @import 'partials/layout-navbar';
 @import 'partials/layout-sections';
@@ -40,10 +40,21 @@ TABLE OF CONTENTS
 @import 'partials/components-pricing';
 @import 'partials/components-dropdowns';
 @import 'partials/extensions-checkboxes';
+@import 'partials/extensions-badge';
+@import 'partials/extensions-range';
+@import 'partials/extensions-ribbon';
+@import 'partials/extensions-slider';
+@import 'partials/extensions-switch';
+@import 'partials/extensions-timeline';
+@import 'partials/extensions-uploader';
 @import 'partials/pages-details';
 @import 'partials/pages-auth';
+@import 'partials/pages-startup';
+@import 'partials/pages-demo';
+@import 'partials/pages-landing';
+@import 'partials/pages-landing-v1';
+@import 'partials/pages-landing-v2';
+@import 'partials/pages-landing-v3';
 @import 'partials/pages-landing-v4';
 @import 'partials/layout-helpers';
 @import 'partials/layout-responsive';
-
-

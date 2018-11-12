@@ -12,7 +12,7 @@ import WelcomeView from './views/Welcome/WelcomeView'
 import HomePage from '@/components/Welcome/Page/Home';
 import WelcomeWorks from '@/components/Welcome/Page/Howitworks';
 import WelcomeSearch from '@/components/Welcome/Page/SearchPage';
-//import WelcomeEventOrganizer from '@/components/Welcome/Page/EventOrganizer';
+import WelcomeExpoCategoryPage from '@/components/Welcome/Page/ExpoCategoryPage';
 import WelcomeExibitor from '@/components/Welcome/Page/Exibitor';
 import WelcomeContact from '@/components/Welcome/Page/Contact';
 import WelcomeLogin from '@/components/Welcome/Page/Login';
@@ -41,6 +41,13 @@ import showchat from '@/components/Main/Pages/showchat/showchat';
 
 //Main info Edit Expo info
 import editShowInfo from '@/components/Main/Pages/showinfo/editShowInfo';
+
+
+import addShows from '@/components/Main/Pages/shows/addShows';
+// main manage show/analytics
+import manageshowInfo from '@/components/Main/Pages/showinfo/manageshowInfo';
+import vendorManageShows from '@/components/Main/Pages/showinfo/vendorManageShows';
+
 //Main Confirm Attendee
 import ConfirmVendor from '@/components/Main/Pages/manage/vendors';
 //Main Show Schedule
@@ -72,7 +79,7 @@ const router = new Router({
           component: WelcomeSearch
         },
         {
-          path: 'Exhibitor',
+          path: 'Exhibitor/:id/:pageid',
           name: 'Exhibitor',
           component: WelcomeExibitor
         },
@@ -85,6 +92,11 @@ const router = new Router({
           path: 'login',
           name: 'Login',
           component: WelcomeLogin
+        },
+        {
+          path: 'Categories/:id',
+          name: 'Categories',
+          component: WelcomeExpoCategoryPage
         },
 
       ]
@@ -101,9 +113,9 @@ const router = new Router({
           }
         },
         {
-          path: '/editinfo',
-          name: 'editinfo',
-          component: DashEdit,
+          path: '/addShows',
+          name: 'addShows',
+          component: addShows,
           meta: {
             requiresAuth: true,
           }
@@ -112,14 +124,6 @@ const router = new Router({
           path: '/manageshows',
           name: 'manageshows',
           component: DashShow,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/exibitorpage',
-          name: 'exibitorpage',
-          component: exibitorpage,
           meta: {
             requiresAuth: true,
           }
@@ -158,7 +162,23 @@ const router = new Router({
           }
         },
         {
-          path: '/confirmVendor',
+          path: '/manageshowInfo/:id',
+          name: 'manageshowInfo',
+          component: manageshowInfo,
+          meta: {
+            requiresAuth: true,
+          }
+        },
+        {
+          path: '/vendorManageShows/:id',
+          name: 'vendorManageShows',
+          component: vendorManageShows,
+          meta: {
+            requiresAuth: true,
+          }
+        },
+        {
+          path: '/confirmVendor/:id',
           name: 'confirmVendor',
           component: ConfirmVendor,
           meta: {

@@ -1,6 +1,6 @@
 module.exports = {
   pwa: {
-    name: 'xyz-funnel-builder',
+    name: 'xpose-expos',
     themeColor: '#4D90BA'
   }
 }
