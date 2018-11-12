@@ -127,13 +127,13 @@
                                       <div class="field">
                                         <label class="form-label">Image Value</label>
                                         <div class="control">
-                                          <input type="text" class="input is-medium">
+                                          <input type="text" class="input is-medium" v-model="pageHeaderImage" placeholder="https://yourimage.com">
                                         </div>
                                       </div>
                                       <div class="field mt-20">
                                         <label class="form-label">Text</label>
                                         <div class="control">
-                                          <input type="email" class="input is-medium">
+                                          <input type="email" class="input is-medium" v-model="pageHeaderText" placeholder="company name">
                                         </div>
                                       </div>
 
@@ -369,7 +369,9 @@
         orgitionalPageData: [],
         expo_pg_live: false,
         expopgid: null,
-        pgownerid: null
+        pgownerid: null,
+        pageHeaderText: null,
+        pageHeaderImage: null
       };
     },
     components: {
@@ -417,8 +419,8 @@
           message_id: this.currentUser.user_message_id,
           pageHeaderStyle: this.pageHeaderStyle,
           pageHeaderData: {
-            headerImage: this.pageHeaderData.headerImage,
-            headerText: this.pageHeaderData.headerText,
+            headerImage: this.pageHeaderImage,
+            headerText: this.pageHeaderText,
             headerStyle: this.pageHeaderData.headerStyle,
 
             headerClassNames: this.pageHeaderData.headerClassNames
@@ -445,26 +447,41 @@
         const xID = this.$route.params.id;
         const expoRef = fb.expoPagesCollection.doc(xID);
 
-        expoRef
-          .get()
-          .then(res => {
-            this.expo_id = res.data().expo_id;
-            this.currenteditingpage = this.$route.params.id;
-            this.pageHeaderStyle = res.data().pageHeaderStyle;
+        this.currenteditingpage = this.$route.params.id;
 
-            this.pageHeaderData = res.data().pageHeaderData;
-            this.pageFooterStyle = res.data().pageFooterStyle;
-            this.pageFooterData = res.data().pageFooterData;
-            this.pageContentListHolder = res.data().pageContentList;
+        expoRef.onSnapshot(
+          snapshot => {
+            snapshot.docChanges().forEach(change => {
+              if (change.type == 'added') {
+                let doc = change.doc;
 
-            this.orgitionalPageData = res.data().pageContentList;
-            this.expo_pg_live = res.data().expo_pg_live;
-            this.expopgid = res.data().page_id;
-            this.pgownerid = res.data().pg_owner_id;
-          })
-          .catch(err => {
-            console.log(err);
-          });
+                this.expo_id = doc.data().expo_id;
+                this.pageHeaderStyle = doc.data().pageHeaderStyle;
+
+                this.pageHeaderData = doc.data().pageHeaderData;
+                this.pageHeaderImage = doc.data().pageHeaderData.headerImage;
+                this.pageHeaderText = doc.data().pageHeaderData.headerText;
+                this.pageFooterStyle = doc.data().pageFooterStyle;
+                this.pageFooterData = doc.data().pageFooterData;
+                this.pageContentListHolder = doc.data().pageContentList;
+
+                this.orgitionalPageData = doc.data().pageContentList;
+                this.expo_pg_live = doc.data().expo_pg_live;
+                this.expopgid = doc.data().page_id;
+                this.pgownerid = doc.data().pg_owner_id;
+              }
+              if (change.type === 'modified') {
+                // console.log("Modified doc: ");
+              }
+              if (change.type === 'removed') {
+                // console.log("Removed doc: ");
+              }
+            });
+          },
+          error => {
+            this.feedback = error;
+          }
+        );
 
         return;
       },

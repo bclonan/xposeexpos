@@ -230,15 +230,12 @@
                                 </div>
                                 <div class="level mb-40 mt-40">
                                   <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('manageshowInfo' , item.expo_id)">Manage</a>
+                                    <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('manageshowInfo' , item)">Manage</a>
                                   </div>
                                   <div class="level-item">
                                     <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('confirmVendor' , item.expo_id)">Vendors</a>
                                   </div>
 
-                                  <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('messages' , item.expo_id)">Messages</a>
-                                  </div>
                                 </div>
                               </div>
 
@@ -436,8 +433,8 @@
             .commit()
             .then(() => {
               /*this.$router.push({
-                                                    path: `/teamview/${expo_id}`
-                                                  });*/
+                                                        path: `/teamview/${expo_id}`
+                                                      });*/
             })
             .catch(err => {
               this.feedback = err.message;
@@ -449,9 +446,10 @@
       goto(l, i) {
         console.log(l + i);
         // this.$store.commit('chooseExpo/selectExpo', i);
-        this.$router.push({
-          path: `${l}/${i}`
-        });
+        /* this.$router.push({
+            path: `${l}/${i}`
+          });*/
+        console.log(i);
         return;
       }
     },

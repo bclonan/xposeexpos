@@ -85,7 +85,7 @@
             <!-- Page Title -->
 
           </div>
-          <tr v-for="item in filteredMessages" :key="item.id">
+          <tr v-for="item in messageList" :key="item.id">
 
             <td class="contact-preview">
               <span class="inner">
@@ -168,10 +168,16 @@
 
 <script>
   import DocumentListDropdown from '@/components/Main/Pages/assets/Includes/document-list-dropdown';
-  import { getAllMessages } from '@/components/Main/Mixins/getAllMessages.js';
+  const fb = require('@/services/firebase/init.js');
   export default {
+    data() {
+      return {
+        messageList: [],
+        search: '',
+        messageSelected: null
+      };
+    },
     name: 'messageTable',
-    mixins: [getAllMessages],
     components: {
       DocumentListDropdown
     },
@@ -191,7 +197,51 @@
       clearMessage() {
         this.messageSelected = null;
         return;
+      },
+      getAllMessages() {
+        let xID = this.currentUser.user_id;
+
+        const requestCollection = fb.usersCollection.doc(xID).collection('messages');
+
+        requestCollection.onSnapshot(
+          snapshot => {
+            snapshot.docChanges().forEach(change => {
+              if (change.type == 'added') {
+                const doc = change.doc;
+
+                this.messageList.push({
+                  id: doc.id,
+                  message_id: doc.data().message_id,
+                  sender_id: doc.data().sender_id,
+                  sender_msg_id: doc.data().sender_id,
+                  sender_name: doc.data().sender_name,
+                  message_status: doc.data().message_status,
+                  message_content: doc.data().message_content,
+                  message_topic: doc.data().message_topic,
+                  message_date: doc.data().message_date
+                });
+              }
+              if (change.type === 'modified') {
+                // console.log("Modified doc: ");
+              }
+              if (change.type === 'removed') {
+                // console.log("Removed doc: ");
+              }
+            });
+          },
+          error => {
+            this.feedback = error;
+          }
+        );
       }
+    },
+    computed: {
+      currentUser() {
+        return this.$store.getters.getUserProf;
+      }
+    },
+    created() {
+      this.getAllMessages();
     }
   };
 </script>
