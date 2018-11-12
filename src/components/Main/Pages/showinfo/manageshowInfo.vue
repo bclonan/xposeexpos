@@ -274,13 +274,13 @@
                                       <div class="field">
                                         <label class="form-label">Image Value</label>
                                         <div class="control">
-                                          <input type="text" class="input is-medium">
+                                          <input type="text" class="input is-medium" v-model="pageHeaderImage">
                                         </div>
                                       </div>
                                       <div class="field mt-20">
                                         <label class="form-label">Text</label>
                                         <div class="control">
-                                          <input type="email" class="input is-medium">
+                                          <input type="email" class="input is-medium" v-model="pageHeaderText">
                                         </div>
                                       </div>
 
@@ -528,7 +528,9 @@
         pagecontentbackuptwo: [],
         pageContentListHolder: [],
         pageContentList: [],
-        orgitionalPageData: []
+        orgitionalPageData: [],
+        pageHeaderImage: null,
+        pageHeaderText: null
       };
     },
     components: {
@@ -569,9 +571,9 @@
       },
       saveThePage() {
         /*var ar = this.pageContentListHolder;
-                                                  ar.shift(); // returns "zero"
-                                                  console.log(ar);
-                                          */
+                                                        ar.shift(); // returns "zero"
+                                                        console.log(ar);
+                                                */
         var docData = {
           expo_id: this.expo_id,
           expo_owner_id: this.expo_owner_id,
@@ -580,8 +582,8 @@
           message_id: this.expo_message_id,
           pageHeaderStyle: this.pageHeaderStyle,
           pageHeaderData: {
-            headerImage: this.pageHeaderData.headerImage,
-            headerText: this.pageHeaderData.headerText,
+            headerImage: this.pageHeaderData.pageHeaderImage,
+            headerText: this.pageHeaderData.pageHeaderText,
             headerStyle: this.pageHeaderData.headerStyle,
 
             headerClassNames: this.pageHeaderData.headerClassNames
@@ -647,6 +649,8 @@
                 .then(result => {
                   this.currenteditingpage = pgid;
                   this.pageHeaderStyle = result.data().pageHeaderStyle;
+                  this.pageHeaderImage = result.data().pageHeaderStyle[0].headerImage;
+                  this.pageHeaderText = result.data().pageHeaderStyle[0].headerText;
                   //console.log(pgref);
                   this.pageHeaderData = result.data().pageHeaderData;
                   this.pageFooterStyle = result.data().pageFooterStyle;

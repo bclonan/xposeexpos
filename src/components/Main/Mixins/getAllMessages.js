@@ -10,7 +10,8 @@ export const getAllMessages = {
   },
   methods: {
     getAllMessages() {
-      const xID = this.currentUser.user_id;
+      let xID = this.currentUser.user_id;
+      console.log(xID)
       const requestCollection = fb.usersCollection.doc(xID).collection("messages")
 
       requestCollection.onSnapshot(

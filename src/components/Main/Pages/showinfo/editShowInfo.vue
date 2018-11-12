@@ -436,8 +436,8 @@
             .commit()
             .then(() => {
               /*this.$router.push({
-                                                  path: `/teamview/${expo_id}`
-                                                });*/
+                                                    path: `/teamview/${expo_id}`
+                                                  });*/
             })
             .catch(err => {
               this.feedback = err.message;
