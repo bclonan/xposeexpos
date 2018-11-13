@@ -42,8 +42,10 @@ import showchat from '@/components/Main/Pages/showchat/showchat';
 //Main info Edit Expo info
 import editShowInfo from '@/components/Main/Pages/showinfo/editShowInfo';
 
-
 import addShows from '@/components/Main/Pages/shows/addShows';
+//organizer shows
+
+import organizerShowManage from '@/components/Main/Pages/organizerShowEdit/organizerShowManage';
 // main manage show/analytics
 import manageshowInfo from '@/components/Main/Pages/showinfo/manageshowInfo';
 import vendorManageShows from '@/components/Main/Pages/showinfo/vendorManageShows';
@@ -120,6 +122,15 @@ const router = new Router({
             requiresAuth: true,
           }
         },
+
+        {
+          path: '/organizerShow',
+          name: 'organizerShow',
+          component: organizerShowManage,
+          meta: {
+            requiresAuth: true,
+          }
+        },
         {
           path: '/manageshows',
           name: 'manageshows',
@@ -154,8 +165,8 @@ const router = new Router({
           }
         },
         {
-          path: '/editshowinfo',
-          name: 'editshowinfo',
+          path: '/editShowInfo',
+          name: 'editShowInfo',
           component: editShowInfo,
           meta: {
             requiresAuth: true,

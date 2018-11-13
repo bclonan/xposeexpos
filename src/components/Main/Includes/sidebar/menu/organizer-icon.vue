@@ -4,12 +4,12 @@
     <li class="main-logo">
       <router-link to="/main"><img src="@/styles/Main/images/logos/square-violet.svg" alt="xyz"></router-link>
     </li>
-    <li v-for="item in NavItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
+
+    <li v-for="item in OrganizerItems" :key="item.id" :class="[activeNavItem === item.name ? 'is-active' : '', extraClassItems]" @click="setActive(item.name)">
       <i v-if="item.buttontype === 'route'" :class="item.icon" @click="navigateToRoute(item.to)"></i>
 
       <i v-else :class="item.icon"></i>
     </li>
-
 
   </ul>
   <!-- /Side icon menu -->
@@ -26,17 +26,23 @@
       return {
         extraClassItems: 'side-icon',
         acctType: '',
-        NavItems: [
-          //name = tool name icon = icon for sidebar , menuname = prop to call for inner component
+        OrganizerItems: [
           {
-            name: 'addshows',
+            name: 'editShowInfo',
             icon: 'sl sl-icon-folder-alt',
             menuName: '',
             buttontype: 'route',
-            to: '/addShows',
+            to: '/editShowInfo',
             tag: 'i'
           },
-
+          {
+            name: 'confirmVendor',
+            icon: 'sl sl-icon-people',
+            menuName: '',
+            buttontype: 'route',
+            to: '/confirmVendor',
+            tag: 'i'
+          },
           {
             name: 'messages',
             icon: 'sl sl-icon-speech',
@@ -44,16 +50,17 @@
             buttontype: 'route',
             to: '/messages',
             tag: 'i'
-          }
-          /*{
-              name: 'account',
-              icon: 'sl sl-icon-settings',
-              menuName: '',
-              buttontype: 'route',
-              to: '/account',
-              tag: 'i'
-            }*/
-        ]
+          },
+                   {
+            name: 'organizerShow',
+            icon: 'sl sl-icon-folder-alt',
+            menuName: '',
+            buttontype: 'route',
+            to: '/organizerShow',
+            tag: 'i'
+          },
+        ],
+
       };
     },
     methods: {

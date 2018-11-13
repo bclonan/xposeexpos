@@ -27,8 +27,8 @@ export const addNewExpoVendor = {
     },
     onSubmit() {
        let currentUserid = this.currentUser.user_id;
-        let usermessageId = this.currentUser.user_message_id;
-        console.log(currentUserid)
+       let usermessageId = this.currentUser.user_message_id;
+
       if (this.businessname && this.choosenExpoId) {
 
 
@@ -45,22 +45,18 @@ export const addNewExpoVendor = {
         if (this.autoverifycode && this.autoverifycode === this.autoverifycodeExpo) {
 
           let expo_pg_id = uuid.v4();
-          //ref to new team doc
           var expocollection = fb.expoCollection.doc(expo_id).collection('vendors').doc();
           //analytic ref
           var expoA = fb.expoAnalytics.doc(expo_pg_id);
 
-          //create a new team
           const userExpoRef = fb.usersCollection
             .doc(currentUserid)
             .collection('expos')
             .doc(expo_id);
-          //create expos page placeholder
           const expospageref = fb.expoPagesCollection.doc(expo_pg_id);
 
           const batch = fb.db.batch();
 
-          //add to users collabs
           batch.set(userExpoRef, {
             expo_id: expo_id,
             vendor_id: vendor_id,
@@ -74,7 +70,6 @@ export const addNewExpoVendor = {
             expo_analytic_ref: expoA,
           });
 
-          //create new team
           batch.set(expocollection, {
             expo_id: expo_id,
             vendor_id: vendor_id,
@@ -162,7 +157,11 @@ export const addNewExpoVendor = {
       }
     },
   },
-  computed: {},
+  computed: {
+        currentUser() {
+      return this.$store.state.userProfile;
+    }
+  },
   created() {
 
   }
