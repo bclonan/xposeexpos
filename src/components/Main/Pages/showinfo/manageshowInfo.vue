@@ -570,10 +570,7 @@
         return;
       },
       saveThePage() {
-        /*var ar = this.pageContentListHolder;
-                                                        ar.shift(); // returns "zero"
-                                                        console.log(ar);
-                                                */
+
         var docData = {
           expo_id: this.expo_id,
           expo_owner_id: this.expo_owner_id,

@@ -127,13 +127,13 @@
                                       <div class="field">
                                         <label class="form-label">Image Value</label>
                                         <div class="control">
-                                          <input type="text" class="input is-medium">
+                                          <input type="text" class="input is-medium" v-model="pageHeaderImage" :placeholder="pageHeaderImage">
                                         </div>
                                       </div>
                                       <div class="field mt-20">
                                         <label class="form-label">Text</label>
                                         <div class="control">
-                                          <input type="email" class="input is-medium">
+                                          <input type="text" class="input is-medium" v-model="pageHeaderText" :placeholder="pageHeaderText">
                                         </div>
                                       </div>
 
@@ -190,13 +190,13 @@
                                       <div class="field">
                                         <label class="form-label">Image Value</label>
                                         <div class="control">
-                                          <input type="text" class="input is-medium">
+                                          <input type="text" class="input is-medium" >
                                         </div>
                                       </div>
                                       <div class="field mt-20">
                                         <label class="form-label">Text</label>
                                         <div class="control">
-                                          <input type="email" class="input is-medium">
+                                          <input type="email" class="input is-medium" >
                                         </div>
                                       </div>
 
@@ -205,18 +205,6 @@
                                       </div>
                                     </form>
 
-                                    <p class="menu-label">
-                                      Transactions
-                                    </p>
-                                    <ul class="menu-list">
-
-                                      <li>
-                                        <a>Transfers</a>
-                                      </li>
-                                      <li>
-                                        <a>Balance</a>
-                                      </li>
-                                    </ul>
                                   </aside>
                                   <!--/footer-->
                                 </div>
@@ -369,7 +357,9 @@
         orgitionalPageData: [],
         expo_pg_live: false,
         expopgid: null,
-        pgownerid: null
+        pgownerid: null,
+        pageHeaderImage: null,
+        pageHeaderText: null
       };
     },
     components: {
@@ -417,8 +407,8 @@
           message_id: this.currentUser.user_message_id,
           pageHeaderStyle: this.pageHeaderStyle,
           pageHeaderData: {
-            headerImage: this.pageHeaderData.headerImage,
-            headerText: this.pageHeaderData.headerText,
+            headerImage: this.pageHeaderImage,
+            headerText: this.pageHeaderText,
             headerStyle: this.pageHeaderData.headerStyle,
 
             headerClassNames: this.pageHeaderData.headerClassNames
@@ -451,7 +441,8 @@
             this.expo_id = res.data().expo_id;
             this.currenteditingpage = this.$route.params.id;
             this.pageHeaderStyle = res.data().pageHeaderStyle;
-
+            this.pageHeaderImage = res.data().pageHeaderStyle[0].headerImage;
+            this.pageHeaderText = res.data().pageHeaderStyle[0].headerText;
             this.pageHeaderData = res.data().pageHeaderData;
             this.pageFooterStyle = res.data().pageFooterStyle;
             this.pageFooterData = res.data().pageFooterData;
