@@ -38,7 +38,7 @@
 
 <script>
   import messageTable from '@/components/Main/Pages/messages/Includes/messageTable.vue';
-  import RightSideBar from '@/components/Main/Pages/assets/Includes/AssetSideBar.vue';
+
   import { dropdownMixin } from '@/components/Main/Mixins/dropdownMixin.js';
   export default {
     name: 'DashMessages',
@@ -47,8 +47,7 @@
       return {};
     },
     components: {
-      messageTable,
-      RightSideBar
+      messageTable
     }
   };
 </script>

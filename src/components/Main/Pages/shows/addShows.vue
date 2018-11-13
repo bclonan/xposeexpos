@@ -204,7 +204,6 @@
     methods: {
       goto(l, i) {
         console.log(l + i);
-        // this.$store.commit('chooseExpo/selectExpo', i);
         this.$router.push({
           path: `${l}/${i}`
         });

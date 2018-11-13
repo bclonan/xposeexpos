@@ -279,11 +279,11 @@
   //Mixins
   import { activeModalToggle } from '@/components/Main/Mixins/activeModalToggle.js';
   import { activeTabMixin } from '@/components/Main/Mixins/activeTabMixin.js';
-  import { getOrganizerExpos } from '@/components/Main/Mixins/getExhibitorExpos.js';
+ // import { getOrganizerExpos } from '@/components/Main/Mixins/getExhibitorExpos.js';
 
   export default {
     name: 'DashCollaborateMain',
-    mixins: [activeModalToggle, activeTabMixin, getOrganizerExpos],
+    mixins: [activeModalToggle, activeTabMixin],
     data() {
       return {
         activeTabChosen: 'newTeam',

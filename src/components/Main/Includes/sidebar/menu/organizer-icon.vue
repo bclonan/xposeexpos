@@ -28,22 +28,6 @@
         acctType: '',
         OrganizerItems: [
           {
-            name: 'editShowInfo',
-            icon: 'sl sl-icon-folder-alt',
-            menuName: '',
-            buttontype: 'route',
-            to: '/editShowInfo',
-            tag: 'i'
-          },
-          {
-            name: 'confirmVendor',
-            icon: 'sl sl-icon-people',
-            menuName: '',
-            buttontype: 'route',
-            to: '/confirmVendor',
-            tag: 'i'
-          },
-          {
             name: 'messages',
             icon: 'sl sl-icon-speech',
             menuName: '',
@@ -51,12 +35,12 @@
             to: '/messages',
             tag: 'i'
           },
-                   {
-            name: 'organizerShow',
+          {
+            name: 'expo',
             icon: 'sl sl-icon-folder-alt',
             menuName: '',
             buttontype: 'route',
-            to: '/organizerShow',
+            to: '/expo',
             tag: 'i'
           },
         ],

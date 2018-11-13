@@ -167,13 +167,11 @@
 </template>
 
 <script>
-  import DocumentListDropdown from '@/components/Main/Pages/assets/Includes/document-list-dropdown';
   import { getAllMessages } from '@/components/Main/Mixins/getAllMessages.js';
   export default {
     name: 'messageTable',
     mixins: [getAllMessages],
     components: {
-      DocumentListDropdown
     },
     methods: {
       previewAsset(i) {

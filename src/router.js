@@ -27,33 +27,18 @@ import DashMessages from '@/components/Main/Pages/messages/DashMessages';
 //Main Account Page
 import DashAccount from '@/components/Main/Pages/account/DashAccount';
 
-//Main  info Edit Page
-import DashEdit from '@/components/Main/Pages/edit/DashEdit';
-
-//Main show edit
-import DashShow from '@/components/Main/Pages/editshow/DashShow';
-//Main show schedule
-import DashShowSchedule from '@/components/Main/Pages/showschedule/DashShowSchedule';
-
-
-//Main Exibitor Chat
-import showchat from '@/components/Main/Pages/showchat/showchat';
-
 //Main info Edit Expo info
 import editShowInfo from '@/components/Main/Pages/showinfo/editShowInfo';
 
 import addShows from '@/components/Main/Pages/shows/addShows';
 //organizer shows
 
-import organizerShowManage from '@/components/Main/Pages/organizerShowEdit/organizerShowManage';
+
+import expo from '@/components/Main/Pages/organizerShowEdit/expo';
+import organizerShow from '@/components/Main/Pages/organizerShowEdit/organizerShowManage';
 // main manage show/analytics
 import manageshowInfo from '@/components/Main/Pages/showinfo/manageshowInfo';
 import vendorManageShows from '@/components/Main/Pages/showinfo/vendorManageShows';
-
-//Main Confirm Attendee
-import ConfirmVendor from '@/components/Main/Pages/manage/vendors';
-//Main Show Schedule
-import editSchedule from '@/components/Main/Pages/editSchedule/editSchedule';
 
 
 
@@ -124,17 +109,9 @@ const router = new Router({
         },
 
         {
-          path: '/organizerShow',
-          name: 'organizerShow',
-          component: organizerShowManage,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/manageshows',
-          name: 'manageshows',
-          component: DashShow,
+          path: '/expo',
+          name: 'expo',
+          component: expo,
           meta: {
             requiresAuth: true,
           }
@@ -156,14 +133,7 @@ const router = new Router({
             requiresAuth: true,
           }
         },
-        {
-          path: '/showchat',
-          name: 'showchat',
-          component: showchat,
-          meta: {
-            requiresAuth: true,
-          }
-        },
+
         {
           path: '/editShowInfo',
           name: 'editShowInfo',
@@ -188,30 +158,8 @@ const router = new Router({
             requiresAuth: true,
           }
         },
-        {
-          path: '/confirmVendor/:id',
-          name: 'confirmVendor',
-          component: ConfirmVendor,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/schedule',
-          name: 'schedule',
-          component: DashShowSchedule,
-          meta: {
-            requiresAuth: true,
-          }
-        },
-        {
-          path: '/editshowschedule',
-          name: 'editshowschedule',
-          component: editSchedule,
-          meta: {
-            requiresAuth: true,
-          }
-        },
+
+
       ]
     },
 
