@@ -8,8 +8,8 @@ export const getExhibitorExpos = {
   },
   methods: {
     fetchAssets() {
-
-      const expoList = fb.usersCollection.doc(this.currentUser.uid).collection("expos").orderBy("expo_date_start", "desc")
+      console.log(this.currentUser)
+      const expoList = fb.usersCollection.doc(this.currentUser.user_id).collection("expos");
 
       expoList.onSnapshot(
         (snapshot) => {

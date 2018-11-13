@@ -1,6 +1,5 @@
 <template>
   <div class="content column is-11">
-
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">
       <ul>
@@ -11,21 +10,16 @@
       </ul>
     </nav>
     <!-- /Breadcrumbs -->
-
     <!-- Dashboard Wrapper -->
     <div class="dashboard-wrapper">
-
       <div class="columns">
         <div class="column">
           <!-- Main content -->
           <div class="section-wrapper">
             <!-- Dashboard content -->
             <div class="columns dashboard-columns">
-
               <div class="column"></div>
-
               <div class="column is-11">
-
                 <div class="navigation-tabs layout-tabs animated-tabs mt-20 mb-20">
                   <div class="tabs is-toggle is-fullwidth">
                     <ul>
@@ -35,19 +29,15 @@
                       <li class="tab-link" @click="setTheActiveTab('manageInvites')" :class="[ isTabActiveNow === 'manageInvites' ? 'is-active' : '']">
                         <a>Manage Expos</a>
                       </li>
-
                     </ul>
                   </div>
                   <div class="navtab-content" :class="[ isTabActiveNow === 'newTeam' ? 'is-active' : '']">
-
                     <!-- Projects Group -->
                     <div class="projects-list-wrapper">
                       <div class="list-header">
                         <div class="list-title">
                           <span>New Expo</span>
-
                         </div>
-
                       </div>
                       <div class="list-body">
                         <div class="columns is-multiline">
@@ -63,21 +53,18 @@
                                         <label>Name of expo</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Expo" v-model="expo_name" />
                                       </div>
-
                                     </div>
                                     <div class="column">
                                       <div class="control">
                                         <label>Expo start date</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="date" value="2018-02-28" min="2017-12-11" max="2180-2-23" v-model="expo_date_start" />
                                       </div>
-
                                     </div>
                                     <div class="column">
                                       <div class="control">
                                         <label>Expo end date</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="date" value="2018-02-28" min="2017-12-11" max="2180-2-23" v-model="expo_date_end" />
                                       </div>
-
                                     </div>
                                   </div>
                                   <div class="columns mt-30">
@@ -86,9 +73,7 @@
                                         <label>Address Line 1</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="55 street street" v-model="expo_address_address" />
                                       </div>
-
                                     </div>
-
                                   </div>
                                   <div class="columns mt-30">
                                     <div class="column">
@@ -96,22 +81,18 @@
                                         <label>City</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Newark" v-model="expo_address_town" />
                                       </div>
-
                                     </div>
-
                                     <div class="column">
                                       <div class="control">
                                         <label>State</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="NJ" v-model="expo_address_state" />
                                       </div>
-
                                     </div>
                                     <div class="column">
                                       <div class="control">
                                         <label>Country</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Ireland" v-model="expo_address_country" />
                                       </div>
-
                                     </div>
                                   </div>
                                   <div class="columns mt-30">
@@ -120,48 +101,37 @@
                                         <label>Expo Promo website</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="supercoolexpo.com" v-model="expo_promo_website" />
                                       </div>
-
                                     </div>
-
                                   </div>
                                   <div class="columns mt-30">
                                     <div class="column">
-
                                       <div class="control">
                                         <label>Expo Description</label>
                                         <AppControlInput :inputClass="inputTypeTwo" rows="5" type="textarea" placeholder="The biggest tech expo this side of mississippi ..." v-model="expo_description" />
-
                                       </div>
                                     </div>
                                   </div>
-
                                   <h2 class="title is-4 text-bold mb-20">Organization Information</h2>
                                   <div class="columns mt-30">
-
                                     <div class="column">
                                       <div class="control">
                                         <label>Organizer business address</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="77 address way" v-model="business_location" />
                                       </div>
-
                                     </div>
                                   </div>
-
                                   <div class="columns mt-30">
-
                                     <div class="column">
                                       <div class="control">
                                         <label>Business Name</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Expo Event Company .inc" v-model="expo_owner_businessname" />
                                       </div>
-
                                     </div>
                                     <div class="column">
                                       <div class="control">
                                         <label>Business Website</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="ExpoEventCompany.com" v-model="expo_organizer_website" />
                                       </div>
-
                                     </div>
                                   </div>
                                   <div class="columns mt-30">
@@ -170,9 +140,7 @@
                                         <label>Point of contact name</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="Sally Smith" v-model="expo_contact_name" />
                                       </div>
-
                                     </div>
-
                                   </div>
                                   <div class="columns mt-30">
                                     <div class="column">
@@ -180,20 +148,15 @@
                                         <label>Point of contact number</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="text" placeholder="7327777777" v-model="expo_organizer_number" />
                                       </div>
-
                                     </div>
                                     <div class="column">
                                       <div class="control">
                                         <label>Point of contact email</label>
                                         <AppControlInput :inputClass="inputTypeOne" type="email" placeholder="youremail@business.com" v-model="expo_organizer_email" />
                                       </div>
-
                                     </div>
-
                                   </div>
-
                                   <div class="mt-30">
-
                                     <AppButton class="button btn-align no-lh raised primary-btn" type="submit">Create</AppButton>
                                     <button class="button is-link no-lh">Cancel</button>
                                   </div>
@@ -204,58 +167,39 @@
                         </div>
                       </div>
                     </div>
-
                   </div>
-
                   <div class="navtab-content" :class="[ isTabActiveNow === 'manageInvites' ? 'is-active' : '']">
-
                     <!-- Projects Group -->
                     <div class="projects-list-wrapper">
                       <div class="list-header">
                         <div class="list-title">
                           <span>Your Expos</span>
-
                         </div>
-
                       </div>
                       <div class="list-body">
                         <div class="columns is-multiline">
-                          <div class="column is-4" v-for="item in vendorExpos" :key="item.id">
+                          <div class="column is-4" v-for="item in organizerExpos" :key="item.id">
                             <div class=" flex-card light-bordered light-raised">
-
                               <div class="card-content">
                                 <div class="info-block mt-40">
-                                  <h4>{{item.vendor_expo_name}}</h4>
-                                  <p>{{item.vendor_expo_date_start}}</p>
+                                  <h4>{{item.expo_name}}</h4>
+                                  <p>{{item.expo_date_start}}</p>
                                 </div>
                                 <div class="level mb-40 mt-40">
                                   <div class="level-item">
                                     <a class="button button-cta btn-outlined is-bold" @click.prevent="goto('manageshowInfo' , item.expo_id)">Manage</a>
                                   </div>
-                                  <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('confirmVendor' , item.expo_id)">Vendors</a>
-                                  </div>
-
-                                  <div class="level-item">
-                                    <a class="button button-cta btn-outlined is-bold primary-btn" @click.prevent="goto('messages' , item.expo_id)">Messages</a>
-                                  </div>
                                 </div>
                               </div>
-
                             </div>
                           </div>
-
                         </div>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
               </div>
-
               <div class="column"></div>
-
             </div>
             <!-- /Dashboard content -->
           </div>
@@ -279,11 +223,11 @@
   //Mixins
   import { activeModalToggle } from '@/components/Main/Mixins/activeModalToggle.js';
   import { activeTabMixin } from '@/components/Main/Mixins/activeTabMixin.js';
- // import { getOrganizerExpos } from '@/components/Main/Mixins/getExhibitorExpos.js';
+  import { getOrganizerExpos } from '@/components/Main/Mixins/getOrganizerExpos.js';
 
   export default {
     name: 'DashCollaborateMain',
-    mixins: [activeModalToggle, activeTabMixin],
+    mixins: [activeModalToggle, activeTabMixin, getOrganizerExpos],
     data() {
       return {
         activeTabChosen: 'newTeam',

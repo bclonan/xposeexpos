@@ -3,13 +3,13 @@ const fb = require('@/services/firebase/init.js');
 export const getOrganizerExpos = {
   data() {
     return {
-      vendorExpos: [],
+      organizerExpos: [],
     }
   },
   methods: {
     fetchAssets() {
 
-      const expoList = fb.usersCollection.doc(this.currentUser.uid).collection("expos").orderBy("expo_date_start", "desc")
+      const expoList = fb.usersCollection.doc(this.currentUser.user_id).collection("expos").orderBy("expo_date_start", "desc")
 
       expoList.onSnapshot(
         (snapshot) => {
@@ -24,7 +24,7 @@ export const getOrganizerExpos = {
 
               var newdate = year + "/" + month + "/" + day;
 
-              this.vendorExpos.push({
+              this.organizerExpos.push({
                 id: doc.id,
                 expo_id: doc.data().expo_id,
                 expo_name: doc.data().expo_name,
